@@ -1,12 +1,9 @@
 # 针对 vscode 的文件
-
 .vscode/
 build/
-
 # 结束
 
 # 以下是 qt 自动生成的文件
-
 *~
 *.autosave
 *.a
@@ -77,5 +74,8 @@ CMakeLists.txt.user*
 # --------
 *.dll
 *.exe
-
 # 结束
+
+# 针对jerbrains全家桶
+.idea/
+#结束
