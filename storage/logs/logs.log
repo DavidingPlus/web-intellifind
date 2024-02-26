@@ -1,0 +1,2 @@
+{"level":"DEBUG","time":"2024-02-26 15:18:28","caller":"verifycode/vertify_code.go:69","message":"验证码","生成验证码":"{\"lihangyu01@xiaoduotech.com\":\"831999\"}"}
+{"level":"DEBUG","time":"2024-02-26 15:18:29","caller":"mail/driver_smtp.go:44","message":"发送邮件","发件成功":""}

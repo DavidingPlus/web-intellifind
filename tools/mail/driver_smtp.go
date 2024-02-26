@@ -1,6 +1,7 @@
 package mail
 
 import (
+	"backend/logger"
 	"fmt"
 	"net/smtp"
 
@@ -40,6 +41,6 @@ func (s *SMTP) Send(email Email, config map[string]string) bool {
 		return false
 	}
 
-	//logger.DebugString("发送邮件", "发件成功", "")
+	logger.DebugString("发送邮件", "发件成功", "")
 	return true
 }

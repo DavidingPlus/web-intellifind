@@ -10,6 +10,7 @@ func main() {
 	utils.ShowConfig()
 	utils.InitMysql()
 	utils.InitRedis()
+	utils.InitLogger()
 	r := router.Router()
 	r.Run(viper.GetString("port"))
 

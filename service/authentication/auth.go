@@ -5,9 +5,11 @@ import (
 	"backend/model"
 	"backend/requests"
 	"backend/tools/captcha"
+	"backend/tools/verifycode"
 	"backend/utils"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"strconv"
 )
 
@@ -35,7 +37,7 @@ func LoginVerify(c *gin.Context) {
 	utils.DB.Where("email = ? AND password = ?", login_request.Email, login_request.Password).First(&data)
 
 	if data.Username == "" {
-		c.JSON(200, gin.H{
+		c.JSON(http.StatusUnauthorized, gin.H{
 			"code":    -1,
 			"message": "用户名或密码错误",
 		})
@@ -63,21 +65,20 @@ func SignUp(c *gin.Context) {
 	}
 	exist := model.GetUserByEmail(signup_req.Email)
 	if exist.Username != "" {
-		c.JSON(200, gin.H{
+		c.JSON(http.StatusUnauthorized, gin.H{
 			"code":    -1,
 			"message": "邮箱已被注册",
 		})
 		return
 	}
 
-	//todo 发送验证码
-
-	//todo 校验验证码
-
-	flag := true
-
-	if flag == true {
-
+	//校验验证码
+	if flag := verifycode.NewVerifyCode().CheckAnswer(signup_req.Email, signup_req.VerifyCode); flag == false {
+		c.JSON(200, gin.H{
+			"code":    -1,
+			"message": "验证码错误！",
+		})
+	} else {
 		data := model.UserInfos{
 			Username: signup_req.Username,
 			Email:    signup_req.Email,
@@ -90,11 +91,6 @@ func SignUp(c *gin.Context) {
 			"code":    1,
 			"message": "注册成功",
 			"data":    data,
-		})
-	} else {
-		c.JSON(200, gin.H{
-			"code":    -1,
-			"message": "验证码错误！",
 		})
 	}
 

@@ -9,6 +9,8 @@ require (
 	github.com/jordan-wright/email v4.0.1-0.20210109023952-943e75fe5223+incompatible
 	github.com/mojocn/base64Captcha v1.3.6
 	github.com/spf13/viper v1.18.2
+	go.uber.org/zap v1.21.0
+	gopkg.in/natefinch/lumberjack.v2 v2.2.1
 	gorm.io/driver/mysql v1.5.4
 	gorm.io/gorm v1.25.7
 )

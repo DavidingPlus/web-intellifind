@@ -1,6 +1,7 @@
 package verifycode
 
 import (
+	"backend/logger"
 	"backend/tools/helpers"
 	"backend/tools/mail"
 	"backend/utils"
@@ -52,12 +53,20 @@ func (vc *VerifyCode) SendEmail(email string) error {
 	return nil
 }
 
+// CheckAnswer 检查用户提交的验证码是否正确
+func (vc *VerifyCode) CheckAnswer(key string, answer string) bool {
+
+	logger.DebugJSON("验证码", "检查验证码", map[string]string{key: answer})
+
+	return vc.Store.Verify(key, answer, false)
+}
+
 func (vc *VerifyCode) generateVerifyCode(key string) string {
 
 	// 生成随机码
 	code := helpers.RandomNumber(viper.GetInt("Verifycode.code_length"))
 
-	//logger.DebugJSON("验证码", "生成验证码", map[string]string{key: code})
+	logger.DebugJSON("验证码", "生成验证码", map[string]string{key: code})
 
 	// 将验证码及 KEY（邮箱或手机号）存放到 Redis 中并设置过期时间
 	vc.Store.Set(key, code)
