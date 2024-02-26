@@ -1,0 +1,56 @@
+port: ":8080"
+
+Mysql:
+  dsn: root:1234@tcp(8.137.100.0:3306)/backend?charset=utf8mb4&parseTime=True&loc=Local
+
+Redis:
+  addr: 8.137.100.0:6379
+  password: "1234"
+  db: 0
+  poolSize: 30
+  minIdleConn: 30
+
+Capatcha:
+  height: 80   # 验证码图片高度
+  width: 240  # 验证码图片宽度
+  length: 6  #验证码的长度
+  maxskew: 0.7 #数字的最大倾斜角度
+  dotcount: 80  #图片背景里的混淆点数量
+  expire_time: 15 # 过期时间，单位是分钟
+  debug_expire_time: 10080 # debug 模式下的过期时间，方便本地开发调试
+  testing_key: "captcha_skip_test"  # 非 production 环境，使用此 key 可跳过验证，方便测试
+
+Mail:
+#  // 默认是 Mailhog 的配置
+  smtp:
+    host: smtp.qq.com
+    port:  25
+    username: 1731978669@qq.com
+    password:  fqsemliggeksdhdj
+  from:
+    address: 1731978669@qq.com
+    name: max_test
+
+Verifycode:
+  code_length: 6
+
+#时区
+TimeZone: Asia/Shanghai
+
+#应用的名字
+Name: test_backend
+
+#调试模式
+Debug: false
+
+#调试模式的过期时间，2个月
+debug_expire_time: 86400
+
+#正式模式的国企时间，2小时
+expire_time: 120
+
+#加密会话、JWT 加密
+key: 33446a9dcf9ea060a0a6532b166da32f304af0de
+
+# 允许刷新时间，2个月
+max_refresh_time: 86400
