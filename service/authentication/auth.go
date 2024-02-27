@@ -2,11 +2,10 @@ package authentication
 
 import (
 	"backend/jwt"
-	"backend/model"
+	"backend/model/user"
 	"backend/requests"
 	"backend/tools/captcha"
 	"backend/tools/verifycode"
-	"backend/utils"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -14,7 +13,6 @@ import (
 )
 
 // 登录校验
-
 func LoginVerify(c *gin.Context) {
 
 	login_request := requests.LoginRequest{}
@@ -33,10 +31,11 @@ func LoginVerify(c *gin.Context) {
 		return
 	}
 
-	data := model.UserInfos{}
-	utils.DB.Where("email = ? AND password = ?", login_request.Email, login_request.Password).First(&data)
+	//校验用户名密码
+	flag := user.ComparePassword(login_request.Password, login_request.Email)
 
-	if data.Username == "" {
+	//登陆失败：用户名密码错误
+	if !flag {
 		c.JSON(http.StatusUnauthorized, gin.H{
 			"code":    -1,
 			"message": "用户名或密码错误",
@@ -44,9 +43,13 @@ func LoginVerify(c *gin.Context) {
 		return
 	}
 
+	//生成token
+	data := user.GetUserByEmail(login_request.Email)
+
 	ID_string := strconv.Itoa(int(data.ID))
 	token := jwt.NewJWT().IssueToken(ID_string, data.Username)
 
+	//登陆成功
 	c.JSON(200, gin.H{
 		"code":    1,
 		"message": "登陆成功",
@@ -55,6 +58,7 @@ func LoginVerify(c *gin.Context) {
 
 }
 
+// 注册
 func SignUp(c *gin.Context) {
 
 	signup_req := requests.SignUpRequest{}
@@ -63,7 +67,9 @@ func SignUp(c *gin.Context) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	exist := model.GetUserByEmail(signup_req.Email)
+	exist := user.GetUserByEmail(signup_req.Email)
+
+	//邮箱被注册
 	if exist.Username != "" {
 		c.JSON(http.StatusUnauthorized, gin.H{
 			"code":    -1,
@@ -74,18 +80,19 @@ func SignUp(c *gin.Context) {
 
 	//校验验证码
 	if flag := verifycode.NewVerifyCode().CheckAnswer(signup_req.Email, signup_req.VerifyCode); flag == false {
+		//验证码错误
 		c.JSON(200, gin.H{
 			"code":    -1,
 			"message": "验证码错误！",
 		})
 	} else {
-		data := model.UserInfos{
+		data := user.UserInfos{
 			Username: signup_req.Username,
 			Email:    signup_req.Email,
 			Password: signup_req.Password,
 		}
 
-		model.CreateUser(data)
+		user.CreateUser(data)
 
 		c.JSON(200, gin.H{
 			"code":    1,

@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/spf13/viper"
-	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -187,10 +186,11 @@ func (jwt *JWT) getTokenFromHeader(c *gin.Context) (string, error) {
 	if authHeader == "" {
 		return "", ErrHeaderEmpty
 	}
-	// 按空格分割
-	parts := strings.SplitN(authHeader, " ", 2)
-	if !(len(parts) == 2 && parts[0] == "Bearer") {
-		return "", ErrHeaderMalformed
-	}
-	return parts[1], nil
+	//// 按空格分割
+	//parts := strings.SplitN(authHeader, " ", 2)
+	//if !(len(parts) == 2 && parts[0] == "Bearer") {
+	//	return "", ErrHeaderMalformed
+	//}
+	//return parts[1], nil
+	return authHeader, nil
 }

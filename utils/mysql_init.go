@@ -11,6 +11,7 @@ import (
 )
 
 var (
+	//全局的DB
 	DB *gorm.DB
 )
 

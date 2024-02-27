@@ -13,7 +13,6 @@ func ShowConfig() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(1)
 	fmt.Sprintf("config for mysql,", viper.GetString("MySql.dsn"))
 	fmt.Sprintf("config for redis,", viper.GetString("Redis.dsn"))
 }

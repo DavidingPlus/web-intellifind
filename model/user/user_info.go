@@ -1,6 +1,7 @@
-package model
+package user
 
 import (
+	"backend/tools/hash"
 	"backend/utils"
 	"fmt"
 	"gorm.io/gorm"
@@ -54,4 +55,15 @@ func CreateUser(user UserInfos) {
 func DelteUser(id_string string) {
 	id, _ := strconv.Atoi(id_string)
 	utils.DB.Where("id = ?", id).Delete(&UserInfos{})
+}
+
+func GetPasswoord(email string) string {
+	user := UserInfos{}
+	utils.DB.Where("email = ?", email).First(&user)
+	return user.Password
+}
+
+func ComparePassword(_password string, email string) bool {
+	real_password := GetPasswoord(email)
+	return hash.BcryptCheck(_password, real_password)
 }
