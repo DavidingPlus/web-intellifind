@@ -17,3 +17,5 @@
 {"level":"DEBUG","time":"2024-02-27 14:10:59","caller":"verifycode/vertify_code.go:59","message":"验证码","检查验证码":"{\"mail@test.com\":\"1234\"}"}
 {"level":"DEBUG","time":"2024-02-27 14:19:41","caller":"verifycode/vertify_code.go:69","message":"验证码","生成验证码":"{\"lihangyu01@xiaoduotech.com\":\"228592\"}"}
 {"level":"DEBUG","time":"2024-02-27 14:19:42","caller":"mail/driver_smtp.go:44","message":"发送邮件","发件成功":""}
+{"level":"DEBUG","time":"2024-02-29 15:48:33","caller":"verifycode/vertify_code.go:69","message":"验证码","生成验证码":"{\"lihangyu01@xiaoduotech.com\":\"657040\"}"}
+{"level":"DEBUG","time":"2024-02-29 15:48:34","caller":"mail/driver_smtp.go:44","message":"发送邮件","发件成功":""}
