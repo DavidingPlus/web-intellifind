@@ -25,29 +25,17 @@ func GetUserList() []*UserInfos {
 	return data
 }
 
-// 通过id获取个人信息
-func GetUserInfoById(id uint) UserInfos {
+func GetUser(key string) UserInfos {
 	user := UserInfos{}
-	utils.DB.Where("id = ?", id).First(&user)
-	return user
-}
-
-// 通过名字获取个人信息
-func GetUserByUsername(username string) UserInfos {
-	user := UserInfos{}
-	utils.DB.Where("username = ?", username).First(&user)
-	return user
-}
-
-// 通过email获取个人信息
-func GetUserByEmail(email string) UserInfos {
-	user := UserInfos{}
-	utils.DB.Where("email = ?", email).First(&user)
+	utils.DB.Where("email = ?", key).Or("id= ?", key).First(&user)
 	return user
 }
 
 // 新建用户
 func CreateUser(user UserInfos) {
+	if !hash.BcryptIsHashed(user.Password) {
+		user.Password = hash.BcryptHash(user.Password)
+	}
 	utils.DB.Create(&user)
 }
 
@@ -57,13 +45,21 @@ func DelteUser(id_string string) {
 	utils.DB.Where("id = ?", id).Delete(&UserInfos{})
 }
 
-func GetPasswoord(email string) string {
+func GetPasswoord(key string) string {
 	user := UserInfos{}
-	utils.DB.Where("email = ?", email).First(&user)
+	utils.DB.Where("email = ?", key).Or("id = ?", key).First(&user)
 	return user.Password
 }
 
 func ComparePassword(_password string, email string) bool {
 	real_password := GetPasswoord(email)
 	return hash.BcryptCheck(_password, real_password)
+}
+
+// 更新用户密码
+func UpdatePassword(password string, key string) {
+	user := UserInfos{}
+	utils.DB.Where("email = ?", key).Or("id = ?", key).First(&user)
+	user.Password = hash.BcryptHash(password)
+	utils.DB.Save(&user)
 }

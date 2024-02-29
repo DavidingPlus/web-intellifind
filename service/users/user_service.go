@@ -3,6 +3,7 @@ package users
 import (
 	"backend/jwt"
 	"backend/model/user"
+	"backend/requests"
 	"backend/response"
 	"github.com/gin-gonic/gin"
 )
@@ -36,4 +37,31 @@ func RefreshToken(c *gin.Context) {
 			"token": token,
 		})
 	}
+}
+
+// 修改密码
+func UpdatePassword(c *gin.Context) {
+
+	req := requests.UpdatePasswordRequest{}
+	c.ShouldBind(&req)
+
+	old_pass := user.GetPasswoord(req.UID)
+
+	if old_pass == req.Password {
+		user.UpdatePassword(req.NewPassword, req.UID)
+		c.JSON(200, gin.H{
+			"code":    -1,
+			"message": "新密码不能与旧密码重复",
+		})
+		return
+	}
+
+	//修改密码
+	user.UpdatePassword(req.NewPassword, req.UID)
+
+	c.JSON(200, gin.H{
+		"code":    1,
+		"message": "密码修改成功",
+	})
+
 }

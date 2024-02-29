@@ -14,8 +14,24 @@ type SignUpRequest struct {
 	VerifyCode string `json:"verify_code"`
 }
 
-type VerifyCodeEmailRequest struct {
+type VerifyCaptchaRequest struct {
 	CaptchaId string `json:"captcha_id"`
 	Answer    string `json:"answer"`
 	Email     string `json:"email"`
+}
+
+type VerifyCodeRequest struct {
+	Email      string `json:"email"`
+	VerifyCode string `json:"verify_code"`
+}
+
+type ResetPasswordRequest struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+type UpdatePasswordRequest struct {
+	UID         string `json:"id"`
+	Password    string `json:"password"`
+	NewPassword string `json:"new_password"`
 }

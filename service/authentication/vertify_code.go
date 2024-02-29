@@ -7,10 +7,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func (vc *VerifyCodeController) SendUsingEmail(c *gin.Context) {
+func SendUsingEmail(c *gin.Context) {
 
 	// 1. 验证表单
-	request := requests.VerifyCodeEmailRequest{}
+	request := requests.VerifyCaptchaRequest{}
 	c.ShouldBind(&request)
 	if match := captcha.NewCaptcha().VerifyCaptcha(request.CaptchaId, request.Answer); match != true {
 		c.JSON(200, gin.H{
@@ -33,4 +33,20 @@ func (vc *VerifyCodeController) SendUsingEmail(c *gin.Context) {
 			"message": "发送成功",
 		})
 	}
+}
+
+func VerifyCode(c *gin.Context) {
+	req := requests.VerifyCodeRequest{}
+	if flag := verifycode.NewVerifyCode().CheckAnswer(req.Email, req.VerifyCode); flag == false {
+		//验证码错误
+		c.JSON(200, gin.H{
+			"code":    -1,
+			"message": "验证码错误！",
+		})
+		return
+	}
+	c.JSON(200, gin.H{
+		"code":    1,
+		"message": "验证成功",
+	})
 }

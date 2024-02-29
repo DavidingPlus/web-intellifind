@@ -44,7 +44,7 @@ func LoginVerify(c *gin.Context) {
 	}
 
 	//生成token
-	data := user.GetUserByEmail(login_request.Email)
+	data := user.GetUser(login_request.Email)
 
 	ID_string := strconv.Itoa(int(data.ID))
 	token := jwt.NewJWT().IssueToken(ID_string, data.Username)
@@ -55,7 +55,6 @@ func LoginVerify(c *gin.Context) {
 		"message": "登陆成功",
 		"token":   token,
 	})
-
 }
 
 // 注册
@@ -67,7 +66,7 @@ func SignUp(c *gin.Context) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	exist := user.GetUserByEmail(signup_req.Email)
+	exist := user.GetUser(signup_req.Email)
 
 	//邮箱被注册
 	if exist.Username != "" {
@@ -100,5 +99,21 @@ func SignUp(c *gin.Context) {
 			"data":    data,
 		})
 	}
+
+}
+
+// 重置密码
+func Reset(c *gin.Context) {
+
+	req := requests.ResetPasswordRequest{}
+
+	c.ShouldBind(&req)
+
+	user.UpdatePassword(req.Password, req.Email)
+
+	c.JSON(200, gin.H{
+		"code":    1,
+		"message": "重置成功",
+	})
 
 }
