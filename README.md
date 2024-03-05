@@ -32,8 +32,6 @@ pnpm dev
 pnpm build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+* pnpm i
 
-```sh
-pnpm lint
-```
+* pnpm run dev
