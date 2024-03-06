@@ -1,8 +1,8 @@
 <script setup>
-import { ref } from 'vue'
-import { Edit, Delete } from '@element-plus/icons-vue'
-import { artGetChannelsService, artDelChannelService } from '../../api/article'
-import ChannelEdit from './components/ChannelEdit.vue'
+import { Delete, Edit } from '@element-plus/icons-vue';
+import { ref } from 'vue';
+import { artDelChannelService, artGetChannelsService } from '../../api/article';
+import ChannelEdit from './components/ChannelEdit.vue';
 const channelList = ref([])
 const loading = ref(false)
 const dialog = ref()
@@ -37,7 +37,7 @@ const onSuccess = () => {
 </script>
 
 <template>
-  <page-container title="文章分类">
+  <page-container title="Json不知道干啥">
     <template #extra>
       <el-button @click="onAddChannel">添加分类</el-button>
     </template>

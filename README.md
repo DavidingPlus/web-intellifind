@@ -1,7 +1,3 @@
-# feature-zxy-frontend-frame
-
-- `zxy`的前端框架分支.
-
 # Vue3-big-event-admin
 
 This template should help get you started developing with Vue 3 in Vite.
@@ -32,6 +28,6 @@ pnpm dev
 pnpm build
 ```
 
-* pnpm i
-
-* pnpm run dev
+```sh
+pnpm lint
+```

@@ -1,16 +1,16 @@
 <script setup>
-import {
-  Management,
-  Promotion,
-  UserFilled,
-  User,
-  Crop,
-  EditPen,
-  SwitchButton,
-  CaretBottom
-} from '@element-plus/icons-vue'
 import avatar from '@/assets/default.png'
 import { useUserStore } from '@/stores'
+import {
+  CaretBottom,
+  Crop,
+  EditPen,
+  Management,
+  Promotion,
+  SwitchButton,
+  User,
+  UserFilled
+} from '@element-plus/icons-vue'
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 const userStore = useUserStore()
@@ -65,7 +65,7 @@ const handleCommand = async (key) => {
         </el-menu-item>
         <el-menu-item index="/article/manage">
           <el-icon><Promotion /></el-icon>
-          <span>文章管理</span>
+          <span>JSON解析</span>
         </el-menu-item>
 
         <el-sub-menu index="/user">
@@ -94,7 +94,7 @@ const handleCommand = async (key) => {
     <el-container>
       <el-header>
         <div>
-          黑马程序员：<strong>{{
+          尊贵的用户：<strong>{{
             userStore.user.nickname || userStore.user.username
           }}</strong>
         </div>
@@ -127,7 +127,9 @@ const handleCommand = async (key) => {
       <el-main>
         <router-view></router-view>
       </el-main>
-      <el-footer>大事件 ©2023 Created by 黑马程序员</el-footer>
+      <el-footer
+        >服创·©2024·Created·by·李航宇、刘志学、郑笑宇、李远行、吉劲帆</el-footer
+      >
     </el-container>
   </el-container>
 </template>
