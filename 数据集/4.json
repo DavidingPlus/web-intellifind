@@ -1,0 +1,3327 @@
+{
+    "code": "00000",
+    "data": [
+        {
+            "desc": "https://special-item-501508.framer.app/",
+            "deviceGroupId": 1,
+            "envAttr": {
+                "browser": {
+                    "displayName": "Browser",
+                    "order": "11",
+                    "value": "Chrome"
+                },
+                "city": {
+                    "displayName": "City",
+                    "order": "4",
+                    "value": "Motoyoyogichō"
+                },
+                "country": {
+                    "displayName": "Country or Region",
+                    "order": "2",
+                    "value": "JP"
+                },
+                "deviceType": {
+                    "displayName": "Device Type",
+                    "order": "18",
+                    "value": "PC"
+                },
+                "displayHeight": {
+                    "displayName": "Screen Height",
+                    "order": "13",
+                    "value": 2160
+                },
+                "displayWidth": {
+                    "displayName": "Screen Width",
+                    "order": "12",
+                    "value": 3840
+                },
+                "ip": {
+                    "displayName": "IP",
+                    "order": "1",
+                    "value": "212.107.30.195"
+                },
+                "operatingSystem": {
+                    "displayName": "OS",
+                    "order": "9",
+                    "value": "Mac"
+                },
+                "province": {
+                    "displayName": "Province",
+                    "order": "3",
+                    "value": "Tokyo Prefecture"
+                },
+                "userAgent": {
+                    "displayName": "User Agent",
+                    "order": "22",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+                },
+                "viewportHeight": {
+                    "displayName": "Window Height",
+                    "order": "15",
+                    "value": 1926
+                },
+                "viewporChinaidth": {
+                    "displayName": "Window Width",
+                    "order": "14",
+                    "value": 3840
+                }
+            },
+            "eventId": "928-0-1",
+            "eventName": "Page Visit",
+            "eventTypeId": 1,
+            "interactionAttr": {
+                "errorCount": {
+                    "displayName": "Error Count",
+                    "order": "21",
+                    "value": 0
+                },
+                "isBlank": {
+                    "displayName": "Blank Screen",
+                    "order": "20",
+                    "value": "False"
+                },
+                "isFirstTimeVisit": {
+                    "displayName": "First Visit",
+                    "order": "3",
+                    "value": "False"
+                },
+                "isRefresh": {
+                    "displayName": "Visit From Refresh",
+                    "order": "5",
+                    "value": "True"
+                },
+                "pageActiveDuration": {
+                    "displayName": "Page Active Duration",
+                    "order": "6",
+                    "value": 43483
+                },
+                "pageDuration": {
+                    "displayName": "Viewport Stay Duration",
+                    "order": "7",
+                    "value": 83224
+                },
+                "timeSinceSessionStart": {
+                    "displayName": "Time From Session Start",
+                    "order": "18",
+                    "value": 0
+                }
+            },
+            "pageAttr": {
+                "clientCreateTs": {
+                    "displayName": "",
+                    "value": 1701745253885
+                },
+                "libVersion": {
+                    "displayName": "SDK Version",
+                    "order": "22",
+                    "value": "1.4.0"
+                },
+                "referrer": {
+                    "displayName": "Previous URL",
+                    "order": "15",
+                    "value": ""
+                },
+                "referrerHost": {
+                    "displayName": "Previous Domain",
+                    "order": "16",
+                    "value": ""
+                },
+                "sdkType": {
+                    "displayName": "SDK Type",
+                    "order": "21",
+                    "value": "WEB"
+                },
+                "sessionId": {
+                    "displayName": "",
+                    "order": "",
+                    "value": 928
+                },
+                "title": {
+                    "displayName": "Page Title",
+                    "order": "10",
+                    "value": "SaaS Template"
+                },
+                "uri": {
+                    "displayName": "Page URI",
+                    "order": "12",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "url": {
+                    "displayName": "Page URL",
+                    "order": "11",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "urlHost": {
+                    "displayName": "Page Domain",
+                    "order": "13",
+                    "value": "special-item-501508.framer.app"
+                },
+                "urlPath": {
+                    "displayName": "Page Path",
+                    "order": "14",
+                    "value": "/"
+                }
+            },
+            "performanceAttr": {
+                "consoleErrors": {
+                    "displayName": "Console Error Count",
+                    "order": "15",
+                    "value": 0
+                },
+                "consoleInfos": {
+                    "displayName": "Console Log Count",
+                    "order": "14",
+                    "value": 0
+                },
+                "consoleWarnings": {
+                    "displayName": "Console Warning Count",
+                    "order": "16",
+                    "value": 0
+                }
+            },
+            "projectId": 19,
+            "screenDirect": 0,
+            "sessionId": 928,
+            "userId": 50
+        },
+        {
+            "desc": "Performance Need Improvement（LCP=3884.3ms）",
+            "deviceGroupId": 1,
+            "envAttr": {
+                "browser": {
+                    "displayName": "Browser",
+                    "order": "11",
+                    "value": "Chrome"
+                },
+                "city": {
+                    "displayName": "City",
+                    "order": "4",
+                    "value": "Motoyoyogichō"
+                },
+                "country": {
+                    "displayName": "Country or Region",
+                    "order": "2",
+                    "value": "JP"
+                },
+                "deviceType": {
+                    "displayName": "Device Type",
+                    "order": "18",
+                    "value": "PC"
+                },
+                "displayHeight": {
+                    "displayName": "Screen Height",
+                    "order": "13",
+                    "value": 2160
+                },
+                "displayWidth": {
+                    "displayName": "Screen Width",
+                    "order": "12",
+                    "value": 3840
+                },
+                "ip": {
+                    "displayName": "IP",
+                    "order": "1",
+                    "value": "212.107.30.195"
+                },
+                "operatingSystem": {
+                    "displayName": "OS",
+                    "order": "9",
+                    "value": "Mac"
+                },
+                "province": {
+                    "displayName": "Province",
+                    "order": "3",
+                    "value": "Tokyo Prefecture"
+                },
+                "userAgent": {
+                    "displayName": "User Agent",
+                    "order": "22",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+                },
+                "viewportHeight": {
+                    "displayName": "Window Height",
+                    "order": "15",
+                    "value": 1926
+                },
+                "viewporChinaidth": {
+                    "displayName": "Window Width",
+                    "order": "14",
+                    "value": 3840
+                }
+            },
+            "eventId": "928-0-3",
+            "eventName": "Page Load",
+            "eventTypeId": 7,
+            "interactionAttr": {
+                "timeSinceSessionStart": {
+                    "displayName": "Time From Session Start",
+                    "order": "18",
+                    "value": 4967
+                }
+            },
+            "pageAttr": {
+                "clientCreateTs": {
+                    "displayName": "",
+                    "value": 1701745258852
+                },
+                "libVersion": {
+                    "displayName": "SDK Version",
+                    "order": "22",
+                    "value": "1.4.0"
+                },
+                "referrer": {
+                    "displayName": "Previous URL",
+                    "order": "15",
+                    "value": ""
+                },
+                "referrerHost": {
+                    "displayName": "Previous Domain",
+                    "order": "16",
+                    "value": ""
+                },
+                "sdkType": {
+                    "displayName": "SDK Type",
+                    "order": "21",
+                    "value": "WEB"
+                },
+                "sessionId": {
+                    "displayName": "",
+                    "order": "",
+                    "value": 928
+                },
+                "title": {
+                    "displayName": "Page Title",
+                    "order": "10",
+                    "value": "SaaS Template"
+                },
+                "uri": {
+                    "displayName": "Page URI",
+                    "order": "12",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "url": {
+                    "displayName": "Page URL",
+                    "order": "11",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "urlHost": {
+                    "displayName": "Page Domain",
+                    "order": "13",
+                    "value": "special-item-501508.framer.app"
+                },
+                "urlPath": {
+                    "displayName": "Page Path",
+                    "order": "14",
+                    "value": "/"
+                }
+            },
+            "performanceAttr": {
+                "consoleErrors": {
+                    "displayName": "Console Error Count",
+                    "order": "15",
+                    "value": 0
+                },
+                "consoleInfos": {
+                    "displayName": "Console Log Count",
+                    "order": "14",
+                    "value": 0
+                },
+                "consoleWarnings": {
+                    "displayName": "Console Warning Count",
+                    "order": "16",
+                    "value": 0
+                },
+                "largestContentfulPaint": {
+                    "displayName": "LCP",
+                    "order": "2",
+                    "value": 3884.3
+                },
+                "loadingPerformance": {
+                    "displayName": "Loading Performance",
+                    "order": "1",
+                    "value": "Needs Improvement"
+                },
+                "pageLoad": {
+                    "displayName": "Total Page Load Time",
+                    "order": "3",
+                    "value": 4967
+                }
+            },
+            "projectId": 19,
+            "screenDirect": 0,
+            "sessionId": 928,
+            "userId": 50
+        },
+        {
+            "desc": "Click Grow your startup",
+            "deviceGroupId": 1,
+            "envAttr": {
+                "browser": {
+                    "displayName": "Browser",
+                    "order": "11",
+                    "value": "Chrome"
+                },
+                "city": {
+                    "displayName": "City",
+                    "order": "4",
+                    "value": "Motoyoyogichō"
+                },
+                "country": {
+                    "displayName": "Country or Region",
+                    "order": "2",
+                    "value": "JP"
+                },
+                "deviceType": {
+                    "displayName": "Device Type",
+                    "order": "18",
+                    "value": "PC"
+                },
+                "displayHeight": {
+                    "displayName": "Screen Height",
+                    "order": "13",
+                    "value": 2160
+                },
+                "displayWidth": {
+                    "displayName": "Screen Width",
+                    "order": "12",
+                    "value": 3840
+                },
+                "ip": {
+                    "displayName": "IP",
+                    "order": "1",
+                    "value": "212.107.30.195"
+                },
+                "operatingSystem": {
+                    "displayName": "OS",
+                    "order": "9",
+                    "value": "Mac"
+                },
+                "province": {
+                    "displayName": "Province",
+                    "order": "3",
+                    "value": "Tokyo Prefecture"
+                },
+                "userAgent": {
+                    "displayName": "User Agent",
+                    "order": "22",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+                },
+                "viewportHeight": {
+                    "displayName": "Window Height",
+                    "order": "15",
+                    "value": 1926
+                },
+                "viewporChinaidth": {
+                    "displayName": "Window Width",
+                    "order": "14",
+                    "value": 3840
+                }
+            },
+            "eventId": "928-0-6",
+            "eventName": "Element Click",
+            "eventTypeId": 2,
+            "interactionAttr": {
+                "errorCount": {
+                    "displayName": "Error Count",
+                    "order": "21",
+                    "value": 0
+                },
+                "repeatClick": {
+                    "displayName": "Multiple Clicks",
+                    "order": "19",
+                    "value": "False"
+                },
+                "timeSincePageLoad": {
+                    "displayName": "Duration Before Entering the Page",
+                    "order": "17",
+                    "value": 8512
+                },
+                "timeSinceSessionStart": {
+                    "displayName": "Time From Session Start",
+                    "order": "18",
+                    "value": 8512
+                }
+            },
+            "pageAttr": {
+                "clientCreateTs": {
+                    "displayName": "",
+                    "value": 1701745262397
+                },
+                "cssSelector": {
+                    "displayName": "Element Selector",
+                    "order": "1",
+                    "value": "body.framer-body-augiA20Il-framer-lpcgl:nth-child(2) \u003e div#main:nth-child(2) \u003e div.framer-lpcgl.framer-neckq.framer-oPX3o.framer-dR8YU:nth-child(1) \u003e div.framer-72rtr7:nth-child(1) \u003e header.framer-1uyqpyx:nth-child(2) \u003e div.framer-1ckriva:nth-child(1) \u003e div.framer-1c9hqh8[data-framer-appear-id='1c9hqh8']:nth-child(1) \u003e div.framer-1g0cw8g[data-framer-component-type='RichTextContainer']:nth-child(1) \u003e h1.framer-text.framer-styles-preset-o3e5h0[data-styles-preset='stylesPresetHeading1']:nth-child(1)"
+                },
+                "elementClassName": {
+                    "displayName": "Element Class Name",
+                    "order": "9",
+                    "value": "framer-text framer-styles-preset-o3e5h0"
+                },
+                "elementId": {
+                    "displayName": "Element ID",
+                    "order": "2",
+                    "value": ""
+                },
+                "elementName": {
+                    "displayName": "Element Name",
+                    "order": "8",
+                    "value": ""
+                },
+                "elementPosition": {
+                    "displayName": "Element Position",
+                    "order": "6",
+                    "value": "1"
+                },
+                "elementTargetUrl": {
+                    "displayName": "Element Link",
+                    "order": "4",
+                    "value": ""
+                },
+                "elementText": {
+                    "displayName": "Element Text",
+                    "order": "3",
+                    "value": "Grow your startup"
+                },
+                "elementType": {
+                    "displayName": "Element Tag",
+                    "order": "5",
+                    "value": "H1"
+                },
+                "libVersion": {
+                    "displayName": "SDK Version",
+                    "order": "22",
+                    "value": "1.4.0"
+                },
+                "referrer": {
+                    "displayName": "Previous URL",
+                    "order": "15",
+                    "value": ""
+                },
+                "referrerHost": {
+                    "displayName": "Previous Domain",
+                    "order": "16",
+                    "value": ""
+                },
+                "sdkType": {
+                    "displayName": "SDK Type",
+                    "order": "21",
+                    "value": "WEB"
+                },
+                "sessionId": {
+                    "displayName": "",
+                    "order": "",
+                    "value": 928
+                },
+                "title": {
+                    "displayName": "Page Title",
+                    "order": "10",
+                    "value": "SaaS Template"
+                },
+                "uri": {
+                    "displayName": "Page URI",
+                    "order": "12",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "url": {
+                    "displayName": "Page URL",
+                    "order": "11",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "urlHost": {
+                    "displayName": "Page Domain",
+                    "order": "13",
+                    "value": "special-item-501508.framer.app"
+                },
+                "urlPath": {
+                    "displayName": "Page Path",
+                    "order": "14",
+                    "value": "/"
+                }
+            },
+            "performanceAttr": {
+                "consoleErrors": {
+                    "displayName": "Console Error Count",
+                    "order": "15",
+                    "value": 0
+                },
+                "consoleInfos": {
+                    "displayName": "Console Log Count",
+                    "order": "14",
+                    "value": 0
+                },
+                "consoleWarnings": {
+                    "displayName": "Console Warning Count",
+                    "order": "16",
+                    "value": 0
+                },
+                "feedbackInterval": {
+                    "displayName": "Click Latency",
+                    "order": "17",
+                    "value": 391.7
+                },
+                "slowNeChinaork": {
+                    "displayName": "Delayed NeChinaork",
+                    "order": "18",
+                    "value": "False"
+                }
+            },
+            "projectId": 19,
+            "screenDirect": 0,
+            "sessionId": 928,
+            "userId": 50
+        },
+        {
+            "desc": "Performance Good（FID=2.0ms）",
+            "deviceGroupId": 1,
+            "envAttr": {
+                "browser": {
+                    "displayName": "Browser",
+                    "order": "11",
+                    "value": "Chrome"
+                },
+                "city": {
+                    "displayName": "City",
+                    "order": "4",
+                    "value": "Motoyoyogichō"
+                },
+                "country": {
+                    "displayName": "Country or Region",
+                    "order": "2",
+                    "value": "JP"
+                },
+                "deviceType": {
+                    "displayName": "Device Type",
+                    "order": "18",
+                    "value": "PC"
+                },
+                "displayHeight": {
+                    "displayName": "Screen Height",
+                    "order": "13",
+                    "value": 2160
+                },
+                "displayWidth": {
+                    "displayName": "Screen Width",
+                    "order": "12",
+                    "value": 3840
+                },
+                "ip": {
+                    "displayName": "IP",
+                    "order": "1",
+                    "value": "212.107.30.195"
+                },
+                "operatingSystem": {
+                    "displayName": "OS",
+                    "order": "9",
+                    "value": "Mac"
+                },
+                "province": {
+                    "displayName": "Province",
+                    "order": "3",
+                    "value": "Tokyo Prefecture"
+                },
+                "userAgent": {
+                    "displayName": "User Agent",
+                    "order": "22",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+                },
+                "viewportHeight": {
+                    "displayName": "Window Height",
+                    "order": "15",
+                    "value": 1926
+                },
+                "viewporChinaidth": {
+                    "displayName": "Window Width",
+                    "order": "14",
+                    "value": 3840
+                }
+            },
+            "eventId": "928-0-7",
+            "eventName": "First Interaction",
+            "eventTypeId": 9,
+            "interactionAttr": {
+                "timeSinceSessionStart": {
+                    "displayName": "Time From Session Start",
+                    "order": "18",
+                    "value": 8518
+                }
+            },
+            "pageAttr": {
+                "clientCreateTs": {
+                    "displayName": "",
+                    "value": 1701745262403
+                },
+                "libVersion": {
+                    "displayName": "SDK Version",
+                    "order": "22",
+                    "value": "1.4.0"
+                },
+                "referrer": {
+                    "displayName": "Previous URL",
+                    "order": "15",
+                    "value": ""
+                },
+                "referrerHost": {
+                    "displayName": "Previous Domain",
+                    "order": "16",
+                    "value": ""
+                },
+                "sdkType": {
+                    "displayName": "SDK Type",
+                    "order": "21",
+                    "value": "WEB"
+                },
+                "sessionId": {
+                    "displayName": "",
+                    "order": "",
+                    "value": 928
+                },
+                "title": {
+                    "displayName": "Page Title",
+                    "order": "10",
+                    "value": "SaaS Template"
+                },
+                "uri": {
+                    "displayName": "Page URI",
+                    "order": "12",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "url": {
+                    "displayName": "Page URL",
+                    "order": "11",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "urlHost": {
+                    "displayName": "Page Domain",
+                    "order": "13",
+                    "value": "special-item-501508.framer.app"
+                },
+                "urlPath": {
+                    "displayName": "Page Path",
+                    "order": "14",
+                    "value": "/"
+                }
+            },
+            "performanceAttr": {
+                "consoleErrors": {
+                    "displayName": "Console Error Count",
+                    "order": "15",
+                    "value": 0
+                },
+                "consoleInfos": {
+                    "displayName": "Console Log Count",
+                    "order": "14",
+                    "value": 0
+                },
+                "consoleWarnings": {
+                    "displayName": "Console Warning Count",
+                    "order": "16",
+                    "value": 0
+                },
+                "firstInputDelay": {
+                    "displayName": "FID",
+                    "order": "8",
+                    "value": 2
+                },
+                "firstInteractionAction": {
+                    "displayName": "First Interaction",
+                    "order": "7",
+                    "value": "pointerdown"
+                },
+                "firstInteractionPerformance": {
+                    "displayName": "First Interaction Performance",
+                    "order": "6",
+                    "value": "Good"
+                }
+            },
+            "projectId": 19,
+            "screenDirect": 0,
+            "sessionId": 928,
+            "userId": 50
+        },
+        {
+            "desc": "",
+            "deviceGroupId": 1,
+            "envAttr": {
+                "browser": {
+                    "displayName": "Browser",
+                    "order": "11",
+                    "value": "Chrome"
+                },
+                "city": {
+                    "displayName": "City",
+                    "order": "4",
+                    "value": "Motoyoyogichō"
+                },
+                "country": {
+                    "displayName": "Country or Region",
+                    "order": "2",
+                    "value": "JP"
+                },
+                "deviceType": {
+                    "displayName": "Device Type",
+                    "order": "18",
+                    "value": "PC"
+                },
+                "displayHeight": {
+                    "displayName": "Screen Height",
+                    "order": "13",
+                    "value": 2160
+                },
+                "displayWidth": {
+                    "displayName": "Screen Width",
+                    "order": "12",
+                    "value": 3840
+                },
+                "ip": {
+                    "displayName": "IP",
+                    "order": "1",
+                    "value": "212.107.30.195"
+                },
+                "operatingSystem": {
+                    "displayName": "OS",
+                    "order": "9",
+                    "value": "Mac"
+                },
+                "province": {
+                    "displayName": "Province",
+                    "order": "3",
+                    "value": "Tokyo Prefecture"
+                },
+                "userAgent": {
+                    "displayName": "User Agent",
+                    "order": "22",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+                },
+                "viewportHeight": {
+                    "displayName": "Window Height",
+                    "order": "15",
+                    "value": 1926
+                },
+                "viewporChinaidth": {
+                    "displayName": "Window Width",
+                    "order": "14",
+                    "value": 3840
+                }
+            },
+            "eventId": "928-0-13",
+            "eventName": "Element Click",
+            "eventTypeId": 2,
+            "interactionAttr": {
+                "errorCount": {
+                    "displayName": "Error Count",
+                    "order": "21",
+                    "value": 0
+                },
+                "repeatClick": {
+                    "displayName": "Multiple Clicks",
+                    "order": "19",
+                    "value": "False"
+                },
+                "timeSincePageLoad": {
+                    "displayName": "Duration Before Entering the Page",
+                    "order": "17",
+                    "value": 11857
+                },
+                "timeSinceSessionStart": {
+                    "displayName": "Time From Session Start",
+                    "order": "18",
+                    "value": 11857
+                }
+            },
+            "pageAttr": {
+                "clientCreateTs": {
+                    "displayName": "",
+                    "value": 1701745265742
+                },
+                "cssSelector": {
+                    "displayName": "Element Selector",
+                    "order": "1",
+                    "value": "body.framer-body-augiA20Il-framer-lpcgl:nth-child(2) \u003e div#main:nth-child(2) \u003e div.framer-lpcgl.framer-neckq.framer-oPX3o.framer-dR8YU:nth-child(1) \u003e div.framer-72rtr7:nth-child(1) \u003e header.framer-1uyqpyx:nth-child(2) \u003e div.framer-1su0uuv:nth-child(2) \u003e div.framer-1ubp5vc-container:nth-child(1) \u003e div:nth-child(1) \u003e form[method='POST']:nth-child(1) \u003e input.v1.framer-custom-input[type='email'][name='email'][placeholder='Email'][autocomplete='off'][autocapitalize='off'][autocorrect='off'][spellcheck='false'][value='']:nth-child(1)"
+                },
+                "elementClassName": {
+                    "displayName": "Element Class Name",
+                    "order": "9",
+                    "value": "v1 framer-custom-input"
+                },
+                "elementId": {
+                    "displayName": "Element ID",
+                    "order": "2",
+                    "value": ""
+                },
+                "elementName": {
+                    "displayName": "Element Name",
+                    "order": "8",
+                    "value": "email"
+                },
+                "elementPosition": {
+                    "displayName": "Element Position",
+                    "order": "6",
+                    "value": "1"
+                },
+                "elementTargetUrl": {
+                    "displayName": "Element Link",
+                    "order": "4",
+                    "value": ""
+                },
+                "elementText": {
+                    "displayName": "Element Text",
+                    "order": "3",
+                    "value": ""
+                },
+                "elementType": {
+                    "displayName": "Element Tag",
+                    "order": "5",
+                    "value": "INPUT"
+                },
+                "libVersion": {
+                    "displayName": "SDK Version",
+                    "order": "22",
+                    "value": "1.4.0"
+                },
+                "referrer": {
+                    "displayName": "Previous URL",
+                    "order": "15",
+                    "value": ""
+                },
+                "referrerHost": {
+                    "displayName": "Previous Domain",
+                    "order": "16",
+                    "value": ""
+                },
+                "sdkType": {
+                    "displayName": "SDK Type",
+                    "order": "21",
+                    "value": "WEB"
+                },
+                "sessionId": {
+                    "displayName": "",
+                    "order": "",
+                    "value": 928
+                },
+                "title": {
+                    "displayName": "Page Title",
+                    "order": "10",
+                    "value": "SaaS Template"
+                },
+                "uri": {
+                    "displayName": "Page URI",
+                    "order": "12",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "url": {
+                    "displayName": "Page URL",
+                    "order": "11",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "urlHost": {
+                    "displayName": "Page Domain",
+                    "order": "13",
+                    "value": "special-item-501508.framer.app"
+                },
+                "urlPath": {
+                    "displayName": "Page Path",
+                    "order": "14",
+                    "value": "/"
+                }
+            },
+            "performanceAttr": {
+                "consoleErrors": {
+                    "displayName": "Console Error Count",
+                    "order": "15",
+                    "value": 0
+                },
+                "consoleInfos": {
+                    "displayName": "Console Log Count",
+                    "order": "14",
+                    "value": 0
+                },
+                "consoleWarnings": {
+                    "displayName": "Console Warning Count",
+                    "order": "16",
+                    "value": 0
+                },
+                "feedbackInterval": {
+                    "displayName": "Click Latency",
+                    "order": "17",
+                    "value": 494.3
+                },
+                "slowNeChinaork": {
+                    "displayName": "Delayed NeChinaork",
+                    "order": "18",
+                    "value": "False"
+                }
+            },
+            "projectId": 19,
+            "screenDirect": 0,
+            "sessionId": 928,
+            "userId": 50
+        },
+        {
+            "desc": "Input frank@gmail.com",
+            "deviceGroupId": 1,
+            "envAttr": {
+                "browser": {
+                    "displayName": "Browser",
+                    "order": "11",
+                    "value": "Chrome"
+                },
+                "city": {
+                    "displayName": "City",
+                    "order": "4",
+                    "value": "Motoyoyogichō"
+                },
+                "country": {
+                    "displayName": "Country or Region",
+                    "order": "2",
+                    "value": "JP"
+                },
+                "deviceType": {
+                    "displayName": "Device Type",
+                    "order": "18",
+                    "value": "PC"
+                },
+                "displayHeight": {
+                    "displayName": "Screen Height",
+                    "order": "13",
+                    "value": 2160
+                },
+                "displayWidth": {
+                    "displayName": "Screen Width",
+                    "order": "12",
+                    "value": 3840
+                },
+                "ip": {
+                    "displayName": "IP",
+                    "order": "1",
+                    "value": "212.107.30.195"
+                },
+                "operatingSystem": {
+                    "displayName": "OS",
+                    "order": "9",
+                    "value": "Mac"
+                },
+                "province": {
+                    "displayName": "Province",
+                    "order": "3",
+                    "value": "Tokyo Prefecture"
+                },
+                "userAgent": {
+                    "displayName": "User Agent",
+                    "order": "22",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+                },
+                "viewportHeight": {
+                    "displayName": "Window Height",
+                    "order": "15",
+                    "value": 1926
+                },
+                "viewporChinaidth": {
+                    "displayName": "Window Width",
+                    "order": "14",
+                    "value": 3840
+                }
+            },
+            "eventId": "928-0-20",
+            "eventName": "Text Input",
+            "eventTypeId": 5,
+            "interactionAttr": {
+                "textInput": {
+                    "displayName": "Input Text",
+                    "order": "1",
+                    "value": "frank@gmail.com"
+                },
+                "textInputTime": {
+                    "displayName": "Text Input Latency",
+                    "order": "2",
+                    "value": 7817
+                },
+                "timeSincePageLoad": {
+                    "displayName": "Duration Before Entering the Page",
+                    "order": "17",
+                    "value": 19546
+                },
+                "timeSinceSessionStart": {
+                    "displayName": "Time From Session Start",
+                    "order": "18",
+                    "value": 19546
+                }
+            },
+            "pageAttr": {
+                "clientCreateTs": {
+                    "displayName": "",
+                    "value": 1701745273431
+                },
+                "cssSelector": {
+                    "displayName": "Element Selector",
+                    "order": "1",
+                    "value": "body.framer-body-augiA20Il-framer-lpcgl:nth-child(2) \u003e div#main:nth-child(2) \u003e div.framer-lpcgl.framer-neckq.framer-oPX3o.framer-dR8YU:nth-child(1) \u003e div.framer-72rtr7:nth-child(1) \u003e header.framer-1uyqpyx:nth-child(2) \u003e div.framer-1su0uuv:nth-child(2) \u003e div.framer-1ubp5vc-container:nth-child(1) \u003e div:nth-child(1) \u003e form[method='POST']:nth-child(1) \u003e input.v1.framer-custom-input[type='email'][name='email'][placeholder='Email'][autocomplete='off'][autocapitalize='off'][autocorrect='off'][spellcheck='false'][value='frank@gmail.com']:nth-child(1)"
+                },
+                "libVersion": {
+                    "displayName": "SDK Version",
+                    "order": "22",
+                    "value": "1.4.0"
+                },
+                "referrer": {
+                    "displayName": "Previous URL",
+                    "order": "15",
+                    "value": ""
+                },
+                "referrerHost": {
+                    "displayName": "Previous Domain",
+                    "order": "16",
+                    "value": ""
+                },
+                "sdkType": {
+                    "displayName": "SDK Type",
+                    "order": "21",
+                    "value": "WEB"
+                },
+                "sessionId": {
+                    "displayName": "",
+                    "order": "",
+                    "value": 928
+                },
+                "title": {
+                    "displayName": "Page Title",
+                    "order": "10",
+                    "value": "SaaS Template"
+                },
+                "uri": {
+                    "displayName": "Page URI",
+                    "order": "12",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "url": {
+                    "displayName": "Page URL",
+                    "order": "11",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "urlHost": {
+                    "displayName": "Page Domain",
+                    "order": "13",
+                    "value": "special-item-501508.framer.app"
+                },
+                "urlPath": {
+                    "displayName": "Page Path",
+                    "order": "14",
+                    "value": "/"
+                }
+            },
+            "performanceAttr": {
+                "consoleErrors": {
+                    "displayName": "Console Error Count",
+                    "order": "15",
+                    "value": 0
+                },
+                "consoleInfos": {
+                    "displayName": "Console Log Count",
+                    "order": "14",
+                    "value": 0
+                },
+                "consoleWarnings": {
+                    "displayName": "Console Warning Count",
+                    "order": "16",
+                    "value": 0
+                },
+                "errorText": {
+                    "displayName": "",
+                    "order": "",
+                    "value": ""
+                },
+                "isError": {
+                    "displayName": "",
+                    "order": "",
+                    "value": "False"
+                }
+            },
+            "projectId": 19,
+            "screenDirect": 0,
+            "sessionId": 928,
+            "userId": 50
+        },
+        {
+            "desc": "Click Sign up",
+            "deviceGroupId": 1,
+            "envAttr": {
+                "browser": {
+                    "displayName": "Browser",
+                    "order": "11",
+                    "value": "Chrome"
+                },
+                "city": {
+                    "displayName": "City",
+                    "order": "4",
+                    "value": "Motoyoyogichō"
+                },
+                "country": {
+                    "displayName": "Country or Region",
+                    "order": "2",
+                    "value": "JP"
+                },
+                "deviceType": {
+                    "displayName": "Device Type",
+                    "order": "18",
+                    "value": "PC"
+                },
+                "displayHeight": {
+                    "displayName": "Screen Height",
+                    "order": "13",
+                    "value": 2160
+                },
+                "displayWidth": {
+                    "displayName": "Screen Width",
+                    "order": "12",
+                    "value": 3840
+                },
+                "ip": {
+                    "displayName": "IP",
+                    "order": "1",
+                    "value": "212.107.30.195"
+                },
+                "operatingSystem": {
+                    "displayName": "OS",
+                    "order": "9",
+                    "value": "Mac"
+                },
+                "province": {
+                    "displayName": "Province",
+                    "order": "3",
+                    "value": "Tokyo Prefecture"
+                },
+                "userAgent": {
+                    "displayName": "User Agent",
+                    "order": "22",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+                },
+                "viewportHeight": {
+                    "displayName": "Window Height",
+                    "order": "15",
+                    "value": 1926
+                },
+                "viewporChinaidth": {
+                    "displayName": "Window Width",
+                    "order": "14",
+                    "value": 3840
+                }
+            },
+            "eventId": "928-0-22",
+            "eventName": "Element Click",
+            "eventTypeId": 2,
+            "interactionAttr": {
+                "errorCount": {
+                    "displayName": "Error Count",
+                    "order": "21",
+                    "value": 1
+                },
+                "repeatClick": {
+                    "displayName": "Multiple Clicks",
+                    "order": "19",
+                    "value": "False"
+                },
+                "timeSincePageLoad": {
+                    "displayName": "Duration Before Entering the Page",
+                    "order": "17",
+                    "value": 19610
+                },
+                "timeSinceSessionStart": {
+                    "displayName": "Time From Session Start",
+                    "order": "18",
+                    "value": 19610
+                }
+            },
+            "pageAttr": {
+                "clientCreateTs": {
+                    "displayName": "",
+                    "value": 1701745273495
+                },
+                "cssSelector": {
+                    "displayName": "Element Selector",
+                    "order": "1",
+                    "value": "body.framer-body-augiA20Il-framer-lpcgl:nth-child(2) \u003e div#main:nth-child(2) \u003e div.framer-lpcgl.framer-neckq.framer-oPX3o.framer-dR8YU:nth-child(1) \u003e div.framer-72rtr7:nth-child(1) \u003e header.framer-1uyqpyx:nth-child(2) \u003e div.framer-1su0uuv:nth-child(2) \u003e div.framer-1ubp5vc-container:nth-child(1) \u003e div:nth-child(1) \u003e form[method='POST']:nth-child(1) \u003e div:nth-child(2) \u003e input[type='submit'][value='Sign up']:nth-child(1)"
+                },
+                "elementClassName": {
+                    "displayName": "Element Class Name",
+                    "order": "9",
+                    "value": ""
+                },
+                "elementId": {
+                    "displayName": "Element ID",
+                    "order": "2",
+                    "value": ""
+                },
+                "elementName": {
+                    "displayName": "Element Name",
+                    "order": "8",
+                    "value": ""
+                },
+                "elementPosition": {
+                    "displayName": "Element Position",
+                    "order": "6",
+                    "value": "1"
+                },
+                "elementTargetUrl": {
+                    "displayName": "Element Link",
+                    "order": "4",
+                    "value": ""
+                },
+                "elementText": {
+                    "displayName": "Element Text",
+                    "order": "3",
+                    "value": "Sign up"
+                },
+                "elementType": {
+                    "displayName": "Element Tag",
+                    "order": "5",
+                    "value": "INPUT"
+                },
+                "libVersion": {
+                    "displayName": "SDK Version",
+                    "order": "22",
+                    "value": "1.4.0"
+                },
+                "referrer": {
+                    "displayName": "Previous URL",
+                    "order": "15",
+                    "value": ""
+                },
+                "referrerHost": {
+                    "displayName": "Previous Domain",
+                    "order": "16",
+                    "value": ""
+                },
+                "sdkType": {
+                    "displayName": "SDK Type",
+                    "order": "21",
+                    "value": "WEB"
+                },
+                "sessionId": {
+                    "displayName": "",
+                    "order": "",
+                    "value": 928
+                },
+                "title": {
+                    "displayName": "Page Title",
+                    "order": "10",
+                    "value": "SaaS Template"
+                },
+                "uri": {
+                    "displayName": "Page URI",
+                    "order": "12",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "url": {
+                    "displayName": "Page URL",
+                    "order": "11",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "urlHost": {
+                    "displayName": "Page Domain",
+                    "order": "13",
+                    "value": "special-item-501508.framer.app"
+                },
+                "urlPath": {
+                    "displayName": "Page Path",
+                    "order": "14",
+                    "value": "/"
+                }
+            },
+            "performanceAttr": {
+                "consoleErrors": {
+                    "displayName": "Console Error Count",
+                    "order": "15",
+                    "value": 0
+                },
+                "consoleInfos": {
+                    "displayName": "Console Log Count",
+                    "order": "14",
+                    "value": 0
+                },
+                "consoleWarnings": {
+                    "displayName": "Console Warning Count",
+                    "order": "16",
+                    "value": 0
+                },
+                "feedbackInterval": {
+                    "displayName": "Click Latency",
+                    "order": "17",
+                    "value": 2.9
+                },
+                "slowNeChinaork": {
+                    "displayName": "Delayed NeChinaork",
+                    "order": "18",
+                    "value": "False"
+                }
+            },
+            "projectId": 19,
+            "screenDirect": 0,
+            "sessionId": 928,
+            "userId": 50
+        },
+        {
+            "desc": "Scrolling Stagnation 22.5s",
+            "deviceGroupId": 1,
+            "envAttr": {
+                "browser": {
+                    "displayName": "Browser",
+                    "order": "11",
+                    "value": "Chrome"
+                },
+                "city": {
+                    "displayName": "City",
+                    "order": "4",
+                    "value": "Motoyoyogichō"
+                },
+                "country": {
+                    "displayName": "Country or Region",
+                    "order": "2",
+                    "value": "JP"
+                },
+                "deviceType": {
+                    "displayName": "Device Type",
+                    "order": "18",
+                    "value": "PC"
+                },
+                "displayHeight": {
+                    "displayName": "Screen Height",
+                    "order": "13",
+                    "value": 2160
+                },
+                "displayWidth": {
+                    "displayName": "Screen Width",
+                    "order": "12",
+                    "value": 3840
+                },
+                "ip": {
+                    "displayName": "IP",
+                    "order": "1",
+                    "value": "212.107.30.195"
+                },
+                "operatingSystem": {
+                    "displayName": "OS",
+                    "order": "9",
+                    "value": "Mac"
+                },
+                "province": {
+                    "displayName": "Province",
+                    "order": "3",
+                    "value": "Tokyo Prefecture"
+                },
+                "userAgent": {
+                    "displayName": "User Agent",
+                    "order": "22",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+                },
+                "viewportHeight": {
+                    "displayName": "Window Height",
+                    "order": "15",
+                    "value": 1926
+                },
+                "viewporChinaidth": {
+                    "displayName": "Window Width",
+                    "order": "14",
+                    "value": 3840
+                }
+            },
+            "eventId": "928-0-25",
+            "eventName": "Viewport Stay",
+            "eventTypeId": 4,
+            "interactionAttr": {
+                "stayTime": {
+                    "displayName": "Viewport Dwell Time",
+                    "order": "8",
+                    "value": 22527
+                },
+                "timeSinceSessionStart": {
+                    "displayName": "Time From Session Start",
+                    "order": "18",
+                    "value": 22527
+                },
+                "viewportPosition": {
+                    "displayName": "Viewport Distance from Top",
+                    "order": "9",
+                    "value": 1032
+                },
+                "viewportPositionPercentage": {
+                    "displayName": "Viewport Relative Page Proportion",
+                    "order": "10",
+                    "value": 26.591085
+                }
+            },
+            "pageAttr": {
+                "clientCreateTs": {
+                    "displayName": "",
+                    "value": 1701745276412
+                },
+                "libVersion": {
+                    "displayName": "SDK Version",
+                    "order": "22",
+                    "value": "1.4.0"
+                },
+                "pageLength": {
+                    "displayName": "Page Length",
+                    "order": "17",
+                    "value": 3881
+                },
+                "referrer": {
+                    "displayName": "Previous URL",
+                    "order": "15",
+                    "value": ""
+                },
+                "referrerHost": {
+                    "displayName": "Previous Domain",
+                    "order": "16",
+                    "value": ""
+                },
+                "sdkType": {
+                    "displayName": "SDK Type",
+                    "order": "21",
+                    "value": "WEB"
+                },
+                "sessionId": {
+                    "displayName": "",
+                    "order": "",
+                    "value": 928
+                },
+                "title": {
+                    "displayName": "Page Title",
+                    "order": "10",
+                    "value": "SaaS Template"
+                },
+                "uri": {
+                    "displayName": "Page URI",
+                    "order": "12",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "url": {
+                    "displayName": "Page URL",
+                    "order": "11",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "urlHost": {
+                    "displayName": "Page Domain",
+                    "order": "13",
+                    "value": "special-item-501508.framer.app"
+                },
+                "urlPath": {
+                    "displayName": "Page Path",
+                    "order": "14",
+                    "value": "/"
+                }
+            },
+            "performanceAttr": {
+                "consoleErrors": {
+                    "displayName": "Console Error Count",
+                    "order": "15",
+                    "value": 1
+                },
+                "consoleInfos": {
+                    "displayName": "Console Log Count",
+                    "order": "14",
+                    "value": 0
+                },
+                "consoleWarnings": {
+                    "displayName": "Console Warning Count",
+                    "order": "16",
+                    "value": 0
+                }
+            },
+            "projectId": 19,
+            "screenDirect": 0,
+            "sessionId": 928,
+            "userId": 50
+        },
+        {
+            "desc": "Click Proactive support",
+            "deviceGroupId": 1,
+            "envAttr": {
+                "browser": {
+                    "displayName": "Browser",
+                    "order": "11",
+                    "value": "Chrome"
+                },
+                "city": {
+                    "displayName": "City",
+                    "order": "4",
+                    "value": "Motoyoyogichō"
+                },
+                "country": {
+                    "displayName": "Country or Region",
+                    "order": "2",
+                    "value": "JP"
+                },
+                "deviceType": {
+                    "displayName": "Device Type",
+                    "order": "18",
+                    "value": "PC"
+                },
+                "displayHeight": {
+                    "displayName": "Screen Height",
+                    "order": "13",
+                    "value": 2160
+                },
+                "displayWidth": {
+                    "displayName": "Screen Width",
+                    "order": "12",
+                    "value": 3840
+                },
+                "ip": {
+                    "displayName": "IP",
+                    "order": "1",
+                    "value": "212.107.30.195"
+                },
+                "operatingSystem": {
+                    "displayName": "OS",
+                    "order": "9",
+                    "value": "Mac"
+                },
+                "province": {
+                    "displayName": "Province",
+                    "order": "3",
+                    "value": "Tokyo Prefecture"
+                },
+                "userAgent": {
+                    "displayName": "User Agent",
+                    "order": "22",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+                },
+                "viewportHeight": {
+                    "displayName": "Window Height",
+                    "order": "15",
+                    "value": 1926
+                },
+                "viewporChinaidth": {
+                    "displayName": "Window Width",
+                    "order": "14",
+                    "value": 3840
+                }
+            },
+            "eventId": "928-0-29",
+            "eventName": "Element Click",
+            "eventTypeId": 2,
+            "interactionAttr": {
+                "errorCount": {
+                    "displayName": "Error Count",
+                    "order": "21",
+                    "value": 0
+                },
+                "repeatClick": {
+                    "displayName": "Multiple Clicks",
+                    "order": "19",
+                    "value": "False"
+                },
+                "timeSincePageLoad": {
+                    "displayName": "Duration Before Entering the Page",
+                    "order": "17",
+                    "value": 23446
+                },
+                "timeSinceSessionStart": {
+                    "displayName": "Time From Session Start",
+                    "order": "18",
+                    "value": 23446
+                }
+            },
+            "pageAttr": {
+                "clientCreateTs": {
+                    "displayName": "",
+                    "value": 1701745277331
+                },
+                "cssSelector": {
+                    "displayName": "Element Selector",
+                    "order": "1",
+                    "value": "body.framer-body-augiA20Il-framer-lpcgl:nth-child(2) \u003e div#main:nth-child(2) \u003e div.framer-lpcgl.framer-neckq.framer-oPX3o.framer-dR8YU:nth-child(1) \u003e div.framer-72rtr7:nth-child(1) \u003e section.framer-kb4u1n:nth-child(3) \u003e div.framer-5kogs0-container:nth-child(2) \u003e div.framer-kB3ke.framer-v-10xa8iz[tabindex='0']:nth-child(1) \u003e div.framer-10xa8iz[data-framer-name='Horizontal 1'][data-highlight='true']:nth-child(1) \u003e div.framer-1cfro1r:nth-child(2) \u003e div.framer-176y61p-container:nth-child(2) \u003e div.framer-0cFgg.framer-gFlhI.framer-v-1teyc8o.hover[tabindex='0']:nth-child(1) \u003e div.framer-1aztli8[data-highlight='true'][tabindex='0']:nth-child(1) \u003e div.framer-1ygmkcq[data-framer-component-type='RichTextContainer']:nth-child(2) \u003e p.framer-text:nth-child(1)"
+                },
+                "elementClassName": {
+                    "displayName": "Element Class Name",
+                    "order": "9",
+                    "value": "framer-text"
+                },
+                "elementId": {
+                    "displayName": "Element ID",
+                    "order": "2",
+                    "value": ""
+                },
+                "elementName": {
+                    "displayName": "Element Name",
+                    "order": "8",
+                    "value": ""
+                },
+                "elementPosition": {
+                    "displayName": "Element Position",
+                    "order": "6",
+                    "value": "1"
+                },
+                "elementTargetUrl": {
+                    "displayName": "Element Link",
+                    "order": "4",
+                    "value": ""
+                },
+                "elementText": {
+                    "displayName": "Element Text",
+                    "order": "3",
+                    "value": "Proactive support"
+                },
+                "elementType": {
+                    "displayName": "Element Tag",
+                    "order": "5",
+                    "value": "P"
+                },
+                "libVersion": {
+                    "displayName": "SDK Version",
+                    "order": "22",
+                    "value": "1.4.0"
+                },
+                "referrer": {
+                    "displayName": "Previous URL",
+                    "order": "15",
+                    "value": ""
+                },
+                "referrerHost": {
+                    "displayName": "Previous Domain",
+                    "order": "16",
+                    "value": ""
+                },
+                "sdkType": {
+                    "displayName": "SDK Type",
+                    "order": "21",
+                    "value": "WEB"
+                },
+                "sessionId": {
+                    "displayName": "",
+                    "order": "",
+                    "value": 928
+                },
+                "title": {
+                    "displayName": "Page Title",
+                    "order": "10",
+                    "value": "SaaS Template"
+                },
+                "uri": {
+                    "displayName": "Page URI",
+                    "order": "12",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "url": {
+                    "displayName": "Page URL",
+                    "order": "11",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "urlHost": {
+                    "displayName": "Page Domain",
+                    "order": "13",
+                    "value": "special-item-501508.framer.app"
+                },
+                "urlPath": {
+                    "displayName": "Page Path",
+                    "order": "14",
+                    "value": "/"
+                }
+            },
+            "performanceAttr": {
+                "consoleErrors": {
+                    "displayName": "Console Error Count",
+                    "order": "15",
+                    "value": 1
+                },
+                "consoleInfos": {
+                    "displayName": "Console Log Count",
+                    "order": "14",
+                    "value": 0
+                },
+                "consoleWarnings": {
+                    "displayName": "Console Warning Count",
+                    "order": "16",
+                    "value": 0
+                },
+                "feedbackInterval": {
+                    "displayName": "Click Latency",
+                    "order": "17",
+                    "value": 20
+                },
+                "slowNeChinaork": {
+                    "displayName": "Delayed NeChinaork",
+                    "order": "18",
+                    "value": "False"
+                }
+            },
+            "projectId": 19,
+            "screenDirect": 0,
+            "sessionId": 928,
+            "userId": 50
+        },
+        {
+            "desc": "Click Announcements",
+            "deviceGroupId": 1,
+            "envAttr": {
+                "browser": {
+                    "displayName": "Browser",
+                    "order": "11",
+                    "value": "Chrome"
+                },
+                "city": {
+                    "displayName": "City",
+                    "order": "4",
+                    "value": "Motoyoyogichō"
+                },
+                "country": {
+                    "displayName": "Country or Region",
+                    "order": "2",
+                    "value": "JP"
+                },
+                "deviceType": {
+                    "displayName": "Device Type",
+                    "order": "18",
+                    "value": "PC"
+                },
+                "displayHeight": {
+                    "displayName": "Screen Height",
+                    "order": "13",
+                    "value": 2160
+                },
+                "displayWidth": {
+                    "displayName": "Screen Width",
+                    "order": "12",
+                    "value": 3840
+                },
+                "ip": {
+                    "displayName": "IP",
+                    "order": "1",
+                    "value": "212.107.30.195"
+                },
+                "operatingSystem": {
+                    "displayName": "OS",
+                    "order": "9",
+                    "value": "Mac"
+                },
+                "province": {
+                    "displayName": "Province",
+                    "order": "3",
+                    "value": "Tokyo Prefecture"
+                },
+                "userAgent": {
+                    "displayName": "User Agent",
+                    "order": "22",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+                },
+                "viewportHeight": {
+                    "displayName": "Window Height",
+                    "order": "15",
+                    "value": 1926
+                },
+                "viewporChinaidth": {
+                    "displayName": "Window Width",
+                    "order": "14",
+                    "value": 3840
+                }
+            },
+            "eventId": "928-0-32",
+            "eventName": "Element Click",
+            "eventTypeId": 2,
+            "interactionAttr": {
+                "errorCount": {
+                    "displayName": "Error Count",
+                    "order": "21",
+                    "value": 0
+                },
+                "repeatClick": {
+                    "displayName": "Multiple Clicks",
+                    "order": "19",
+                    "value": "False"
+                },
+                "timeSincePageLoad": {
+                    "displayName": "Duration Before Entering the Page",
+                    "order": "17",
+                    "value": 24345
+                },
+                "timeSinceSessionStart": {
+                    "displayName": "Time From Session Start",
+                    "order": "18",
+                    "value": 24345
+                }
+            },
+            "pageAttr": {
+                "clientCreateTs": {
+                    "displayName": "",
+                    "value": 1701745278230
+                },
+                "cssSelector": {
+                    "displayName": "Element Selector",
+                    "order": "1",
+                    "value": "body.framer-body-augiA20Il-framer-lpcgl:nth-child(2) \u003e div#main:nth-child(2) \u003e div.framer-lpcgl.framer-neckq.framer-oPX3o.framer-dR8YU:nth-child(1) \u003e div.framer-72rtr7:nth-child(1) \u003e section.framer-kb4u1n:nth-child(3) \u003e div.framer-5kogs0-container:nth-child(2) \u003e div.framer-kB3ke.framer-v-17ui6i6[tabindex='0']:nth-child(1) \u003e div.framer-10xa8iz[data-framer-name='Horizontal 2'][data-highlight='true']:nth-child(1) \u003e div.framer-1cfro1r:nth-child(2) \u003e div.framer-hwg5n3-container:nth-child(3) \u003e div.framer-0cFgg.framer-gFlhI.framer-v-1teyc8o.hover[tabindex='0']:nth-child(1) \u003e div.framer-1aztli8[data-highlight='true'][tabindex='0']:nth-child(1) \u003e div.framer-1ygmkcq[data-framer-component-type='RichTextContainer']:nth-child(2) \u003e p.framer-text:nth-child(1)"
+                },
+                "elementClassName": {
+                    "displayName": "Element Class Name",
+                    "order": "9",
+                    "value": "framer-text"
+                },
+                "elementId": {
+                    "displayName": "Element ID",
+                    "order": "2",
+                    "value": ""
+                },
+                "elementName": {
+                    "displayName": "Element Name",
+                    "order": "8",
+                    "value": ""
+                },
+                "elementPosition": {
+                    "displayName": "Element Position",
+                    "order": "6",
+                    "value": "1"
+                },
+                "elementTargetUrl": {
+                    "displayName": "Element Link",
+                    "order": "4",
+                    "value": ""
+                },
+                "elementText": {
+                    "displayName": "Element Text",
+                    "order": "3",
+                    "value": "Announcements"
+                },
+                "elementType": {
+                    "displayName": "Element Tag",
+                    "order": "5",
+                    "value": "P"
+                },
+                "libVersion": {
+                    "displayName": "SDK Version",
+                    "order": "22",
+                    "value": "1.4.0"
+                },
+                "referrer": {
+                    "displayName": "Previous URL",
+                    "order": "15",
+                    "value": ""
+                },
+                "referrerHost": {
+                    "displayName": "Previous Domain",
+                    "order": "16",
+                    "value": ""
+                },
+                "sdkType": {
+                    "displayName": "SDK Type",
+                    "order": "21",
+                    "value": "WEB"
+                },
+                "sessionId": {
+                    "displayName": "",
+                    "order": "",
+                    "value": 928
+                },
+                "title": {
+                    "displayName": "Page Title",
+                    "order": "10",
+                    "value": "SaaS Template"
+                },
+                "uri": {
+                    "displayName": "Page URI",
+                    "order": "12",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "url": {
+                    "displayName": "Page URL",
+                    "order": "11",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "urlHost": {
+                    "displayName": "Page Domain",
+                    "order": "13",
+                    "value": "special-item-501508.framer.app"
+                },
+                "urlPath": {
+                    "displayName": "Page Path",
+                    "order": "14",
+                    "value": "/"
+                }
+            },
+            "performanceAttr": {
+                "consoleErrors": {
+                    "displayName": "Console Error Count",
+                    "order": "15",
+                    "value": 0
+                },
+                "consoleInfos": {
+                    "displayName": "Console Log Count",
+                    "order": "14",
+                    "value": 0
+                },
+                "consoleWarnings": {
+                    "displayName": "Console Warning Count",
+                    "order": "16",
+                    "value": 0
+                },
+                "feedbackInterval": {
+                    "displayName": "Click Latency",
+                    "order": "17",
+                    "value": 20.5
+                },
+                "slowNeChinaork": {
+                    "displayName": "Delayed NeChinaork",
+                    "order": "18",
+                    "value": "False"
+                }
+            },
+            "projectId": 19,
+            "screenDirect": 0,
+            "sessionId": 928,
+            "userId": 50
+        },
+        {
+            "desc": "Scrolling Stagnation 4.2s",
+            "deviceGroupId": 1,
+            "envAttr": {
+                "browser": {
+                    "displayName": "Browser",
+                    "order": "11",
+                    "value": "Chrome"
+                },
+                "city": {
+                    "displayName": "City",
+                    "order": "4",
+                    "value": "Motoyoyogichō"
+                },
+                "country": {
+                    "displayName": "Country or Region",
+                    "order": "2",
+                    "value": "JP"
+                },
+                "deviceType": {
+                    "displayName": "Device Type",
+                    "order": "18",
+                    "value": "PC"
+                },
+                "displayHeight": {
+                    "displayName": "Screen Height",
+                    "order": "13",
+                    "value": 2160
+                },
+                "displayWidth": {
+                    "displayName": "Screen Width",
+                    "order": "12",
+                    "value": 3840
+                },
+                "ip": {
+                    "displayName": "IP",
+                    "order": "1",
+                    "value": "212.107.30.195"
+                },
+                "operatingSystem": {
+                    "displayName": "OS",
+                    "order": "9",
+                    "value": "Mac"
+                },
+                "province": {
+                    "displayName": "Province",
+                    "order": "3",
+                    "value": "Tokyo Prefecture"
+                },
+                "userAgent": {
+                    "displayName": "User Agent",
+                    "order": "22",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+                },
+                "viewportHeight": {
+                    "displayName": "Window Height",
+                    "order": "15",
+                    "value": 1926
+                },
+                "viewporChinaidth": {
+                    "displayName": "Window Width",
+                    "order": "14",
+                    "value": 3840
+                }
+            },
+            "eventId": "928-0-35",
+            "eventName": "Viewport Stay",
+            "eventTypeId": 4,
+            "interactionAttr": {
+                "stayTime": {
+                    "displayName": "Viewport Dwell Time",
+                    "order": "8",
+                    "value": 4297
+                },
+                "timeSinceSessionStart": {
+                    "displayName": "Time From Session Start",
+                    "order": "18",
+                    "value": 26824
+                },
+                "viewportPosition": {
+                    "displayName": "Viewport Distance from Top",
+                    "order": "9",
+                    "value": 1901
+                },
+                "viewportPositionPercentage": {
+                    "displayName": "Viewport Relative Page Proportion",
+                    "order": "10",
+                    "value": 48.98222
+                }
+            },
+            "pageAttr": {
+                "clientCreateTs": {
+                    "displayName": "",
+                    "value": 1701745280709
+                },
+                "libVersion": {
+                    "displayName": "SDK Version",
+                    "order": "22",
+                    "value": "1.4.0"
+                },
+                "pageLength": {
+                    "displayName": "Page Length",
+                    "order": "17",
+                    "value": 3881
+                },
+                "referrer": {
+                    "displayName": "Previous URL",
+                    "order": "15",
+                    "value": ""
+                },
+                "referrerHost": {
+                    "displayName": "Previous Domain",
+                    "order": "16",
+                    "value": ""
+                },
+                "sdkType": {
+                    "displayName": "SDK Type",
+                    "order": "21",
+                    "value": "WEB"
+                },
+                "sessionId": {
+                    "displayName": "",
+                    "order": "",
+                    "value": 928
+                },
+                "title": {
+                    "displayName": "Page Title",
+                    "order": "10",
+                    "value": "SaaS Template"
+                },
+                "uri": {
+                    "displayName": "Page URI",
+                    "order": "12",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "url": {
+                    "displayName": "Page URL",
+                    "order": "11",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "urlHost": {
+                    "displayName": "Page Domain",
+                    "order": "13",
+                    "value": "special-item-501508.framer.app"
+                },
+                "urlPath": {
+                    "displayName": "Page Path",
+                    "order": "14",
+                    "value": "/"
+                }
+            },
+            "performanceAttr": {
+                "consoleErrors": {
+                    "displayName": "Console Error Count",
+                    "order": "15",
+                    "value": 0
+                },
+                "consoleInfos": {
+                    "displayName": "Console Log Count",
+                    "order": "14",
+                    "value": 0
+                },
+                "consoleWarnings": {
+                    "displayName": "Console Warning Count",
+                    "order": "16",
+                    "value": 0
+                }
+            },
+            "projectId": 19,
+            "screenDirect": 0,
+            "sessionId": 928,
+            "userId": 50
+        },
+        {
+            "desc": "Height Reduction 0%,Width Reduction 26%",
+            "deviceGroupId": 1,
+            "envAttr": {
+                "browser": {
+                    "displayName": "Browser",
+                    "order": "11",
+                    "value": "Chrome"
+                },
+                "city": {
+                    "displayName": "City",
+                    "order": "4",
+                    "value": "Motoyoyogichō"
+                },
+                "country": {
+                    "displayName": "Country or Region",
+                    "order": "2",
+                    "value": "JP"
+                },
+                "deviceType": {
+                    "displayName": "Device Type",
+                    "order": "18",
+                    "value": "PC"
+                },
+                "displayHeight": {
+                    "displayName": "Screen Height",
+                    "order": "13",
+                    "value": 2160
+                },
+                "displayWidth": {
+                    "displayName": "Screen Width",
+                    "order": "12",
+                    "value": 3840
+                },
+                "ip": {
+                    "displayName": "IP",
+                    "order": "1",
+                    "value": "212.107.30.195"
+                },
+                "operatingSystem": {
+                    "displayName": "OS",
+                    "order": "9",
+                    "value": "Mac"
+                },
+                "province": {
+                    "displayName": "Province",
+                    "order": "3",
+                    "value": "Tokyo Prefecture"
+                },
+                "userAgent": {
+                    "displayName": "User Agent",
+                    "order": "22",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+                },
+                "viewportHeight": {
+                    "displayName": "Window Height",
+                    "order": "15",
+                    "value": 1926
+                },
+                "viewportHeightPre": {
+                    "displayName": "Pre-Resizing Window Height",
+                    "order": "17",
+                    "value": 963
+                },
+                "viewporChinaidth": {
+                    "displayName": "Window Width",
+                    "order": "14",
+                    "value": 2842
+                },
+                "viewporChinaidthPre": {
+                    "displayName": "Pre-Resizing Window Width",
+                    "order": "16",
+                    "value": 1920
+                }
+            },
+            "eventId": "928-0-39",
+            "eventName": "Window Resizing",
+            "eventTypeId": 6,
+            "interactionAttr": {
+                "timeSinceSessionStart": {
+                    "displayName": "Time From Session Start",
+                    "order": "18",
+                    "value": 31027
+                },
+                "viewportHeightChangeRate": {
+                    "displayName": "Window Height Change",
+                    "order": "14",
+                    "value": 0
+                },
+                "viewporChinaidthChangeRate": {
+                    "displayName": "Window Width Change",
+                    "order": "13",
+                    "value": -0.26
+                }
+            },
+            "pageAttr": {
+                "clientCreateTs": {
+                    "displayName": "",
+                    "value": 1701745284912
+                },
+                "libVersion": {
+                    "displayName": "SDK Version",
+                    "order": "22",
+                    "value": "1.4.0"
+                },
+                "referrer": {
+                    "displayName": "Previous URL",
+                    "order": "15",
+                    "value": ""
+                },
+                "referrerHost": {
+                    "displayName": "Previous Domain",
+                    "order": "16",
+                    "value": ""
+                },
+                "sdkType": {
+                    "displayName": "SDK Type",
+                    "order": "21",
+                    "value": "WEB"
+                },
+                "sessionId": {
+                    "displayName": "",
+                    "order": "",
+                    "value": 928
+                },
+                "title": {
+                    "displayName": "Page Title",
+                    "order": "10",
+                    "value": "SaaS Template"
+                },
+                "uri": {
+                    "displayName": "Page URI",
+                    "order": "12",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "url": {
+                    "displayName": "Page URL",
+                    "order": "11",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "urlHost": {
+                    "displayName": "Page Domain",
+                    "order": "13",
+                    "value": "special-item-501508.framer.app"
+                },
+                "urlPath": {
+                    "displayName": "Page Path",
+                    "order": "14",
+                    "value": "/"
+                }
+            },
+            "performanceAttr": {
+                "consoleErrors": {
+                    "displayName": "Console Error Count",
+                    "order": "15",
+                    "value": 0
+                },
+                "consoleInfos": {
+                    "displayName": "Console Log Count",
+                    "order": "14",
+                    "value": 0
+                },
+                "consoleWarnings": {
+                    "displayName": "Console Warning Count",
+                    "order": "16",
+                    "value": 0
+                }
+            },
+            "projectId": 19,
+            "screenDirect": 0,
+            "sessionId": 928,
+            "userId": 50
+        },
+        {
+            "desc": "Height Reduction 0%,Width Reduction 26%",
+            "deviceGroupId": 1,
+            "envAttr": {
+                "browser": {
+                    "displayName": "Browser",
+                    "order": "11",
+                    "value": "Chrome"
+                },
+                "city": {
+                    "displayName": "City",
+                    "order": "4",
+                    "value": "Motoyoyogichō"
+                },
+                "country": {
+                    "displayName": "Country or Region",
+                    "order": "2",
+                    "value": "JP"
+                },
+                "deviceType": {
+                    "displayName": "Device Type",
+                    "order": "18",
+                    "value": "PC"
+                },
+                "displayHeight": {
+                    "displayName": "Screen Height",
+                    "order": "13",
+                    "value": 2160
+                },
+                "displayWidth": {
+                    "displayName": "Screen Width",
+                    "order": "12",
+                    "value": 3840
+                },
+                "ip": {
+                    "displayName": "IP",
+                    "order": "1",
+                    "value": "212.107.30.195"
+                },
+                "operatingSystem": {
+                    "displayName": "OS",
+                    "order": "9",
+                    "value": "Mac"
+                },
+                "province": {
+                    "displayName": "Province",
+                    "order": "3",
+                    "value": "Tokyo Prefecture"
+                },
+                "userAgent": {
+                    "displayName": "User Agent",
+                    "order": "22",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+                },
+                "viewportHeight": {
+                    "displayName": "Window Height",
+                    "order": "15",
+                    "value": 1926
+                },
+                "viewportHeightPre": {
+                    "displayName": "Pre-Resizing Window Height",
+                    "order": "17",
+                    "value": 963
+                },
+                "viewporChinaidth": {
+                    "displayName": "Window Width",
+                    "order": "14",
+                    "value": 2842
+                },
+                "viewporChinaidthPre": {
+                    "displayName": "Pre-Resizing Window Width",
+                    "order": "16",
+                    "value": 1920
+                }
+            },
+            "eventId": "928-0-40",
+            "eventName": "Window Resizing",
+            "eventTypeId": 6,
+            "interactionAttr": {
+                "timeSinceSessionStart": {
+                    "displayName": "Time From Session Start",
+                    "order": "18",
+                    "value": 31027
+                },
+                "viewportHeightChangeRate": {
+                    "displayName": "Window Height Change",
+                    "order": "14",
+                    "value": 0
+                },
+                "viewporChinaidthChangeRate": {
+                    "displayName": "Window Width Change",
+                    "order": "13",
+                    "value": -0.26
+                }
+            },
+            "pageAttr": {
+                "clientCreateTs": {
+                    "displayName": "",
+                    "value": 1701745284912
+                },
+                "libVersion": {
+                    "displayName": "SDK Version",
+                    "order": "22",
+                    "value": "1.4.0"
+                },
+                "referrer": {
+                    "displayName": "Previous URL",
+                    "order": "15",
+                    "value": ""
+                },
+                "referrerHost": {
+                    "displayName": "Previous Domain",
+                    "order": "16",
+                    "value": ""
+                },
+                "sdkType": {
+                    "displayName": "SDK Type",
+                    "order": "21",
+                    "value": "WEB"
+                },
+                "sessionId": {
+                    "displayName": "",
+                    "order": "",
+                    "value": 928
+                },
+                "title": {
+                    "displayName": "Page Title",
+                    "order": "10",
+                    "value": "SaaS Template"
+                },
+                "uri": {
+                    "displayName": "Page URI",
+                    "order": "12",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "url": {
+                    "displayName": "Page URL",
+                    "order": "11",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "urlHost": {
+                    "displayName": "Page Domain",
+                    "order": "13",
+                    "value": "special-item-501508.framer.app"
+                },
+                "urlPath": {
+                    "displayName": "Page Path",
+                    "order": "14",
+                    "value": "/"
+                }
+            },
+            "performanceAttr": {
+                "consoleErrors": {
+                    "displayName": "Console Error Count",
+                    "order": "15",
+                    "value": 0
+                },
+                "consoleInfos": {
+                    "displayName": "Console Log Count",
+                    "order": "14",
+                    "value": 0
+                },
+                "consoleWarnings": {
+                    "displayName": "Console Warning Count",
+                    "order": "16",
+                    "value": 0
+                }
+            },
+            "projectId": 19,
+            "screenDirect": 0,
+            "sessionId": 928,
+            "userId": 50
+        },
+        {
+            "desc": "",
+            "deviceGroupId": 1,
+            "envAttr": {
+                "browser": {
+                    "displayName": "Browser",
+                    "order": "11",
+                    "value": "Chrome"
+                },
+                "city": {
+                    "displayName": "City",
+                    "order": "4",
+                    "value": "Motoyoyogichō"
+                },
+                "country": {
+                    "displayName": "Country or Region",
+                    "order": "2",
+                    "value": "JP"
+                },
+                "deviceType": {
+                    "displayName": "Device Type",
+                    "order": "18",
+                    "value": "PC"
+                },
+                "displayHeight": {
+                    "displayName": "Screen Height",
+                    "order": "13",
+                    "value": 2160
+                },
+                "displayWidth": {
+                    "displayName": "Screen Width",
+                    "order": "12",
+                    "value": 3840
+                },
+                "ip": {
+                    "displayName": "IP",
+                    "order": "1",
+                    "value": "212.107.30.195"
+                },
+                "operatingSystem": {
+                    "displayName": "OS",
+                    "order": "9",
+                    "value": "Mac"
+                },
+                "province": {
+                    "displayName": "Province",
+                    "order": "3",
+                    "value": "Tokyo Prefecture"
+                },
+                "userAgent": {
+                    "displayName": "User Agent",
+                    "order": "22",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+                },
+                "viewportHeight": {
+                    "displayName": "Window Height",
+                    "order": "15",
+                    "value": 1926
+                },
+                "viewporChinaidth": {
+                    "displayName": "Window Width",
+                    "order": "14",
+                    "value": 2842
+                }
+            },
+            "eventId": "928-0-47",
+            "eventName": "Element Click",
+            "eventTypeId": 2,
+            "interactionAttr": {
+                "errorCount": {
+                    "displayName": "Error Count",
+                    "order": "21",
+                    "value": 0
+                },
+                "repeatClick": {
+                    "displayName": "Multiple Clicks",
+                    "order": "19",
+                    "value": "False"
+                },
+                "timeSincePageLoad": {
+                    "displayName": "Duration Before Entering the Page",
+                    "order": "17",
+                    "value": 49582
+                },
+                "timeSinceSessionStart": {
+                    "displayName": "Time From Session Start",
+                    "order": "18",
+                    "value": 49582
+                }
+            },
+            "pageAttr": {
+                "clientCreateTs": {
+                    "displayName": "",
+                    "value": 1701745303467
+                },
+                "cssSelector": {
+                    "displayName": "Element Selector",
+                    "order": "1",
+                    "value": "body.framer-body-augiA20Il-framer-lpcgl:nth-child(2) \u003e div#main:nth-child(2) \u003e div.framer-lpcgl.framer-neckq.framer-oPX3o.framer-dR8YU:nth-child(1) \u003e div.framer-72rtr7:nth-child(1) \u003e header.framer-1uyqpyx:nth-child(2) \u003e div.framer-1ckriva:nth-child(1)"
+                },
+                "elementClassName": {
+                    "displayName": "Element Class Name",
+                    "order": "9",
+                    "value": "framer-1ckriva"
+                },
+                "elementId": {
+                    "displayName": "Element ID",
+                    "order": "2",
+                    "value": ""
+                },
+                "elementName": {
+                    "displayName": "Element Name",
+                    "order": "8",
+                    "value": ""
+                },
+                "elementPosition": {
+                    "displayName": "Element Position",
+                    "order": "6",
+                    "value": "1"
+                },
+                "elementTargetUrl": {
+                    "displayName": "Element Link",
+                    "order": "4",
+                    "value": ""
+                },
+                "elementText": {
+                    "displayName": "Element Text",
+                    "order": "3",
+                    "value": ""
+                },
+                "elementType": {
+                    "displayName": "Element Tag",
+                    "order": "5",
+                    "value": "DIV"
+                },
+                "libVersion": {
+                    "displayName": "SDK Version",
+                    "order": "22",
+                    "value": "1.4.0"
+                },
+                "referrer": {
+                    "displayName": "Previous URL",
+                    "order": "15",
+                    "value": ""
+                },
+                "referrerHost": {
+                    "displayName": "Previous Domain",
+                    "order": "16",
+                    "value": ""
+                },
+                "sdkType": {
+                    "displayName": "SDK Type",
+                    "order": "21",
+                    "value": "WEB"
+                },
+                "sessionId": {
+                    "displayName": "",
+                    "order": "",
+                    "value": 928
+                },
+                "title": {
+                    "displayName": "Page Title",
+                    "order": "10",
+                    "value": "SaaS Template"
+                },
+                "uri": {
+                    "displayName": "Page URI",
+                    "order": "12",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "url": {
+                    "displayName": "Page URL",
+                    "order": "11",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "urlHost": {
+                    "displayName": "Page Domain",
+                    "order": "13",
+                    "value": "special-item-501508.framer.app"
+                },
+                "urlPath": {
+                    "displayName": "Page Path",
+                    "order": "14",
+                    "value": "/"
+                }
+            },
+            "performanceAttr": {
+                "consoleErrors": {
+                    "displayName": "Console Error Count",
+                    "order": "15",
+                    "value": 0
+                },
+                "consoleInfos": {
+                    "displayName": "Console Log Count",
+                    "order": "14",
+                    "value": 0
+                },
+                "consoleWarnings": {
+                    "displayName": "Console Warning Count",
+                    "order": "16",
+                    "value": 0
+                },
+                "feedbackInterval": {
+                    "displayName": "Click Latency",
+                    "order": "17",
+                    "value": 1911.2
+                },
+                "slowNeChinaork": {
+                    "displayName": "Delayed NeChinaork",
+                    "order": "18",
+                    "value": "False"
+                }
+            },
+            "projectId": 19,
+            "screenDirect": 0,
+            "sessionId": 928,
+            "userId": 50
+        },
+        {
+            "desc": "",
+            "deviceGroupId": 1,
+            "envAttr": {
+                "browser": {
+                    "displayName": "Browser",
+                    "order": "11",
+                    "value": "Chrome"
+                },
+                "city": {
+                    "displayName": "City",
+                    "order": "4",
+                    "value": "Motoyoyogichō"
+                },
+                "country": {
+                    "displayName": "Country or Region",
+                    "order": "2",
+                    "value": "JP"
+                },
+                "deviceType": {
+                    "displayName": "Device Type",
+                    "order": "18",
+                    "value": "PC"
+                },
+                "displayHeight": {
+                    "displayName": "Screen Height",
+                    "order": "13",
+                    "value": 2160
+                },
+                "displayWidth": {
+                    "displayName": "Screen Width",
+                    "order": "12",
+                    "value": 3840
+                },
+                "ip": {
+                    "displayName": "IP",
+                    "order": "1",
+                    "value": "212.107.30.195"
+                },
+                "operatingSystem": {
+                    "displayName": "OS",
+                    "order": "9",
+                    "value": "Mac"
+                },
+                "province": {
+                    "displayName": "Province",
+                    "order": "3",
+                    "value": "Tokyo Prefecture"
+                },
+                "userAgent": {
+                    "displayName": "User Agent",
+                    "order": "22",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+                },
+                "viewportHeight": {
+                    "displayName": "Window Height",
+                    "order": "15",
+                    "value": 1926
+                },
+                "viewporChinaidth": {
+                    "displayName": "Window Width",
+                    "order": "14",
+                    "value": 2842
+                }
+            },
+            "eventId": "928-0-53",
+            "eventName": "Element Click",
+            "eventTypeId": 2,
+            "interactionAttr": {
+                "errorCount": {
+                    "displayName": "Error Count",
+                    "order": "21",
+                    "value": 0
+                },
+                "repeatClick": {
+                    "displayName": "Multiple Clicks",
+                    "order": "19",
+                    "value": "False"
+                },
+                "timeSincePageLoad": {
+                    "displayName": "Duration Before Entering the Page",
+                    "order": "17",
+                    "value": 69194
+                },
+                "timeSinceSessionStart": {
+                    "displayName": "Time From Session Start",
+                    "order": "18",
+                    "value": 69194
+                }
+            },
+            "pageAttr": {
+                "clientCreateTs": {
+                    "displayName": "",
+                    "value": 1701745323079
+                },
+                "cssSelector": {
+                    "displayName": "Element Selector",
+                    "order": "1",
+                    "value": "body.framer-body-augiA20Il-framer-lpcgl:nth-child(2) \u003e div#main:nth-child(2) \u003e div.framer-lpcgl.framer-neckq.framer-oPX3o.framer-dR8YU:nth-child(1) \u003e div.framer-72rtr7:nth-child(1) \u003e header.framer-1uyqpyx:nth-child(2)"
+                },
+                "elementClassName": {
+                    "displayName": "Element Class Name",
+                    "order": "9",
+                    "value": "framer-1uyqpyx"
+                },
+                "elementId": {
+                    "displayName": "Element ID",
+                    "order": "2",
+                    "value": ""
+                },
+                "elementName": {
+                    "displayName": "Element Name",
+                    "order": "8",
+                    "value": ""
+                },
+                "elementPosition": {
+                    "displayName": "Element Position",
+                    "order": "6",
+                    "value": "2"
+                },
+                "elementTargetUrl": {
+                    "displayName": "Element Link",
+                    "order": "4",
+                    "value": ""
+                },
+                "elementText": {
+                    "displayName": "Element Text",
+                    "order": "3",
+                    "value": ""
+                },
+                "elementType": {
+                    "displayName": "Element Tag",
+                    "order": "5",
+                    "value": "HEADER"
+                },
+                "libVersion": {
+                    "displayName": "SDK Version",
+                    "order": "22",
+                    "value": "1.4.0"
+                },
+                "referrer": {
+                    "displayName": "Previous URL",
+                    "order": "15",
+                    "value": ""
+                },
+                "referrerHost": {
+                    "displayName": "Previous Domain",
+                    "order": "16",
+                    "value": ""
+                },
+                "sdkType": {
+                    "displayName": "SDK Type",
+                    "order": "21",
+                    "value": "WEB"
+                },
+                "sessionId": {
+                    "displayName": "",
+                    "order": "",
+                    "value": 928
+                },
+                "title": {
+                    "displayName": "Page Title",
+                    "order": "10",
+                    "value": "SaaS Template"
+                },
+                "uri": {
+                    "displayName": "Page URI",
+                    "order": "12",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "url": {
+                    "displayName": "Page URL",
+                    "order": "11",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "urlHost": {
+                    "displayName": "Page Domain",
+                    "order": "13",
+                    "value": "special-item-501508.framer.app"
+                },
+                "urlPath": {
+                    "displayName": "Page Path",
+                    "order": "14",
+                    "value": "/"
+                }
+            },
+            "performanceAttr": {
+                "consoleErrors": {
+                    "displayName": "Console Error Count",
+                    "order": "15",
+                    "value": 0
+                },
+                "consoleInfos": {
+                    "displayName": "Console Log Count",
+                    "order": "14",
+                    "value": 0
+                },
+                "consoleWarnings": {
+                    "displayName": "Console Warning Count",
+                    "order": "16",
+                    "value": 0
+                },
+                "feedbackInterval": {
+                    "displayName": "Click Latency",
+                    "order": "17",
+                    "value": 405.1
+                },
+                "slowNeChinaork": {
+                    "displayName": "Delayed NeChinaork",
+                    "order": "18",
+                    "value": "False"
+                }
+            },
+            "projectId": 19,
+            "screenDirect": 0,
+            "sessionId": 928,
+            "userId": 50
+        },
+        {
+            "desc": "",
+            "deviceGroupId": 1,
+            "envAttr": {
+                "browser": {
+                    "displayName": "Browser",
+                    "order": "11",
+                    "value": "Chrome"
+                },
+                "city": {
+                    "displayName": "City",
+                    "order": "4",
+                    "value": "Motoyoyogichō"
+                },
+                "country": {
+                    "displayName": "Country or Region",
+                    "order": "2",
+                    "value": "JP"
+                },
+                "deviceType": {
+                    "displayName": "Device Type",
+                    "order": "18",
+                    "value": "PC"
+                },
+                "displayHeight": {
+                    "displayName": "Screen Height",
+                    "order": "13",
+                    "value": 2160
+                },
+                "displayWidth": {
+                    "displayName": "Screen Width",
+                    "order": "12",
+                    "value": 3840
+                },
+                "ip": {
+                    "displayName": "IP",
+                    "order": "1",
+                    "value": "212.107.30.195"
+                },
+                "operatingSystem": {
+                    "displayName": "OS",
+                    "order": "9",
+                    "value": "Mac"
+                },
+                "province": {
+                    "displayName": "Province",
+                    "order": "3",
+                    "value": "Tokyo Prefecture"
+                },
+                "userAgent": {
+                    "displayName": "User Agent",
+                    "order": "22",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+                },
+                "viewportHeight": {
+                    "displayName": "Window Height",
+                    "order": "15",
+                    "value": 1926
+                },
+                "viewporChinaidth": {
+                    "displayName": "Window Width",
+                    "order": "14",
+                    "value": 2842
+                }
+            },
+            "eventId": "928-0-57",
+            "eventName": "Element Click",
+            "eventTypeId": 2,
+            "interactionAttr": {
+                "errorCount": {
+                    "displayName": "Error Count",
+                    "order": "21",
+                    "value": 0
+                },
+                "repeatClick": {
+                    "displayName": "Multiple Clicks",
+                    "order": "19",
+                    "value": "True"
+                },
+                "timeSincePageLoad": {
+                    "displayName": "Duration Before Entering the Page",
+                    "order": "17",
+                    "value": 70377
+                },
+                "timeSinceSessionStart": {
+                    "displayName": "Time From Session Start",
+                    "order": "18",
+                    "value": 70377
+                }
+            },
+            "pageAttr": {
+                "clientCreateTs": {
+                    "displayName": "",
+                    "value": 1701745324262
+                },
+                "cssSelector": {
+                    "displayName": "Element Selector",
+                    "order": "1",
+                    "value": "body.framer-body-augiA20Il-framer-lpcgl:nth-child(2) \u003e div#main:nth-child(2) \u003e div.framer-lpcgl.framer-neckq.framer-oPX3o.framer-dR8YU:nth-child(1) \u003e div.framer-72rtr7:nth-child(1) \u003e header.framer-1uyqpyx:nth-child(2)"
+                },
+                "elementClassName": {
+                    "displayName": "Element Class Name",
+                    "order": "9",
+                    "value": "framer-1uyqpyx"
+                },
+                "elementId": {
+                    "displayName": "Element ID",
+                    "order": "2",
+                    "value": ""
+                },
+                "elementName": {
+                    "displayName": "Element Name",
+                    "order": "8",
+                    "value": ""
+                },
+                "elementPosition": {
+                    "displayName": "Element Position",
+                    "order": "6",
+                    "value": "2"
+                },
+                "elementTargetUrl": {
+                    "displayName": "Element Link",
+                    "order": "4",
+                    "value": ""
+                },
+                "elementText": {
+                    "displayName": "Element Text",
+                    "order": "3",
+                    "value": ""
+                },
+                "elementType": {
+                    "displayName": "Element Tag",
+                    "order": "5",
+                    "value": "HEADER"
+                },
+                "libVersion": {
+                    "displayName": "SDK Version",
+                    "order": "22",
+                    "value": "1.4.0"
+                },
+                "referrer": {
+                    "displayName": "Previous URL",
+                    "order": "15",
+                    "value": ""
+                },
+                "referrerHost": {
+                    "displayName": "Previous Domain",
+                    "order": "16",
+                    "value": ""
+                },
+                "sdkType": {
+                    "displayName": "SDK Type",
+                    "order": "21",
+                    "value": "WEB"
+                },
+                "sessionId": {
+                    "displayName": "",
+                    "order": "",
+                    "value": 928
+                },
+                "title": {
+                    "displayName": "Page Title",
+                    "order": "10",
+                    "value": "SaaS Template"
+                },
+                "uri": {
+                    "displayName": "Page URI",
+                    "order": "12",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "url": {
+                    "displayName": "Page URL",
+                    "order": "11",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "urlHost": {
+                    "displayName": "Page Domain",
+                    "order": "13",
+                    "value": "special-item-501508.framer.app"
+                },
+                "urlPath": {
+                    "displayName": "Page Path",
+                    "order": "14",
+                    "value": "/"
+                }
+            },
+            "performanceAttr": {
+                "consoleErrors": {
+                    "displayName": "Console Error Count",
+                    "order": "15",
+                    "value": 0
+                },
+                "consoleInfos": {
+                    "displayName": "Console Log Count",
+                    "order": "14",
+                    "value": 0
+                },
+                "consoleWarnings": {
+                    "displayName": "Console Warning Count",
+                    "order": "16",
+                    "value": 0
+                },
+                "feedbackInterval": {
+                    "displayName": "Click Latency",
+                    "order": "17",
+                    "value": 2184.7
+                },
+                "slowNeChinaork": {
+                    "displayName": "Delayed NeChinaork",
+                    "order": "18",
+                    "value": "False"
+                }
+            },
+            "projectId": 19,
+            "screenDirect": 0,
+            "sessionId": 928,
+            "userId": 50
+        },
+        {
+            "desc": "Scrolling Stagnation 54.3s",
+            "deviceGroupId": 1,
+            "envAttr": {
+                "browser": {
+                    "displayName": "Browser",
+                    "order": "11",
+                    "value": "Chrome"
+                },
+                "city": {
+                    "displayName": "City",
+                    "order": "4",
+                    "value": "Motoyoyogichō"
+                },
+                "country": {
+                    "displayName": "Country or Region",
+                    "order": "2",
+                    "value": "JP"
+                },
+                "deviceType": {
+                    "displayName": "Device Type",
+                    "order": "18",
+                    "value": "PC"
+                },
+                "displayHeight": {
+                    "displayName": "Screen Height",
+                    "order": "13",
+                    "value": 2160
+                },
+                "displayWidth": {
+                    "displayName": "Screen Width",
+                    "order": "12",
+                    "value": 3840
+                },
+                "ip": {
+                    "displayName": "IP",
+                    "order": "1",
+                    "value": "212.107.30.195"
+                },
+                "operatingSystem": {
+                    "displayName": "OS",
+                    "order": "9",
+                    "value": "Mac"
+                },
+                "province": {
+                    "displayName": "Province",
+                    "order": "3",
+                    "value": "Tokyo Prefecture"
+                },
+                "userAgent": {
+                    "displayName": "User Agent",
+                    "order": "22",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+                },
+                "viewportHeight": {
+                    "displayName": "Window Height",
+                    "order": "15",
+                    "value": 1926
+                },
+                "viewporChinaidth": {
+                    "displayName": "Window Width",
+                    "order": "14",
+                    "value": 2842
+                }
+            },
+            "eventId": "928-0-61",
+            "eventName": "Viewport Stay",
+            "eventTypeId": 4,
+            "interactionAttr": {
+                "stayTime": {
+                    "displayName": "Viewport Dwell Time",
+                    "order": "8",
+                    "value": 54367
+                },
+                "timeSinceSessionStart": {
+                    "displayName": "Time From Session Start",
+                    "order": "18",
+                    "value": 83224
+                },
+                "viewportPosition": {
+                    "displayName": "Viewport Distance from Top",
+                    "order": "9",
+                    "value": 0
+                },
+                "viewportPositionPercentage": {
+                    "displayName": "Viewport Relative Page Proportion",
+                    "order": "10",
+                    "value": 0
+                }
+            },
+            "pageAttr": {
+                "clientCreateTs": {
+                    "displayName": "",
+                    "value": 1701745337109
+                },
+                "libVersion": {
+                    "displayName": "SDK Version",
+                    "order": "22",
+                    "value": "1.4.0"
+                },
+                "pageLength": {
+                    "displayName": "Page Length",
+                    "order": "17",
+                    "value": 3881
+                },
+                "referrer": {
+                    "displayName": "Previous URL",
+                    "order": "15",
+                    "value": ""
+                },
+                "referrerHost": {
+                    "displayName": "Previous Domain",
+                    "order": "16",
+                    "value": ""
+                },
+                "sdkType": {
+                    "displayName": "SDK Type",
+                    "order": "21",
+                    "value": "WEB"
+                },
+                "sessionId": {
+                    "displayName": "",
+                    "order": "",
+                    "value": 928
+                },
+                "title": {
+                    "displayName": "Page Title",
+                    "order": "10",
+                    "value": "SaaS Template"
+                },
+                "uri": {
+                    "displayName": "Page URI",
+                    "order": "12",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "url": {
+                    "displayName": "Page URL",
+                    "order": "11",
+                    "value": "https://special-item-501508.framer.app/"
+                },
+                "urlHost": {
+                    "displayName": "Page Domain",
+                    "order": "13",
+                    "value": "special-item-501508.framer.app"
+                },
+                "urlPath": {
+                    "displayName": "Page Path",
+                    "order": "14",
+                    "value": "/"
+                }
+            },
+            "performanceAttr": {
+                "consoleErrors": {
+                    "displayName": "Console Error Count",
+                    "order": "15",
+                    "value": 0
+                },
+                "consoleInfos": {
+                    "displayName": "Console Log Count",
+                    "order": "14",
+                    "value": 0
+                },
+                "consoleWarnings": {
+                    "displayName": "Console Warning Count",
+                    "order": "16",
+                    "value": 0
+                }
+            },
+            "projectId": 19,
+            "screenDirect": 0,
+            "sessionId": 928,
+            "userId": 50
+        }
+    ],
+    "message": "Success",
+    "meta": {
+        "time": "2024-01-04T04:10:32.066874194Z",
+        "page": {
+            "offset": 0,
+            "number": 1,
+            "size": 200,
+            "total": 17,
+            "isGetAll": false
+        }
+    }
+}
