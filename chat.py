@@ -25,7 +25,7 @@ def gpt_35_api(model: str, messages: list):
         model=model,
         messages=messages
     )
-    print(completion.choices[0].message.content)
+    return completion.choices[0].message.content
 
 
 # 流式响应
@@ -36,6 +36,7 @@ def gpt_35_api_stream(model: str, messages: list):
     Args:
         messages (list): 完整的对话消息
     """
+    res = str()
     stream = client.chat.completions.create(
         model=model,
         messages=messages,
@@ -43,13 +44,14 @@ def gpt_35_api_stream(model: str, messages: list):
     )
     for chunk in stream:
         if chunk.choices[0].delta.content is not None:
-            print(chunk.choices[0].delta.content, end="")
+            res += chunk.choices[0].delta.content
+    return res
 
 
 if __name__ == '__main__':
     model = "gpt-3.5-turbo"
-    messages = [{'role': 'user', 'content': '请详细阐述勒布朗·詹姆斯的NBA生涯历程。'},]
+    messages = [{'role': 'user', 'content': '请详细阐述中华民族上下五千年的历史，不少于800字。'},]
     # 非流式调用
     # gpt_35_api(model, messages)
     # 流式调用
-    gpt_35_api_stream(model, messages)
+    print(gpt_35_api_stream(model, messages))

@@ -1,4 +1,4 @@
-import chat
+from chat import gpt_35_api_stream
 from data import Data
 
 
@@ -6,6 +6,8 @@ from data import Data
 def jsonParse(data: Data):
     score = 0
     allScores = [0] * 9
+
+    # 一. 计算得分
 
     # 1. 跳出率较高
     stayTime = data.m_highBounceRate.stayTime
@@ -99,7 +101,16 @@ def jsonParse(data: Data):
     score += allScores[8] * data.m_multipleProblems.weight
 
     score = round(score, 2)  # 保留两位小数
+
+    # 二. 问题简述
+    # TODO
+
+    # 三. 询问 GPT ，问题详述
+    # problemDetails = gpt_35_api_stream(
+    #     "gpt-3.5-turbo", [{'role': 'user', 'content': '请详细阐述中华民族上下五千年的历史，不少于800字。'}])
+
     return [score, allScores]
+    # return [score, allScores, problemDetails]
 
 
 if __name__ == "__main__":
