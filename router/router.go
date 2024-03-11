@@ -27,7 +27,7 @@ func Router() *gin.Engine {
 	}
 
 	//用户相关
-	user := r.Group("/user")
+	user := r.Group("/user", middlewares.AuthJWT())
 	{
 
 		user.GET("/all", users.GetUserList) //获取所有用户信息，测试用
