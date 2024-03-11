@@ -1,22 +1,21 @@
 package main
 
 import (
-	"fmt"
-	"github.com/gin-gonic/gin"
+	"backend/model/core"
+	"backend/model/user"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
-type LoginRequest struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-}
-
 func main() {
-	g := gin.New()
-	g.POST("/login", func(ctx *gin.Context) {
-		r := &LoginRequest{}
-		ctx.ShouldBind(r)
-		fmt.Printf("login-request:%+v\n", r.Username)
-	})
+	db, err := gorm.Open(mysql.Open("root:1234@tcp(8.137.100.0:3306)/backend?charset=utf8mb4&parseTime=True&loc=Local"), &gorm.Config{})
+	if err != nil {
+		panic("failed to connect database")
+	}
 
-	g.Run(":8080")
+	// 迁移 schema
+	db.AutoMigrate(&user.UserInfos{})
+	db.AutoMigrate(&core.UploadJsonFileRecord{})
+	//db.AutoMigrate(&models.GroupBasic{})
+
 }

@@ -6,7 +6,6 @@ import (
 	"backend/response"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"strconv"
 )
 
 func GuestJWT() gin.HandlerFunc {
@@ -46,7 +45,7 @@ func AuthJWT() gin.HandlerFunc {
 		}
 
 		// 将用户信息存入 gin.context 里，后续 auth 包将从这里拿到当前用户数据
-		c.Set("current_user_id", strconv.Itoa(int(userModel.ID)))
+		c.Set("current_user_id", userModel.ID)
 		c.Set("current_user_name", userModel.Username)
 		c.Set("current_user", userModel)
 

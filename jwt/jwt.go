@@ -162,11 +162,8 @@ func (jwt *JWT) expireAtTime() int64 {
 	timenow := tools.TimenowInTimezone()
 
 	var expireTime int64
-	if viper.GetBool("Debug") {
-		expireTime = viper.GetInt64("debug_expire_time")
-	} else {
-		expireTime = viper.GetInt64("expire_time")
-	}
+
+	expireTime = viper.GetInt64("expire_time")
 
 	expire := time.Duration(expireTime) * time.Minute
 	return timenow.Add(expire).Unix()

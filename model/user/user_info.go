@@ -13,6 +13,9 @@ type UserInfos struct {
 	Username string `json:"username" gorm:"column:username"`
 	Email    string `json:"email" gorm:"column:email" valid:"email"`
 	Password string `json:"password" gorm:"column:password"`
+	Avatar   string `json:"avator" gorm:"column:avator"` //头像
+	City     string `json:"city" gorm:"column:city"`     //城市
+
 }
 
 // 获取用户列表
@@ -62,4 +65,10 @@ func UpdatePassword(password string, key string) {
 	utils.DB.Where("email = ?", key).Or("id = ?", key).First(&user)
 	user.Password = hash.BcryptHash(password)
 	utils.DB.Save(&user)
+}
+
+// 保存
+func (userModel *UserInfos) Save() (rowsAffected int64) {
+	result := utils.DB.Save(&userModel)
+	return result.RowsAffected
 }

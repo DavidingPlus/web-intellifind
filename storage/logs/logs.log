@@ -19,3 +19,9 @@
 {"level":"DEBUG","time":"2024-02-27 14:19:42","caller":"mail/driver_smtp.go:44","message":"发送邮件","发件成功":""}
 {"level":"DEBUG","time":"2024-02-29 15:48:33","caller":"verifycode/vertify_code.go:69","message":"验证码","生成验证码":"{\"lihangyu01@xiaoduotech.com\":\"657040\"}"}
 {"level":"DEBUG","time":"2024-02-29 15:48:34","caller":"mail/driver_smtp.go:44","message":"发送邮件","发件成功":""}
+{"level":"DEBUG","time":"2024-02-29 16:38:27","caller":"verifycode/vertify_code.go:69","message":"验证码","生成验证码":"{\"lihangyu01@xiaoduotech.com\":\"312583\"}"}
+{"level":"DEBUG","time":"2024-02-29 16:38:28","caller":"mail/driver_smtp.go:44","message":"发送邮件","发件成功":""}
+{"level":"DEBUG","time":"2024-02-29 16:39:30","caller":"verifycode/vertify_code.go:69","message":"验证码","生成验证码":"{\"lihangyu01@xiaoduotech.com\":\"352128\"}"}
+{"level":"DEBUG","time":"2024-02-29 16:39:31","caller":"mail/driver_smtp.go:44","message":"发送邮件","发件成功":""}
+{"level":"DEBUG","time":"2024-02-29 16:54:04","caller":"verifycode/vertify_code.go:59","message":"验证码","检查验证码":"{\"mail@test.com\":\"1234\"}"}
+{"level":"DEBUG","time":"2024-03-04 22:37:52","caller":"verifycode/vertify_code.go:59","message":"验证码","检查验证码":"{\"mail@test.com\":\"1234\"}"}

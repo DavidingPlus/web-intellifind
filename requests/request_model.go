@@ -1,5 +1,7 @@
 package requests
 
+import "mime/multipart"
+
 type LoginRequest struct {
 	Email     string `json:"email"  `
 	Password  string `json:"password" `
@@ -34,4 +36,15 @@ type UpdatePasswordRequest struct {
 	UID         string `json:"id"`
 	Password    string `json:"password"`
 	NewPassword string `json:"new_password"`
+}
+
+type IsEmailExistRequest struct {
+	Email string `json:"email"`
+}
+
+type UploadAvatarRequest struct {
+	Avatar *multipart.FileHeader `form:"avatar"`
+}
+type UploadJsonFileRequest struct {
+	JsonFile *multipart.FileHeader `form:"json_file"`
 }

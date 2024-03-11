@@ -12,6 +12,6 @@ func main() {
 	utils.InitRedis()
 	utils.InitLogger()
 	r := router.Router()
-	r.Run(viper.GetString("port"))
+	r.Run(viper.GetString("App.port"))
 
 }

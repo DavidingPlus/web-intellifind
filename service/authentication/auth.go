@@ -117,3 +117,23 @@ func Reset(c *gin.Context) {
 	})
 
 }
+
+func IsExist(c *gin.Context) {
+
+	req := requests.IsEmailExistRequest{}
+	c.ShouldBind(&req)
+	flag := user.GetUser(req.Email)
+
+	if flag.Username == "" {
+		c.JSON(401, gin.H{
+			"code":    -1,
+			"message": "邮箱未注册",
+		})
+		return
+	} else {
+		c.JSON(200, gin.H{
+			"code":    1,
+			"message": "邮箱已注册",
+		})
+	}
+}
