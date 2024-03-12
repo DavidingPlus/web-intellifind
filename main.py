@@ -1,11 +1,12 @@
 from chat import gpt_35_api_stream
-from data import Data
+from data import DataT
+from reply import replyT
 
 
 # 最终后端调用的主函数
-def jsonParse(data: Data):
-    score = 0
-    allScores = [0] * 9
+def jsonParse(data: DataT) -> replyT:
+    score = 0.0
+    allScores = [0.0] * 9
 
     # 一. 计算得分
 
@@ -103,18 +104,30 @@ def jsonParse(data: Data):
     score = round(score, 2)  # 保留两位小数
 
     # 二. 问题简述
-    # TODO
+    briefDesc = "经过检测，您本次体验存在的问题如下，以下是问题简述：\n"
+    briefDesc += f"1. 关于跳出率较高，停留时长为 {stayTime} 毫秒，得分 {round(allScores[0] , 2)} 分；\n"
+    briefDesc += f"2. 关于重复点击，是否重复点击为 {data.m_repeatClick.repeatClick} ，得分为 {round(allScores[1] , 2)} 分；\n"
+    briefDesc += f"3. 关于页面打开慢，页面加载时长为 {pageLoad} 毫秒，得分 {round(allScores[2] , 2)} 分；\n"
+    briefDesc += f"4. 关于点击后网络反馈慢，延迟时间为 {feedbackInterval} 毫秒，得分 {round(allScores[3] , 2)} 分；\n"
+    briefDesc += f"5. 关于点击无反应，得分 {round(allScores[4] , 2)} 分；\n"
+    briefDesc += f"6. 关于点击报错，页面错误信息个数为 {data.m_clickError.errorCount}，得分 {round(allScores[5] , 2)} 分；\n"
+    briefDesc += f"7. 关于页面加载报错，控制台的报错信息个数为 {data.m_pageLoadingError.consoleErrors}，得分 {round(allScores[6] , 2)} 分；\n"
+    briefDesc += f"8. 关于页面加载白屏，是否白屏为 {data.m_pageLoadingBlank.isBlank}，得分 {round(allScores[7] , 2)} 分；\n"
+    briefDesc += f"9. 关于多个同时出现，上述问题总共出现 {(100 - allScores[8]) // 5} 个，得分 {round(allScores[8] , 2)} 分；\n"
 
     # 三. 询问 GPT ，问题详述
-    # problemDetails = gpt_35_api_stream(
-    #     "gpt-3.5-turbo", [{'role': 'user', 'content': '请详细阐述中华民族上下五千年的历史，不少于800字。'}])
+    askGPTStr = f"现在我给你一些网站体验过程中的问题简述，并且附有一些数据和得分，请您结合数据和得分详细分析一下这些问题，并且给出合适的优化建议，每一条请严格按照我的格式提行进行补充。\n{briefDesc}"
+    detailDesc = gpt_35_api_stream(
+        "gpt-3.5-turbo", [{'role': 'user', 'content': askGPTStr}])
 
-    return [score, allScores]
-    # return [score, allScores, problemDetails]
+    # 四. 封装为结构体返回
+    res = replyT(score, allScores, briefDesc, detailDesc)
+
+    return res
 
 
 if __name__ == "__main__":
-    data = Data()
+    data = DataT()
     data.m_highBounceRate.stayTime = 26.556 * 1000  # 跳出率较高
     data.m_repeatClick.repeatClick = False  # 重复点击
     data.m_slowPageLoading.pageLoad = 3.561  # 页面打开慢
@@ -123,4 +136,4 @@ if __name__ == "__main__":
     data.m_pageLoadingError.consoleErrors = 3  # 页面加载报错
     data.m_pageLoadingBlank.isBlank = True  # 页面加载白屏
 
-    print(jsonParse(data))
+    print(jsonParse(data).m_detailDesc)

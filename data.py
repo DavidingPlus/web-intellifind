@@ -1,35 +1,31 @@
-import problems
+from problems import *
 
 
 # 整体数据结构体
-class Data:
+class DataT:
     # 点击无反应
-    m_clickNoResponse = problems.clickNoResponse()
+    m_clickNoResponse = clickNoResponse()
 
     # 跳出率较高
-    m_highBounceRate = problems.highBounceRate()
+    m_highBounceRate = highBounceRate()
 
     # 重复点击
-    m_repeatClick = problems.repeatClick()
+    m_repeatClick = repeatClick()
 
     # 页面打开慢
-    m_slowPageLoading = problems.slowPageLoading()
+    m_slowPageLoading = slowPageLoading()
 
     # 点击后网络反馈慢
-    m_slowNetworkFeedback = problems.slowNetworkFeedback()
+    m_slowNetworkFeedback = slowNetworkFeedback()
 
     # 点击报错
-    m_clickError = problems.clickError()
+    m_clickError = clickError()
 
     # 页面加载报错
-    m_pageLoadingError = problems.pageLoadingError()
+    m_pageLoadingError = pageLoadingError()
 
     # 页面加载白屏
-    m_pageLoadingBlank = problems.pageLoadingBlank()
+    m_pageLoadingBlank = pageLoadingBlank()
 
     # 多个同时出现
-    m_multipleProblems = problems.multipleProblems()
-
-
-if __name__ == "__main__":
-    pass
+    m_multipleProblems = multipleProblems()
