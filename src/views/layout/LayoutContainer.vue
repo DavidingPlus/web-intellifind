@@ -7,6 +7,7 @@ import {
   EditPen,
   Management,
   Promotion,
+  Grid,
   SwitchButton,
   User,
   UserFilled
@@ -47,7 +48,7 @@ const handleCommand = async (key) => {
       router  router选项开启，el-menu-item 的 index 就是点击跳转的路径
 
     el-menu-item 菜单项
-      index="/article/channel" 配置的是访问的跳转路径，配合default-active的值，实现高亮
+      index="/json/channel" 配置的是访问的跳转路径，配合default-active的值，实现高亮
   -->
   <el-container class="layout-container">
     <el-aside width="200px">
@@ -59,14 +60,19 @@ const handleCommand = async (key) => {
         text-color="#fff"
         router
       >
-        <el-menu-item index="/article/channel">
-          <el-icon><Management /></el-icon>
-          <span>文章分类</span>
-        </el-menu-item>
-        <el-menu-item index="/article/manage">
-          <el-icon><Promotion /></el-icon>
+        <el-menu-item index="/json/solve">
+          <el-icon><Grid /></el-icon>
           <span>JSON解析</span>
         </el-menu-item>
+        <el-menu-item index="/json/solvelog">
+          <el-icon><Promotion /></el-icon>
+          <span>解析历史</span>
+        </el-menu-item>
+        <el-menu-item index="/json/show">
+          <el-icon><Management /></el-icon>
+          <span>图表展示</span>
+        </el-menu-item>
+        
 
         <el-sub-menu index="/user">
           <!-- 多级菜单的标题 - 具名插槽 title -->
@@ -128,7 +134,7 @@ const handleCommand = async (key) => {
         <router-view></router-view>
       </el-main>
       <el-footer
-        >服创·©2024·Created·by·李航宇、刘志学、郑笑宇、李远行、吉劲帆</el-footer
+        >服创·©2024·Created·by·李航宇、刘治学、郑笑宇、李远行、吉劲帆</el-footer
       >
     </el-container>
   </el-container>

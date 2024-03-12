@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { artEditChannelService, artAddChannelService } from '@/api/article.js'
+// import { artEditChannelService, artAddChannelService } from '@/api/json.js'
 const dialogVisible = ref(false)
 const formRef = ref()
 const formModel = ref({

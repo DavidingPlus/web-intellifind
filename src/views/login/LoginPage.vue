@@ -1,5 +1,5 @@
 <script setup>
-import { userRegisterService, userLoginService } from '@/api/user.js'
+// import { userRegisterService, userLoginService } from '@/api/user.js'
 import { User, Lock } from '@element-plus/icons-vue'
 import { ref, watch } from 'vue'
 import { useUserStore } from '@/stores'

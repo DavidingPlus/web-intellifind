@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { Plus, Upload } from '@element-plus/icons-vue'
 import { useUserStore } from '@/stores'
-import { userUpdateAvatarService } from '@/api/user'
+// import { userUpdateAvatarService } from '@/api/user'
 const userStore = useUserStore()
 const imgUrl = ref(userStore.user.user_pic)
 const uploadRef = ref()

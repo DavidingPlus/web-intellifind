@@ -1,19 +1,19 @@
 <script setup>
 import { Delete, Edit } from '@element-plus/icons-vue';
 import { ref } from 'vue';
-import { artDelChannelService, artGetChannelsService } from '../../api/article';
+// import { artDelChannelService, artGetChannelsService } from '../../api/json';
 import ChannelEdit from './components/ChannelEdit.vue';
 const channelList = ref([])
 const loading = ref(false)
 const dialog = ref()
 
-const getChannelList = async () => {
-  loading.value = true
-  const res = await artGetChannelsService()
-  channelList.value = res.data.data
-  loading.value = false
-}
-getChannelList()
+// const getChannelList = async () => {
+//   loading.value = true
+//   const res = await artGetChannelsService()
+//   channelList.value = res.data.data
+//   loading.value = false
+// }
+// getChannelList()
 
 const onDelChannel = async (row) => {
   await ElMessageBox.confirm('你确认要删除该分类么', '温馨提示', {
@@ -29,7 +29,8 @@ const onEditChannel = (row) => {
   dialog.value.open(row)
 }
 const onAddChannel = () => {
-  dialog.value.open({})
+  // dialog.value.open({})
+  router.push('/json/solve')
 }
 const onSuccess = () => {
   getChannelList()
@@ -37,10 +38,10 @@ const onSuccess = () => {
 </script>
 
 <template>
-  <page-container title="Json不知道干啥">
-    <template #extra>
-      <el-button @click="onAddChannel">添加分类</el-button>
-    </template>
+  <page-container title="图表展示">
+    <!-- <template #extra>
+      <el-button @click="onAddChannel">添加解析</el-button>
+    </template> -->
 
     <el-table v-loading="loading" :data="channelList" style="width: 100%">
       <el-table-column type="index" label="序号" width="100"></el-table-column>

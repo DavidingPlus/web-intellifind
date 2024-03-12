@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { userUpdatePasswordService } from '@/api/user'
+// import { userUpdatePasswordService } from '@/api/user'
 import { useUserStore } from '@/stores'
 import { useRouter } from 'vue-router'
 

@@ -15,15 +15,19 @@ const router = createRouter({
     {
       path: '/',
       component: () => import('@/views/layout/LayoutContainer.vue'),
-      redirect: '/article/manage',
+      redirect: '/user/profile',
       children: [
         {
-          path: '/article/manage',
-          component: () => import('@/views/article/ArticleManage.vue')
+          path: '/json/solve',
+          component: () => import('@/views/json/JsonSolve.vue')
         },
         {
-          path: '/article/channel',
-          component: () => import('@/views/article/ArticleChannel.vue')
+          path: '/json/solvelog',
+          component: () => import('@/views/json/JsonSolveLog.vue')
+        },
+        {
+          path: '/json/show',
+          component: () => import('@/views/json/JsonShow.vue')
         },
         {
           path: '/user/profile',

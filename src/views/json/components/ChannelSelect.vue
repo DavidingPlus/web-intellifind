@@ -1,5 +1,5 @@
 <script setup>
-import { artGetChannelsService } from '@/api/article.js'
+// import { artGetChannelsService } from '@/api/json.js'
 import { ref } from 'vue'
 
 defineProps({

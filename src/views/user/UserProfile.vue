@@ -1,30 +1,30 @@
 <script setup>
-import PageContainer from '@/components/PageContainer.vue'
-import { ref } from 'vue'
-import { useUserStore } from '@/stores'
-import { userUpdateInfoService } from '@/api/user'
+// import { userUpdateInfoService } from '@/api/user';
+import PageContainer from '@/components/PageContainer.vue';
+import { useUserStore } from '@/stores';
+import { ref } from 'vue';
 
 const formRef = ref()
 
 // 是在使用仓库中数据的初始值 (无需响应式) 解构无问题
 const {
-  user: { email, id, nickname, username },
+  user: { email, id, username, nickname },
   getUser
 } = useUserStore()
 
 const form = ref({
   id,
-  username,
   nickname,
-  email
+  username,
+  email,
 })
 
 const rules = ref({
-  nickname: [
-    { required: true, message: '请输入用户昵称', trigger: 'blur' },
+  username: [
+    { required: true, message: '请输入用户姓名', trigger: 'blur' },
     {
       pattern: /^\S{2,10}/,
-      message: '昵称长度在2-10个非空字符',
+      message: '用户姓名长度在2-5个非空字符',
       trigger: 'blur'
     }
   ],
@@ -53,14 +53,20 @@ const submitForm = async () => {
   <page-container title="基本资料">
     <!-- 表单部分 -->
     <el-form ref="formRef" :model="form" :rules="rules" label-width="100px">
-      <el-form-item label="登录名称">
-        <el-input v-model="form.username" disabled></el-input>
+      <el-form-item label="登录昵称">
+        <el-input v-model="form.nickname" disabled></el-input>
       </el-form-item>
-      <el-form-item label="用户昵称" prop="nickname">
-        <el-input v-model="form.nickname"></el-input>
+      <el-form-item label="用户姓名" prop="username">
+        <el-input v-model="form.username"></el-input>
       </el-form-item>
       <el-form-item label="用户邮箱" prop="email">
         <el-input v-model="form.email"></el-input>
+      </el-form-item>
+      <el-form-item label="所在城市">
+        <el-input ></el-input>
+      </el-form-item>
+      <el-form-item label="注册时间">
+        <el-input ></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm">提交修改</el-button>

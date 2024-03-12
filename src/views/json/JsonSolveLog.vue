@@ -1,9 +1,9 @@
 <script setup>
-import { artDelService, artGetListService } from '@/api/article.js'
+// import { artDelService, artGetListService } from '@/api/json.js'
 import { formatTime } from '@/utils/format.js'
 import { Delete, Edit } from '@element-plus/icons-vue'
 import { ref } from 'vue'
-import ArticleEdit from './components/ArticleEdit.vue'
+import ArticleEdit from './components/JsonEdit.vue'
 import ChannelSelect from './components/ChannelSelect.vue'
 const articleList = ref([]) // 文章列表
 const total = ref(0) // 总条数
@@ -18,16 +18,16 @@ const params = ref({
 })
 
 // 基于params参数，获取文章列表
-const getArticleList = async () => {
-  loading.value = true
+// const getArticleList = async () => {
+//   loading.value = true
 
-  const res = await artGetListService(params.value)
-  articleList.value = res.data.data
-  total.value = res.data.total
+//   const res = await artGetListService(params.value)
+//   articleList.value = res.data.data
+//   total.value = res.data.total
 
-  loading.value = false
-}
-getArticleList()
+//   loading.value = false
+// }
+// getArticleList()
 
 // 处理分页逻辑
 const onSizeChange = (size) => {
@@ -98,7 +98,7 @@ const onSuccess = (type) => {
 </script>
 
 <template>
-  <page-container title="json解析">
+  <page-container title="解析记录">
     <template #extra>
       <el-button type="primary" @click="onAddArticle">添加解析</el-button>
     </template>
@@ -108,17 +108,18 @@ const onSuccess = (type) => {
       <el-form-item label="用户 : ">
         <!-- Vue2 => v-model :value 和 @input 的简写 -->
         <!-- Vue3 => v-model :modelValue 和 @update:modelValue 的简写 -->
-        <channel-select v-model="params.cate_id"></channel-select>
+        <channel-select v-model="params.cate_id" width="100px"></channel-select>
 
         <!-- Vue3 => v-model:cid  :cid 和 @update:cid 的简写 -->
         <!-- <channel-select v-model:cid="params.cate_id"></channel-select> -->
       </el-form-item>
-      <el-form-item label="时间 :">
+      <el-form-item label="时间 :" width="100px">
         <!-- 这里后台标记发布状态，就是通过中文标记的，已发布 / 草稿 -->
-        <el-select v-model="params.state">
+        <channel-select v-model="params.state" width="100px"></channel-select>
+        <!-- <el-select v-model="params.state" width="100px">
           <el-option label="已发布" value="已发布"></el-option>
           <el-option label="草稿" value="草稿"></el-option>
-        </el-select>
+        </el-select> -->
       </el-form-item>
       <el-form-item>
         <el-button @click="onSearch" type="primary">搜索</el-button>
