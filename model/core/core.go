@@ -6,10 +6,10 @@ import (
 )
 
 type UploadJsonFileRecord struct {
-	UID        uint
-	UploadTime time.Time
-	FileName   string
-	SavePath   string
+	FileName   string    `gorm:"primary_key"`
+	UID        uint      `gorm:"column:uid"`
+	UploadTime time.Time `gorm:"column:upload_time"`
+	SavePath   string    `gorm:"column:save_path"`
 }
 
 func (u *UploadJsonFileRecord) TableName() string {

@@ -10,7 +10,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/spf13/viper"
 )
 
 // CurrentUser 从 gin.context 中获取当前登录用户
@@ -86,7 +85,7 @@ func UploadAvatar(c *gin.Context) {
 	}
 
 	currentUser := CurrentUser(c)
-	currentUser.Avatar = viper.GetString("App.url") + avatar
+	currentUser.Avatar = avatar
 	currentUser.Save()
 
 	c.JSON(200, gin.H{

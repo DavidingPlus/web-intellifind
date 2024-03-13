@@ -10,11 +10,11 @@ import (
 
 type UserInfos struct {
 	gorm.Model
-	Username string `json:"username" gorm:"column:username"`
-	Email    string `json:"email" gorm:"column:email" valid:"email"`
-	Password string `json:"password" gorm:"column:password"`
-	Avatar   string `json:"avator" gorm:"column:avator"` //头像
-	City     string `json:"city" gorm:"column:city"`     //城市
+	Username string `gorm:"column:username"`
+	Email    string ` gorm:"column:email" `
+	Password string `gorm:"column:password"`
+	Avatar   string `gorm:"column:avator"` //头像
+	City     string ` gorm:"column:city"`  //城市
 
 }
 

@@ -23,6 +23,7 @@ func SaveUploadAvatar(c *gin.Context, file *multipart.FileHeader) (string, error
 	fileName := "temp" + "_" + "avatar.jpg"
 	// public/uploads/avatars/2021/12/22/1/nFDacgaWKpWWOmOt.png
 	avatarPath := publicPath + dirName + fileName
+
 	if err := c.SaveUploadedFile(file, avatarPath); err != nil {
 		return avatar, err
 	}
@@ -35,6 +36,7 @@ func SaveUploadAvatar(c *gin.Context, file *multipart.FileHeader) (string, error
 	resizeAvatar := imaging.Thumbnail(img, 256, 256, imaging.Lanczos)
 	resizeAvatarName := "avatar.jpg"
 	resizeAvatarPath := publicPath + dirName + resizeAvatarName
+
 	err = imaging.Save(resizeAvatar, resizeAvatarPath)
 	if err != nil {
 		return avatar, err
@@ -49,7 +51,7 @@ func SaveUploadAvatar(c *gin.Context, file *multipart.FileHeader) (string, error
 	return dirName + resizeAvatarName, nil
 }
 
-func SaveUploadJsonFile(c *gin.Context, file *multipart.FileHeader) (string, error) {
+func SaveUploadJsonFile(c *gin.Context, file *multipart.FileHeader) (string, string, error) {
 	// 确保目录存在，不存在创建
 	publicPath := "public"
 	dirName := fmt.Sprintf("/uploads/jsonfile/%d/", c.GetUint("current_user_id"))
@@ -57,29 +59,30 @@ func SaveUploadJsonFile(c *gin.Context, file *multipart.FileHeader) (string, err
 
 	// 保存文件
 	uid := c.GetUint("current_user_id")
+	fmt.Println(file.Filename)
+	filename := GenerateFileName(uid, file.Filename)
 
-	fileName := GenerateFileName(uid, file.Filename)
-
-	savePath := publicPath + dirName + fileName
-
-	fmt.Println(file.Header)
+	savePath := publicPath + dirName + filename
 
 	if err := c.SaveUploadedFile(file, savePath); err != nil {
-		return "", err
+		return "", "", err
 	}
 
 	temp := core.UploadJsonFileRecord{
 		UID:        uid,
 		UploadTime: time.Now(),
-		FileName:   fileName,
+		FileName:   filename,
 		SavePath:   savePath,
 	}
 	temp.Create()
 
-	return fileName, nil
+	return savePath, filename, nil
 }
 
-func GenerateFileName(uid uint, filename string) string {
+func GenerateFileName(uid uint, file string) string {
 	uid_string := strconv.Itoa(int(uid))
-	return uid_string + "_" + time.Now().String() + "_" + filename
+
+	filename := uid_string + "_" + strconv.Itoa(int(time.Now().Unix())) + "_" + file
+	fmt.Println(filename)
+	return filename
 }

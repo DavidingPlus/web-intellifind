@@ -4,7 +4,7 @@ App:
   url: "127.0.0.1:8080"
 
 Mysql:
-  dsn: root:1234@tcp(8.137.100.0:3306)/backend?charset=utf8mb4&parseTime=True&loc=Local
+  dsn: root:qz1731978669@tcp(8.137.100.0:3306)/backend?charset=utf8mb4&parseTime=True&loc=Local
 
 Redis:
   addr: 8.137.100.0:6379

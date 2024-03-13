@@ -16,6 +16,7 @@ func main() {
 	// 迁移 schema
 	db.AutoMigrate(&user.UserInfos{})
 	db.AutoMigrate(&core.UploadJsonFileRecord{})
+	db.AutoMigrate(&core.SaveJsonFile{})
 	//db.AutoMigrate(&models.GroupBasic{})
 
 }

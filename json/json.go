@@ -1,6 +1,12 @@
-package main
+package json
 
-type Total struct {
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+)
+
+type JsonParse struct {
 	Data    []Info `json:"data"`
 	Message string `json:"message"`
 }
@@ -20,6 +26,7 @@ type Info struct {
 	UserId          int         `json:"userId"`
 }
 type EnvAttr struct {
+	Browser         Detail `json:"browser"`
 	City            Detail `json:"city"`
 	Country         Detail `json:"country"`
 	DeviceType      Detail `json:"deviceType"`
@@ -35,16 +42,15 @@ type Detail struct {
 	Value       interface{}
 }
 
-//func main() {
-//	file, err := os.ReadFile("./test/data.json")
-//	if err != nil {
-//		fmt.Println(err)
-//	}
-//	var total Total
-//	err = json.Unmarshal(file, &total)
-//	if err != nil {
-//		fmt.Println(err)
-//	}
-//	fmt.Println(total.Data[0].EnvAttr.Country.Value)
-//
-//}
+func ParseJson(file_path string) (JsonParse, error) {
+	file, _ := os.ReadFile(file_path)
+	json_parse := JsonParse{}
+	json.Unmarshal(file, &json_parse)
+	if len(json_parse.Data) == 0 {
+		err := error(fmt.Errorf("上传文件为空或未解析到data字段"))
+		return json_parse, err
+	}
+
+	return json_parse, nil
+
+}
