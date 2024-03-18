@@ -34,8 +34,10 @@ const onUpdateAvatar = async () => {
       :show-file-list="false"
       :on-change="onSelectFile"
     >
+
       <img v-if="imgUrl" :src="imgUrl" class="avatar" />
-      <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+      <img v-else src="../../assets/default.png" class="avatar" />
+      <!-- <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon> -->
     </el-upload>
 
     <br />
