@@ -1,14 +1,19 @@
 from chat import gpt_35_api_stream
 from reply import replyT
 import json
-from weight import proWeight
+from weight import defaultWeight
 
 
 # 最终后端调用的主函数
-def jsonParse(jsonPath: str) -> replyT:
+def jsonParse(jsonPath: str, weights: list) -> replyT:
     data = dict()
     score = 0.0
     allScores = [0.0] * 9
+    proWeights = []
+    if [] == weights:
+        proWeights = defaultWeight
+    else:
+        proWeights = weights
 
     # with open as ... 不用考虑文件关闭， python 会自动再合适的时候关闭
     with open(jsonPath, mode="r", encoding="utf-8") as file:
@@ -30,7 +35,7 @@ def jsonParse(jsonPath: str) -> replyT:
         allScores[0] = 60 + (70 - 60) / (5 * 1000 - 0 * 1000) * \
             (stayTime - 0 * 1000)
 
-    score += allScores[0] * proWeight[0]
+    score += allScores[0] * proWeights[0]
 
     # 2. 重复点击
     if str("False") == data['interactionAttr']['repeatClick']['value']:
@@ -38,7 +43,7 @@ def jsonParse(jsonPath: str) -> replyT:
     else:
         allScores[1] = 60
 
-    score += allScores[1] * proWeight[1]
+    score += allScores[1] * proWeights[1]
 
     # 3. 页面打开慢
     pageLoad = data['performanceAttr']['pageLoad']['value']
@@ -52,7 +57,7 @@ def jsonParse(jsonPath: str) -> replyT:
         if (allScores[2] < 60):
             allScores[2] = 60
 
-    score += allScores[2] * proWeight[2]
+    score += allScores[2] * proWeights[2]
 
     # 4. 点击后网络反馈慢
     feedbackInterval = data['performanceAttr']['feedbackInterval']['value']
@@ -70,27 +75,27 @@ def jsonParse(jsonPath: str) -> replyT:
     else:
         allScores[3] = 60
 
-    score += allScores[3] * proWeight[3]
+    score += allScores[3] * proWeights[3]
 
     # 5. 点击无反应
     allScores[4] = allScores[2] * \
         0.5 + allScores[3] * 0.5
 
-    score += allScores[4] * proWeight[4]
+    score += allScores[4] * proWeights[4]
 
     # 6. 点击报错
     allScores[5] = 100 - 3 * data['interactionAttr']['errorCount']['value']
     if allScores[5] < 60:
         allScores[5] = 60
 
-    score += allScores[5] * proWeight[5]
+    score += allScores[5] * proWeights[5]
 
     # 7. 页面加载报错
     allScores[6] = 100 - 3 * data['performanceAttr']['consoleErrors']['value']
     if allScores[6] < 60:
         allScores[6] = 60
 
-    score += allScores[6] * proWeight[6]
+    score += allScores[6] * proWeights[6]
 
     # 8. 页面加载白屏
     if str("False") == data['interactionAttr']['isBlank']['value']:
@@ -98,7 +103,7 @@ def jsonParse(jsonPath: str) -> replyT:
     else:
         allScores[7] = 60
 
-    score += allScores[7] * proWeight[7]
+    score += allScores[7] * proWeights[7]
 
     # 9. 多个同时出现
     allScores[8] = 100
@@ -106,7 +111,7 @@ def jsonParse(jsonPath: str) -> replyT:
         if 100 != allScores[i]:
             allScores[8] -= 5
 
-    score += allScores[8] * proWeight[8]
+    score += allScores[8] * proWeights[8]
 
     score = round(score, 2)  # 保留两位小数
 
@@ -132,7 +137,9 @@ def jsonParse(jsonPath: str) -> replyT:
 
 
 if __name__ == "__main__":
-    res = jsonParse("./res/test.json")
+    # res = jsonParse("./res/test.json",
+    #                 [0.15, 0.05, 0.15, 0.15, 0.1, 0.1, 0.1, 0.05, 0.15])
+    res = jsonParse("./res/test.json", [])
     print(res.m_score)
     print(res.m_allScore)
     print(res.m_briefDesc)
