@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "axios": "^1.6.7",
+    "echarts": "^5.5.0",
+    "element-plus": "^2.6.1",
+    "js-md5": "^0.8.3",
+    "sass": "^1.72.0",
+    "sass-loader": "^14.1.1",
+    "suneditor": "^2.45.1",
+    "vue-cookies": "^1.8.3",
+    "vue-router": "^4.3.0"
+  }
+}

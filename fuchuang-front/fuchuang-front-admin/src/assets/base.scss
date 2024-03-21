@@ -1,0 +1,103 @@
+::-webkit-scrollbar
+{
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track
+{
+    background:rgb(239,239,239);
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb
+{
+    background: #bfbffb;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover
+{
+    background: #bfbffb;
+}
+
+::-webkit-scrollbar-corner
+{
+    background: #bfbffb;
+}
+
+:root
+{
+    --text1:#9499A0;
+    --text2:#61666d;
+    --icon:#9499a0;
+    --text-link:#409eff;
+    --blue:#007fff;
+    --tag:#7BCDEF;
+    --pink:#ff6699;
+}
+
+body
+{
+    margin:0px;
+    padding: 0px;
+    color: #636d7e;
+    font-size: 14px;    
+}
+
+*
+{
+    box-sizing: border-box;
+}
+
+.a-link
+{
+    text-decoration: none;
+    color: var(--blue);
+}
+
+.top-panel
+{
+    .el-card_body
+    {
+        padding: 15px;
+    }
+    .el-form-item
+    {
+        margin-bottom: 0px;
+    }
+}
+
+.row-op-panel
+{
+    a
+    {
+        text-decoration: none;
+        color: var(--blue);
+        margin-right: 8px;
+    }
+    a:last-child
+    {
+        margin-right: 0px;
+    }
+    .not-allow
+    {
+        cursor:not-allowed;
+        color: #ddd;
+        text-decoration: none;
+    }
+}
+
+.table-data-card
+{
+    margin-top:10px;
+    .el-card_body
+    {
+        padding: 10px;
+    }
+}
+
+.el-form-item_content
+{
+    width:100%;
+}

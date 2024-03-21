@@ -1,0 +1,37 @@
+{
+  "id": "4468401",
+  "name": "服创admin",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "553324",
+      "name": "验证 验证码",
+      "font_class": "checkcode_email",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "4552970",
+      "name": "邮箱",
+      "font_class": "email",
+      "unicode": "e908",
+      "unicode_decimal": 59656
+    },
+    {
+      "icon_id": "7791978",
+      "name": "密码",
+      "font_class": "password",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
+      "icon_id": "27776709",
+      "name": "登录-数字验证码",
+      "font_class": "checkcode_number",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    }
+  ]
+}
