@@ -1,11 +1,11 @@
 <script setup>
 // import { artDelService, artGetListService } from '@/api/json.js'
+import * as echarts from 'echarts';
+import { onMounted, ref } from 'vue';
 import { formatTime } from '@/utils/format.js'
 import { Delete, Edit } from '@element-plus/icons-vue'
-import { ref } from 'vue'
 import ArticleEdit from './components/JsonEdit.vue'
 import ChannelSelect from './components/ChannelSelect.vue'
-const articleList = ref([]) // 文章列表
 const total = ref(0) // 总条数
 const loading = ref(false) // loading状态
 
@@ -14,8 +14,42 @@ const params = ref({
   pagenum: 1, // 当前页
   pagesize: 5, // 当前生效的每页条数
   cate_id: '',
-  state: ''
+  grade: '',
 })
+
+const articleList = ref([
+  {
+    id: 1,
+    title: '用户1- 你小子有点不服？',
+    pub_date: '2021-09-01 12:00:00',
+    grade: 'Grade A ：82'
+  },
+  {
+    id: 2,
+    title: '用户2- 来嘛，不服创我！',
+    pub_date: '2021-09-01 12:00:00',
+    grade: 'Grade B+：72'
+  },
+  {
+    id: 3,
+    title: '用户3- 试试就逝世！',
+    pub_date: '2021-09-01 12:00:00',
+    grade: 'Grade A+：90'
+  },
+  {
+    id: 4,
+    title: '用户4- Duang！！！！',
+    pub_date: '2021-09-01 12:00:00',
+    grade: 'Grade A ：86'
+  },
+  {
+    id: 5,
+    title: '用户5- 服了服了别创我了',
+    pub_date: '2021-09-01 12:00:00',
+    grade: 'Grade A+：92'
+  }
+]) 
+
 
 // 基于params参数，获取文章列表
 // const getArticleList = async () => {
@@ -60,20 +94,20 @@ const onReset = () => {
   getArticleList()
 }
 
-const articleEditRef = ref()
-// 添加逻辑
-const onAddArticle = () => {
-  articleEditRef.value.open({})
-}
-// 编辑逻辑
-const onEditArticle = (row) => {
-  articleEditRef.value.open(row)
-}
+// const articleEditRef = ref()
+// // 添加逻辑
+// const onAddArticle = () => {
+//   articleEditRef.value.open({})
+// }
+// // 编辑逻辑
+// const onEditArticle = (row) => {
+//   articleEditRef.value.open(row)
+// }
 
 // 删除逻辑
 const onDeleteArticle = async (row) => {
   // 提示用户是否要删除
-  await ElMessageBox.confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+  await ElMessageBox.confirm('此操作将永久删除该记录, 是否继续?', '提示', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     type: 'warning'
@@ -84,17 +118,92 @@ const onDeleteArticle = async (row) => {
   getArticleList()
 }
 
-// 添加或者编辑 成功的回调
-const onSuccess = (type) => {
-  if (type === 'add') {
-    // 如果是添加，最好渲染最后一页
-    const lastPage = Math.ceil((total.value + 1) / params.value.pagesize)
-    // 更新成最大页码数，再渲染
-    params.value.pagenum = lastPage
-  }
+// // 添加或者编辑 成功的回调
+// const onSuccess = (type) => {
+//   if (type === 'add') {
+//     // 如果是添加，最好渲染最后一页
+//     const lastPage = Math.ceil((total.value + 1) / params.value.pagesize)
+//     // 更新成最大页码数，再渲染
+//     params.value.pagenum = lastPage
+//   }
 
-  getArticleList()
+//   getArticleList()
+// }
+
+
+
+
+// 通过echarts 中的折线图进行历次数据展示
+const chartRef = ref(null)
+const chartData = ref([])
+onMounted(() => {
+  if (chartRef.value) {
+  const chart = echarts.init(chartRef.value)
+  const option = {
+    title: {
+      text: '最近七次解析反馈数据'
+    },
+    tooltip: {
+      trigger: 'axis'
+    },
+    legend: {
+      data: ['JSON1', 'JSON2', 'JSON3', 'JSON4', 'JSON5']
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '0%',
+      containLabel: true
+    },
+    toolbox: {
+      feature: {
+        saveAsImage: {}
+      }
+    },
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: ['第一次解析', '第二次解析', '第三次解析', '第四次解析', '第五次解析', '第六次解析', '第七次解析']
+    },
+    yAxis: {
+      type: 'value',
+      // min: Math.min(...chartData.value.map(item => Math.min(...item.data))),  
+      // max: Math.max(...chartData.value.map(item => Math.max(...item.data))),  
+    },
+    // 通过循环的方式，将历次数据进行展示
+    series: chartData.value.map(item => ({
+      name: item.name,
+      data: item.data,
+      type: 'line',
+    }))
+  }
+chart.setOption(option)}})
+
+const fetchData = () => {
+  chartData.value = [{
+      name: 'JSON1',
+      data: [10, 42, 11, 14, 90, 23, 51]
+    },
+    {
+      name: 'JSON2',
+      data: [42, 8, 91, 60, 29, 33, 10]
+    },
+    {
+      name: 'JSON3',
+      data: [15, 32, 20, 54, 87, 60, 61]
+    },
+    {
+      name: 'JSON4',
+      data: [32, 13, 1, 34, 39, 42, 20]
+    },
+    {
+      name: 'JSON5',
+      data: [82, 23, 10, 24, 29, 36, 40]
+    }]
 }
+fetchData()
+
+
 </script>
 
 <template>
@@ -104,27 +213,19 @@ const onSuccess = (type) => {
     </template>
 
     <!-- 表单区域 -->
-    <el-form inline>
-      <el-form-item label="用户 : ">
-        <!-- Vue2 => v-model :value 和 @input 的简写 -->
-        <!-- Vue3 => v-model :modelValue 和 @update:modelValue 的简写 -->
+    <el-form inline style="display: flex; justify-content: space-between;">
+      <el-form-item label="用户 :" style="flex: 1">
         <channel-select v-model="params.cate_id" width="100px"></channel-select>
-
-        <!-- Vue3 => v-model:cid  :cid 和 @update:cid 的简写 -->
-        <!-- <channel-select v-model:cid="params.cate_id"></channel-select> -->
       </el-form-item>
-      <el-form-item label="时间 :" width="100px">
+      <el-form-item label="时间 :" style="flex: 1">
         <!-- 这里后台标记发布状态，就是通过中文标记的，已发布 / 草稿 -->
         <channel-select v-model="params.state" width="100px"></channel-select>
-        <!-- <el-select v-model="params.state" width="100px">
-          <el-option label="已发布" value="已发布"></el-option>
-          <el-option label="草稿" value="草稿"></el-option>
-        </el-select> -->
       </el-form-item>
-      <el-form-item>
+      <el-form-item style="flex: 1">
         <el-button @click="onSearch" type="primary">搜索</el-button>
         <el-button @click="onReset">重置</el-button>
       </el-form-item>
+      <el-form-item style="flex: 1"></el-form-item>
     </el-form>
 
     <!-- 表格区域 -->
@@ -132,6 +233,11 @@ const onSuccess = (type) => {
       <el-table-column label="用户" prop="title">
         <template #default="{ row }">
           <el-link type="primary" :underline="false">{{ row.title }}</el-link>
+        </template>
+      </el-table-column>
+      <el-table-column label="得分" prop="title">
+        <template #default="{ row }">
+          <el-link type="primary" :underline="false">{{ row.grade }}</el-link>
         </template>
       </el-table-column>
       <!-- <el-table-column label="分类" prop="cate_name"></el-table-column> -->
@@ -177,6 +283,12 @@ const onSuccess = (type) => {
 
     <!-- 添加编辑的抽屉 -->
     <article-edit ref="articleEditRef" @success="onSuccess"></article-edit>
+
+    <div
+          ref="chartRef"
+          style="width: 100%; height: 300px;"
+        > </div>
+
   </page-container>
 </template>
 

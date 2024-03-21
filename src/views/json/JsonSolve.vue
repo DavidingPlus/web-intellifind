@@ -3,26 +3,9 @@ import { UploadFilled } from '@element-plus/icons-vue';
 import * as echarts from 'echarts';
 import { onMounted, ref } from 'vue';
 
-// const articleEditRef = ref()
-// const jsonFile = ref(null)
-
-// // 解析json文件
-// const onParse = () => {
-//   const file = jsonFile.value
-//   if (!file) {
-//     return
-//   }
-//   const reader = new FileReader()
-//   reader.onload = (e) => {
-//     const data = e.target.result
-//     const jsonData = JSON.parse(data)
-//     console.log(jsonData)
-//   }
-//   reader.readAsText(file)
-// }
-
 // 通过echarts 中的折线图进行历次数据展示
 const chartRef = ref(null)
+const chartData = ref([])
 onMounted(() => {
   if (chartRef.value) {
   const chart = echarts.init(chartRef.value)
@@ -53,66 +36,54 @@ onMounted(() => {
       data: ['第一次解析', '第二次解析', '第三次解析', '第四次解析', '第五次解析', '第六次解析', '第七次解析']
     },
     yAxis: {
-      type: 'value'
+      type: 'value',
+      // min: Math.min(...chartData.value.map(item => Math.min(...item.data))),  
+      // max: Math.max(...chartData.value.map(item => Math.max(...item.data))),  
     },
-    series: [
-      {
-        name: 'JSON1',
-        type: 'line',
-        stack: '总量',
-        data: [12, 13, 10, 13, 9, 23, 21]
-      },
-      {
-        name: 'JSON2',
-        type: 'line',
-        stack: '总量',
-        data: [22, 18, 19, 23, 29, 33, 31]
-      },
-      {
-        name: 'JSON3',
-        type: 'line',
-        stack: '总量',
-        data: [15, 23, 20, 15, 19, 33, 41]
-      },
-      {
-        name: 'JSON4',
-        type: 'line',
-        stack: '总量',
-        data: [32, 33, 30, 33, 39, 33, 32]
-      },
-      {
-        name: 'JSON5',
-        type: 'line',
-        stack: '总量',
-        data: [82, 93, 90, 93, 129, 133, 132]
-      }
-    ]
+    // 通过循环的方式，将历次数据进行展示
+    series: chartData.value.map(item => ({
+      name: item.name,
+      data: item.data,
+      type: 'line',
+    }))
   }
 chart.setOption(option)}})
 
-
+const fetchData = () => {
+  chartData.value = [{
+      name: 'JSON1',
+      data: [10, 42, 11, 14, 90, 23, 51]
+    },
+    {
+      name: 'JSON2',
+      data: [42, 8, 91, 60, 29, 33, 10]
+    },
+    {
+      name: 'JSON3',
+      data: [15, 32, 20, 54, 87, 60, 61]
+    },
+    {
+      name: 'JSON4',
+      data: [32, 13, 1, 34, 39, 42, 20]
+    },
+    {
+      name: 'JSON5',
+      data: [82, 23, 10, 24, 29, 36, 40]
+    }]
+}
+fetchData()
 
 </script>
 
 <template>
   <page-container title="JSON解析">
 
-    <!-- <el-form>
-        <el-form-item>
-          <el-input type="file" v-model="jsonFile" size="large" />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="onParse">解析</el-button>
-        </el-form-item>
-      <br>
-      <br>
-      </el-form> -->
-
-
+    <!-- 上传文件组件 -->
+    <!-- action ： 请求的URL -->
       <el-upload
         class="upload-demo"
         drag
-        action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+        action= #
         multiple
       >
         <el-icon class="el-icon--upload"><upload-filled /></el-icon>
@@ -123,20 +94,11 @@ chart.setOption(option)}})
         </div>
       </el-upload>
 
-
-
-
-
-
-
-
-
         <!--  通过echarts 中的折线图进行历次数据展示  -->
         <div
           ref="chartRef"
           style="width: 100%; height: 300px;"
         > </div>
-
       
   </page-container>
 </template>
@@ -144,3 +106,6 @@ chart.setOption(option)}})
 <style lang="scss" scoped>
 
 </style>
+
+
+

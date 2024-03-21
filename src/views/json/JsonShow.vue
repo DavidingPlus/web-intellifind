@@ -1,71 +1,115 @@
 <script setup>
-import { Delete, Edit } from '@element-plus/icons-vue';
-import { ref } from 'vue';
+import * as echarts from 'echarts';
+import { onMounted, ref } from 'vue';
 // import { artDelChannelService, artGetChannelsService } from '../../api/json';
-import ChannelEdit from './components/ChannelEdit.vue';
-const channelList = ref([])
-const loading = ref(false)
-const dialog = ref()
 
-// const getChannelList = async () => {
-//   loading.value = true
-//   const res = await artGetChannelsService()
-//   channelList.value = res.data.data
-//   loading.value = false
-// }
-// getChannelList()
-
-const onDelChannel = async (row) => {
-  await ElMessageBox.confirm('你确认要删除该分类么', '温馨提示', {
-    type: 'warning',
-    confirmButtonText: '确认',
-    cancelButtonText: '取消'
-  })
-  await artDelChannelService(row.id)
-  ElMessage.success('删除成功')
-  getChannelList()
-}
-const onEditChannel = (row) => {
-  dialog.value.open(row)
-}
-const onAddChannel = () => {
-  // dialog.value.open({})
-  router.push('/json/solve')
-}
-const onSuccess = () => {
-  getChannelList()
-}
+// 得分表展示
+const gradeChartRef = ref(null);
+onMounted(() => {
+  if (gradeChartRef.value) {
+    const gradeChart = echarts.init(gradeChartRef.value);
+    const option = {
+      series: [
+        {
+          type: 'gauge',
+          startAngle: 180,
+          endAngle: 0,
+          center: ['50%', '75%'],
+          radius: '90%',
+          min: 0,
+          max: 1,
+          splitNumber: 8,
+          axisLine: {
+            lineStyle: {
+              width: 6,
+              color: [
+                [0.25, '#FF6E76'],
+                [0.5, '#FDDD60'],
+                [0.75, '#58D9F9'],
+                [1, '#7CFFB2']
+              ]
+            }
+          },
+          pointer: {
+            icon: 'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
+            length: '12%',
+            width: 20,
+            offsetCenter: [0, '-60%'],
+            itemStyle: {
+              color: 'auto'
+            }
+          },
+          axisTick: {
+            length: 12,
+            lineStyle: {
+              color: 'auto',
+              width: 2
+            }
+          },
+          splitLine: {
+            length: 20,
+            lineStyle: {
+              color: 'auto',
+              width: 5
+            }
+          },
+          axisLabel: {
+            color: '#464646',
+            fontSize: 20,
+            distance: -60,
+            rotate: 'tangential',
+            formatter: function (value) {
+              if (value === 0.875) {
+                return 'Grade A';
+              } else if (value === 0.625) {
+                return 'Grade B';
+              } else if (value === 0.375) {
+                return 'Grade C';
+              } else if (value === 0.125) {
+                return 'Grade D';
+              }
+              return '';
+            }
+          },
+          title: {
+            offsetCenter: [0, '-10%'],
+            fontSize: 20
+          },
+          detail: {
+            fontSize: 30,
+            offsetCenter: [0, '-35%'],
+            valueAnimation: true,
+            formatter: function (value) {
+              return Math.round(value * 100) + '';
+            },
+            color: 'inherit'
+          },
+          data: [
+            {
+              value: 0.8,
+              name: 'Grade'
+            }
+          ]
+        }
+      ]
+    }
+gradeChart.setOption(option)}})
+const flag = ref(false);
 </script>
 
 <template>
   <page-container title="图表展示">
-    <el-table v-loading="loading" :data="channelList" style="width: 100%">
-      <!-- <el-table-column type="index" label="序号" width="100"></el-table-column>
-      <el-table-column prop="cate_name" label="分类名称"></el-table-column>
-      <el-table-column prop="cate_alias" label="分类别名"></el-table-column>
-      <el-table-column label="操作" width="150">
-        <template #default="{ row, $index }">
-          <el-button
-            :icon="Edit"
-            circle
-            plain
-            type="primary"
-            @click="onEditChannel(row, $index)"
-          ></el-button>
-          <el-button
-            :icon="Delete"
-            circle
-            plain
-            type="danger"
-            @click="onDelChannel(row, $index)"
-          ></el-button>
-        </template>
-      </el-table-column> -->
-      
+    <!-- 如果echarts图表中没有数据，显示没有数据 -->
+    <el-form inline >
+    <el-table v-if="flag">
       <template #empty>
-        <el-empty description="没有数据" style="height: 100%;"></el-empty>
+        <el-empty description="没有数据" style="width: 100%; height: auto;"></el-empty>
       </template>
     </el-table>
+
+    
+    <div v-else ref="gradeChartRef" style="width: 400px; height: 300px; position: relative;"></div>
+    </el-form>
   </page-container>
 </template>
 
