@@ -2,6 +2,7 @@ package core
 
 import (
 	"backend/utils"
+	"fmt"
 	"time"
 )
 
@@ -17,5 +18,15 @@ func (u *UploadJsonFileRecord) TableName() string {
 }
 func (u *UploadJsonFileRecord) Create() {
 	utils.DB.Create(&u)
+
+}
+func GetFileNamebyUID(uid uint) ([]string, error) {
+	var filenames []string
+
+	result := utils.DB.Select("file_name").Where("uid = ?", uid).Find(&filenames)
+	if result.RowsAffected == 0 {
+		return filenames, fmt.Errorf("查询为空")
+	}
+	return filenames, nil
 
 }

@@ -1,15 +1,10 @@
 package authentication
 
 import (
-	"backend/jwt"
 	"backend/model/user"
 	"backend/requests"
-	"backend/tools/captcha"
-	"backend/tools/verifycode"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"net/http"
-	"strconv"
 )
 
 // 登录校验
@@ -22,39 +17,22 @@ func LoginVerify(c *gin.Context) {
 		fmt.Println(err)
 	}
 
-	//校验图形验证码
-	if match := captcha.NewCaptcha().VerifyCaptcha(login_request.CaptchaId, login_request.Answer); match == false {
+	token, err := LoginService(c, login_request)
+
+	if err != nil {
 		c.JSON(200, gin.H{
 			"code":    -1,
-			"message": "验证码错误",
+			"message": err.Error(),
 		})
 		return
 	}
 
-	//校验用户名密码
-	flag := user.ComparePassword(login_request.Password, login_request.Email)
-
-	//登陆失败：用户名密码错误
-	if !flag {
-		c.JSON(http.StatusUnauthorized, gin.H{
-			"code":    -1,
-			"message": "用户名或密码错误",
-		})
-		return
-	}
-
-	//生成token
-	data := user.GetUser(login_request.Email)
-
-	ID_string := strconv.Itoa(int(data.ID))
-	token := jwt.NewJWT().IssueToken(ID_string, data.Username)
-
-	//登陆成功
 	c.JSON(200, gin.H{
 		"code":    1,
-		"message": "登陆成功",
+		"message": "登录成功",
 		"token":   token,
 	})
+
 }
 
 // 注册
@@ -66,24 +44,13 @@ func SignUp(c *gin.Context) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	exist := user.GetUser(signup_req.Email)
 
-	//邮箱被注册
-	if exist.Username != "" {
-		c.JSON(http.StatusUnauthorized, gin.H{
-			"code":    -1,
-			"message": "邮箱已被注册",
-		})
-		return
-	}
-
-	//校验验证码
-	if flag := verifycode.NewVerifyCode().CheckAnswer(signup_req.Email, signup_req.VerifyCode); flag == false {
-		//验证码错误
+	if err := SignUpService(c, signup_req); err != nil {
 		c.JSON(200, gin.H{
 			"code":    -1,
-			"message": "验证码错误！",
+			"message": err.Error(),
 		})
+		return
 	} else {
 		data := user.UserInfos{
 			Username: signup_req.Username,

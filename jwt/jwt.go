@@ -89,7 +89,7 @@ func (jwt *JWT) ParserToken(c *gin.Context) (*JWTCustomClaims, error) {
 }
 
 // RefreshToken 更新 Token，用以提供 refresh token 接口
-func (jwt *JWT) RefreshToken(c *gin.Context) (string, error) {
+func (jwt *JWT) RefreshToken(c *gin.Context, flag bool) (string, error) {
 
 	// 1. 从 Header 里获取 token
 	tokenString, parseErr := jwt.getTokenFromHeader(c)
@@ -116,11 +116,23 @@ func (jwt *JWT) RefreshToken(c *gin.Context) (string, error) {
 	x := tools.TimenowInTimezone().Add(-jwt.MaxRefresh).Unix()
 	if claims.IssuedAt > x {
 		// 修改过期时间
-		claims.StandardClaims.ExpiresAt = jwt.expireAtTime()
+		var times int64
+		if flag == true {
+			times = jwt.expireAtTime()
+		} else {
+
+			times = tools.TimenowInTimezone().Unix()
+		}
+
+		claims.StandardClaims.ExpiresAt = times
 		return jwt.createToken(*claims)
 	}
 
 	return "", ErrTokenExpiredMaxRefresh
+}
+
+func (jwt *JWT) SetInvalidToken(c *gin.Context) (string, error) {
+	return jwt.RefreshToken(c, false)
 }
 
 // IssueToken 生成  Token，在登录成功时调用

@@ -17,6 +17,7 @@ func ParseJsonFile(c *gin.Context, file_path string, file_name string) (core.Sav
 	user_info := json_parse.Data[0]
 	json_data := core.SaveJsonFile{
 		FileName:   file_name,
+		UID:        c.GetUint("current_user_id"),
 		CreateTime: time.Now(),
 
 		Desc:          user_info.Desc,

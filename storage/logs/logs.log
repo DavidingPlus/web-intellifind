@@ -25,3 +25,7 @@
 {"level":"DEBUG","time":"2024-02-29 16:39:31","caller":"mail/driver_smtp.go:44","message":"发送邮件","发件成功":""}
 {"level":"DEBUG","time":"2024-02-29 16:54:04","caller":"verifycode/vertify_code.go:59","message":"验证码","检查验证码":"{\"mail@test.com\":\"1234\"}"}
 {"level":"DEBUG","time":"2024-03-04 22:37:52","caller":"verifycode/vertify_code.go:59","message":"验证码","检查验证码":"{\"mail@test.com\":\"1234\"}"}
+{"level":"DEBUG","time":"2024-03-14 15:46:24","caller":"verifycode/vertify_code.go:59","message":"验证码","检查验证码":"{\"lzx@qq.com\":\"1234\"}"}
+{"level":"DEBUG","time":"2024-03-14 15:48:27","caller":"verifycode/vertify_code.go:59","message":"验证码","检查验证码":"{\"lzx@qq.com\":\"1234\"}"}
+{"level":"DEBUG","time":"2024-03-15 17:19:26","caller":"verifycode/vertify_code.go:71","message":"验证码","生成验证码":"{\"lihangyu01@xiaoduotech.com\":\"921224\"}"}
+{"level":"DEBUG","time":"2024-03-15 17:19:27","caller":"mail/driver_smtp.go:44","message":"发送邮件","发件成功":""}

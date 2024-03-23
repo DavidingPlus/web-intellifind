@@ -8,6 +8,7 @@ import (
 
 type SaveJsonFile struct {
 	FileName   string    `gorm:"primary_key"`
+	UID        uint      `gorm:"uid"`
 	CreateTime time.Time `gorm:"column:create_time"`
 
 	Desc            string

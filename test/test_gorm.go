@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	db, err := gorm.Open(mysql.Open("root:1234@tcp(8.137.100.0:3306)/backend?charset=utf8mb4&parseTime=True&loc=Local"), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open("root:qz1731978669@tcp(8.137.100.0:3306)/backend?charset=utf8mb4&parseTime=True&loc=Local"), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
 	}
@@ -17,6 +17,8 @@ func main() {
 	db.AutoMigrate(&user.UserInfos{})
 	db.AutoMigrate(&core.UploadJsonFileRecord{})
 	db.AutoMigrate(&core.SaveJsonFile{})
+	db.AutoMigrate(&core.Settings{})
+	db.AutoMigrate(&core.Result{})
 	//db.AutoMigrate(&models.GroupBasic{})
 
 }

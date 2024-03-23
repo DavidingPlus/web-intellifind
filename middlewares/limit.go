@@ -34,7 +34,6 @@ func LimitPerRoute(limit string) gin.HandlerFunc {
 
 	return func(c *gin.Context) {
 
-		fmt.Println(c.ClientIP())
 		// 针对单个路由，增加访问次数
 		c.Set("limiter-once", false)
 

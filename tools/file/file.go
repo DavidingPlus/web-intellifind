@@ -13,6 +13,10 @@ import (
 
 func SaveUploadAvatar(c *gin.Context, file *multipart.FileHeader) (string, error) {
 
+	if flag := IsFileValid(file.Filename, []string{"jpg", "png"}); !flag {
+		return "", fmt.Errorf("请上传jpg,png格式文件！")
+	}
+
 	var avatar string
 	// 确保目录存在，不存在创建
 	publicPath := "public"
@@ -51,7 +55,11 @@ func SaveUploadAvatar(c *gin.Context, file *multipart.FileHeader) (string, error
 	return dirName + resizeAvatarName, nil
 }
 
-func SaveUploadJsonFile(c *gin.Context, file *multipart.FileHeader) (string, string, error) {
+func SaveUploadJsonFile(c *gin.Context, file *multipart.FileHeader) (savePath string, filename string, err error) {
+
+	if flag := IsFileValid(file.Filename, []string{"json"}); !flag {
+		return "", "", fmt.Errorf("请上传json格式文件！")
+	}
 	// 确保目录存在，不存在创建
 	publicPath := "public"
 	dirName := fmt.Sprintf("/uploads/jsonfile/%d/", c.GetUint("current_user_id"))
@@ -60,9 +68,9 @@ func SaveUploadJsonFile(c *gin.Context, file *multipart.FileHeader) (string, str
 	// 保存文件
 	uid := c.GetUint("current_user_id")
 	fmt.Println(file.Filename)
-	filename := GenerateFileName(uid, file.Filename)
+	filename = GenerateFileName(uid, file.Filename)
 
-	savePath := publicPath + dirName + filename
+	savePath = publicPath + dirName + filename
 
 	if err := c.SaveUploadedFile(file, savePath); err != nil {
 		return "", "", err
@@ -85,4 +93,25 @@ func GenerateFileName(uid uint, file string) string {
 	filename := uid_string + "_" + strconv.Itoa(int(time.Now().Unix())) + "_" + file
 	fmt.Println(filename)
 	return filename
+}
+
+// 文件格式是否合适 仅通过后缀判断
+func IsFileValid(filename string, valid []string) bool {
+	length := len(filename)
+
+	for i := length - 1; i >= 0; i-- {
+		if filename[i] == '.' {
+			break
+		}
+		length--
+	}
+
+	ext := filename[length:]
+	for _, v := range valid {
+		if ext == v {
+			return true
+		}
+	}
+
+	return false
 }

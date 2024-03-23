@@ -68,7 +68,10 @@ func UpdatePassword(password string, key string) {
 }
 
 // 保存
-func (userModel *UserInfos) Save() (rowsAffected int64) {
+func (userModel *UserInfos) Save() error {
 	result := utils.DB.Save(&userModel)
-	return result.RowsAffected
+	if result.RowsAffected == 0 {
+		return error(fmt.Errorf("保存失败"))
+	}
+	return nil
 }
