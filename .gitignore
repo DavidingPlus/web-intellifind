@@ -76,3 +76,7 @@ CMakeLists.txt.user*
 
 # 3.针对 jerbrains 全家桶
 .idea/
+
+# 4.针对前端框架
+node_modules/
+db.json
