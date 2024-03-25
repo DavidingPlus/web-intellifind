@@ -68,10 +68,10 @@ const handleCommand = async (key) => {
           <el-icon><Promotion /></el-icon>
           <span>解析历史</span>
         </el-menu-item>
-        <el-menu-item index="/json/show">
+        <!-- <el-menu-item index="/json/show">
           <el-icon><Management /></el-icon>
           <span>图表展示</span>
-        </el-menu-item>
+        </el-menu-item> -->
         
 
         <el-sub-menu index="/user">

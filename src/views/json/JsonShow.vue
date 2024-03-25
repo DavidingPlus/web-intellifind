@@ -1,14 +1,26 @@
 <script setup>
 import * as echarts from 'echarts';
 import { onMounted, ref } from 'vue';
-// import { artDelChannelService, artGetChannelsService } from '../../api/json';
 
-// 得分表展示
+const chartContainRef = ref(null);
 const gradeChartRef = ref(null);
+const ratioChartRef = ref(null);
+const exactGradeChartRef = ref(null);
+
 onMounted(() => {
+
+  // 设置容器宽高
+  const chartContainerWidth = chartContainRef.value.clientWidth / 3; // 分成两份
+  const chartContainerHeight = 390; 
+
+  // 综合得分表展示
   if (gradeChartRef.value) {
     const gradeChart = echarts.init(gradeChartRef.value);
-    const option = {
+    gradeChart.resize({ width: chartContainerWidth, height: chartContainerHeight });
+      const option1 = {
+      title: {
+        text: '综合得分表',
+      },
       series: [
         {
           type: 'gauge',
@@ -86,31 +98,155 @@ onMounted(() => {
           },
           data: [
             {
-              value: 0.8,
+              value: 0.85,
               name: 'Grade'
             }
           ]
         }
       ]
     }
-gradeChart.setOption(option)}})
-const flag = ref(false);
+gradeChart.setOption(option1)}
+
+  // 比例图展示
+  if (ratioChartRef.value) {
+    const ratioChart = echarts.init(ratioChartRef.value);
+    ratioChart.resize({ width: chartContainerWidth, height: chartContainerHeight });
+    const option2 = {
+    title: {
+      text: '各项参数权重图',
+      left: 'center'
+    },
+    radar: {
+      // shape: 'circle',
+      indicator: [
+        { name: '参数1', max: 25 },
+        { name: '参数2', max: 25 },
+        { name: '参数3', max: 25 },
+        { name: '参数4', max: 25 },
+        { name: '参数5', max: 25 },
+        { name: '参数6', max: 25 },
+        { name: '参数7', max: 25 },
+        { name: '参数8', max: 25 },
+        { name: '参数9', max: 25}
+      ]
+    },
+    series: [
+      {
+        name: 'ratio',
+        type: 'radar',
+        data: [
+          {
+            total: 100,
+            value: [5, 15, 25, 10, 5, 20, 5, 15, 10]
+          }
+        ]
+      }
+    ]
+}
+ratioChart.setOption(option2)}
+
+// 每项成绩具体得分表
+if (exactGradeChartRef.value) {
+  const exactGradeChart = echarts.init(exactGradeChartRef.value);
+  exactGradeChart.resize({ width: chartContainerWidth, height: chartContainerHeight });
+  const option3 = {
+    title: {
+      text: '各项具体得分表',
+      left: 'right'
+    },
+    tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      name: '各项具体得分表',
+      type: 'pie',
+      radius: '50%',
+      data: [
+        { value: 86, name: '参数1' },
+        { value: 95, name: '参数2' },
+        { value: 90, name: '参数3' },
+        { value: 84, name: '参数4' },
+        { value: 80, name: '参数5' },
+        { value: 84, name: '参数6' },
+        { value: 90, name: '参数7' },
+        { value: 78, name: '参数8' },
+        { value: 79, name: '参数9' }
+      ],
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+  }
+  exactGradeChart.setOption(option3)}})
+
+
+const tableRowClassName = ({ row }) => {
+  if (row.score >= 85) {
+    return 'success-row';
+  } else if (row.score <= 70) {
+    return 'warning-row';
+  }
+  return '';
+}
+
+const tableData = [
+  { paramName: '参数1', score: 66, comment: '评价较差' },
+  { paramName: '参数2', score: 95, comment: '评价很好' },
+  { paramName: '参数3', score: 90, comment: '评价较好' },
+  { paramName: '参数4', score: 74, comment: '评价一般' },
+  { paramName: '参数5', score: 80, comment: '评价一般' },
+  { paramName: '参数6', score: 84, comment: '评价较好' },
+  { paramName: '参数7', score: 90, comment: '评价较好' },
+  { paramName: '参数8', score: 68, comment: '评价较差' },
+  { paramName: '参数9', score: 79, comment: '评价一般' }
+]
+
 </script>
 
 <template>
   <page-container title="图表展示">
-    <!-- 如果echarts图表中没有数据，显示没有数据 -->
-    <el-form inline >
-    <el-table v-if="flag">
-      <template #empty>
-        <el-empty description="没有数据" style="width: 100%; height: auto;"></el-empty>
-      </template>
+
+    <div ref="chartContainRef"  style="display: flex; justify-content: space-between;">
+
+    <!-- 综合得分表 -->
+      <div ref="gradeChartRef"></div>
+
+    <!-- 各项系数比例图 -->
+      <div ref="ratioChartRef"></div>
+
+    <!-- 各项具体得分表 -->
+      <div ref="exactGradeChartRef"></div>
+
+    </div>
+
+    <el-table
+      :data="tableData"
+      style="width: 100%"
+      :row-class-name="tableRowClassName"
+    >
+      <el-table-column prop="paramName" label="参数名" width="180" />
+      <el-table-column prop="score" label="该项得分" width="180" />
+      <el-table-column prop="comment" label="详细评判" />
     </el-table>
 
-    
-    <div v-else ref="gradeChartRef" style="width: 400px; height: 300px; position: relative;"></div>
-    </el-form>
   </page-container>
 </template>
 
-<style lang="scss" scoped></style>
+<style>
+.el-table .warning-row {
+  --el-table-tr-bg-color: var(--el-color-warning-light-9);
+}
+.el-table .success-row {
+  --el-table-tr-bg-color: var(--el-color-success-light-9);
+}
+</style>

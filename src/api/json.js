@@ -1,4 +1,16 @@
 // import request from '@/utils/request'
+
+// 获取单次解析信息 
+export const getJsonSolveData = (jsonId) => request.get('/json/solve', { params: {jsonId} })
+// 获取解析日志信息
+export const getJsonSolveLogData = (userId) => request.get('/json/solvelog', { params: {userId} })
+// 删除解析记录信息
+export const deleteJsonSolveLogData = (jsonId) => request.delete('/json/solvelog', { params: {jsonId} })
+
+
+
+
+
 // // 分类：获取文章分类
 // export const artGetChannelsService = () => request.get('/my/cate/list')
 // // 分类：添加文章分类

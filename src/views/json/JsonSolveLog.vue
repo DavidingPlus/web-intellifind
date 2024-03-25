@@ -3,9 +3,11 @@
 import * as echarts from 'echarts';
 import { onMounted, ref } from 'vue';
 import { formatTime } from '@/utils/format.js'
-import { Delete, Edit } from '@element-plus/icons-vue'
-import ArticleEdit from './components/JsonEdit.vue'
+import { Delete, Search } from '@element-plus/icons-vue'
 import ChannelSelect from './components/ChannelSelect.vue'
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
 const total = ref(0) // 总条数
 const loading = ref(false) // loading状态
 
@@ -20,36 +22,35 @@ const params = ref({
 const articleList = ref([
   {
     id: 1,
-    title: '用户1- 你小子有点不服？',
+    title: '1- 你小子有点不服？',
     pub_date: '2021-09-01 12:00:00',
     grade: 'Grade A ：82'
   },
   {
     id: 2,
-    title: '用户2- 来嘛，不服创我！',
+    title: '2- 来嘛，不服创我！',
     pub_date: '2021-09-01 12:00:00',
     grade: 'Grade B+：72'
   },
   {
     id: 3,
-    title: '用户3- 试试就逝世！',
+    title: '3- 试试就逝世！',
     pub_date: '2021-09-01 12:00:00',
     grade: 'Grade A+：90'
   },
   {
     id: 4,
-    title: '用户4- Duang！！！！',
+    title: '4- Duang！！！！',
     pub_date: '2021-09-01 12:00:00',
     grade: 'Grade A ：86'
   },
   {
     id: 5,
-    title: '用户5- 服了服了别创我了',
+    title: '5- 服了服了别创我了',
     pub_date: '2021-09-01 12:00:00',
     grade: 'Grade A+：92'
   }
 ]) 
-
 
 // 基于params参数，获取文章列表
 // const getArticleList = async () => {
@@ -94,18 +95,8 @@ const onReset = () => {
   getArticleList()
 }
 
-// const articleEditRef = ref()
-// // 添加逻辑
-// const onAddArticle = () => {
-//   articleEditRef.value.open({})
-// }
-// // 编辑逻辑
-// const onEditArticle = (row) => {
-//   articleEditRef.value.open(row)
-// }
-
 // 删除逻辑
-const onDeleteArticle = async (row) => {
+const onDelete = async (row) => {
   // 提示用户是否要删除
   await ElMessageBox.confirm('此操作将永久删除该记录, 是否继续?', '提示', {
     confirmButtonText: '确定',
@@ -118,18 +109,13 @@ const onDeleteArticle = async (row) => {
   getArticleList()
 }
 
-// // 添加或者编辑 成功的回调
-// const onSuccess = (type) => {
-//   if (type === 'add') {
-//     // 如果是添加，最好渲染最后一页
-//     const lastPage = Math.ceil((total.value + 1) / params.value.pagesize)
-//     // 更新成最大页码数，再渲染
-//     params.value.pagenum = lastPage
-//   }
-
-//   getArticleList()
-// }
-
+const addJsonSolve = () => {
+  router.push('/json/solve')
+}
+const onShow = (row) => {
+  console.log(row.id)
+  router.push('/json/show')
+}
 
 
 
@@ -209,15 +195,15 @@ fetchData()
 <template>
   <page-container title="解析记录">
     <template #extra>
-      <el-button type="primary" @click="onAddArticle">添加解析</el-button>
+      <el-button type="primary" @click="addJsonSolve">添加解析</el-button>
     </template>
 
     <!-- 表单区域 -->
     <el-form inline style="display: flex; justify-content: space-between;">
-      <el-form-item label="用户 :" style="flex: 1">
+      <el-form-item label="解析ID :" style="flex: 1">
         <channel-select v-model="params.cate_id" width="100px"></channel-select>
       </el-form-item>
-      <el-form-item label="时间 :" style="flex: 1">
+      <el-form-item label="解析时间 :" style="flex: 1">
         <!-- 这里后台标记发布状态，就是通过中文标记的，已发布 / 草稿 -->
         <channel-select v-model="params.state" width="100px"></channel-select>
       </el-form-item>
@@ -230,12 +216,12 @@ fetchData()
 
     <!-- 表格区域 -->
     <el-table :data="articleList" v-loading="loading">
-      <el-table-column label="用户" prop="title">
+      <el-table-column label="解析ID" prop="title">
         <template #default="{ row }">
           <el-link type="primary" :underline="false">{{ row.title }}</el-link>
         </template>
       </el-table-column>
-      <el-table-column label="得分" prop="title">
+      <el-table-column label="综合得分" prop="title">
         <template #default="{ row }">
           <el-link type="primary" :underline="false">{{ row.grade }}</el-link>
         </template>
@@ -254,15 +240,15 @@ fetchData()
             circle
             plain
             type="primary"
-            :icon="Edit"
-            @click="onEditArticle(row)"
+            :icon="Search"
+            @click="onShow(row)"
           ></el-button>
           <el-button
             circle
             plain
             type="danger"
             :icon="Delete"
-            @click="onDeleteArticle(row)"
+            @click="onDelete(row)"
           ></el-button>
         </template>
       </el-table-column>
@@ -281,14 +267,9 @@ fetchData()
       style="margin-top: 20px; justify-content: flex-end"
     />
 
-    <!-- 添加编辑的抽屉 -->
-    <article-edit ref="articleEditRef" @success="onSuccess"></article-edit>
 
-    <div
-          ref="chartRef"
-          style="width: 100%; height: 300px;"
-        > </div>
-
+    <!-- 图表区域 -->
+    <div ref="chartRef" style="width: 100%; height: 400px;"></div>
   </page-container>
 </template>
 

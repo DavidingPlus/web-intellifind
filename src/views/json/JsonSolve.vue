@@ -1,77 +1,19 @@
 <script setup>
 import { UploadFilled } from '@element-plus/icons-vue';
-import * as echarts from 'echarts';
-import { onMounted, ref } from 'vue';
+import { ElUpload, ElIcon, ElButton } from 'element-plus';
+import { Check } from '@element-plus/icons-vue'
+import { useRouter } from 'vue-router';
 
-// 通过echarts 中的折线图进行历次数据展示
-const chartRef = ref(null)
-const chartData = ref([])
-onMounted(() => {
-  if (chartRef.value) {
-  const chart = echarts.init(chartRef.value)
-  const option = {
-    title: {
-      text: '最近七次解析反馈数据'
-    },
-    tooltip: {
-      trigger: 'axis'
-    },
-    legend: {
-      data: ['JSON1', 'JSON2', 'JSON3', 'JSON4', 'JSON5']
-    },
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '0%',
-      containLabel: true
-    },
-    toolbox: {
-      feature: {
-        saveAsImage: {}
-      }
-    },
-    xAxis: {
-      type: 'category',
-      boundaryGap: false,
-      data: ['第一次解析', '第二次解析', '第三次解析', '第四次解析', '第五次解析', '第六次解析', '第七次解析']
-    },
-    yAxis: {
-      type: 'value',
-      // min: Math.min(...chartData.value.map(item => Math.min(...item.data))),  
-      // max: Math.max(...chartData.value.map(item => Math.max(...item.data))),  
-    },
-    // 通过循环的方式，将历次数据进行展示
-    series: chartData.value.map(item => ({
-      name: item.name,
-      data: item.data,
-      type: 'line',
-    }))
-  }
-chart.setOption(option)}})
-
-const fetchData = () => {
-  chartData.value = [{
-      name: 'JSON1',
-      data: [10, 42, 11, 14, 90, 23, 51]
-    },
-    {
-      name: 'JSON2',
-      data: [42, 8, 91, 60, 29, 33, 10]
-    },
-    {
-      name: 'JSON3',
-      data: [15, 32, 20, 54, 87, 60, 61]
-    },
-    {
-      name: 'JSON4',
-      data: [32, 13, 1, 34, 39, 42, 20]
-    },
-    {
-      name: 'JSON5',
-      data: [82, 23, 10, 24, 29, 36, 40]
-    }]
+const getShowId = () => {
+  return 1
 }
-fetchData()
+
+const router = useRouter()
+// 跳转到新开页面并展示详情
+const show = (id) => {
+  console.log(id)
+  router.push('/json/show')
+}
 
 </script>
 
@@ -94,12 +36,7 @@ fetchData()
         </div>
       </el-upload>
 
-        <!--  通过echarts 中的折线图进行历次数据展示  -->
-        <div
-          ref="chartRef"
-          style="width: 100%; height: 300px;"
-        > </div>
-      
+      <el-button type="success" @click="show" round>点此查看解析详情</el-button>
   </page-container>
 </template>
 
