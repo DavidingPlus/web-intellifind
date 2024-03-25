@@ -55,7 +55,7 @@ type UpdateUserInfoRequest struct {
 }
 
 type ShowResultOnceRequest struct {
-	FileName string `json:"file_name"`
+	FileName string `json:"file_name" form:"file_name"`
 }
 
 // 设置权重值

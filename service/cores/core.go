@@ -39,7 +39,9 @@ func UploadFile(c *gin.Context) {
 	}
 
 	//获取解析的结果
-	data, err := GetResult(c, save_path, file_name)
+	uid := c.GetUint("current_user_id")
+	settings, _ := GetSettingService(uid)
+	data, err := GetResult(c, save_path, file_name, settings)
 	if err != nil {
 		fmt.Println(err)
 		response.Abort500(c, err.Error())

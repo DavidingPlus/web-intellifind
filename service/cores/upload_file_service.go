@@ -2,50 +2,45 @@ package cores
 
 import (
 	"backend/model/core"
-	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"io/ioutil"
-	"net/http"
-	"net/url"
+	"github.com/kirinlabs/HttpRequest"
 	"time"
 )
 
-func GetResult(c *gin.Context, save_path string, file_name string) (core.Result, error) {
-	url_value := url.Values{"file_name": {save_path}}
+func GetResult(c *gin.Context, save_path string, file_name string, settings core.Settings) (core.Result, error) {
 
-	//调用解析接口
+	req := HttpRequest.NewRequest()
+	req.SetHeaders(map[string]string{"Content-Type": "application/json"})
+	data := map[string]interface{}{
+		"save_path":      save_path,
+		"stay_time":      settings.StayTime,
+		"repeat_click":   settings.RepeatClick,
+		"page_load":      settings.PageLoad,
+		"feedback":       settings.FeedbackInterval,
+		"no_reaction":    settings.NoReaction,
+		"error_count":    settings.ErrorCount,
+		"console_errors": settings.ConsoleErrors,
+		"is_blank":       settings.IsBlank,
+		"occur_many":     settings.OccurMany,
+	}
 
-	//todo 在算法部分起一个服务
-	resp, err := http.PostForm("http://127.0.0.1:8080/api/parse", url_value)
+	url := "http://127.0.0.1:8082/json/parse"
+	res, err := req.Post(url, data)
+
 	if err != nil {
-		return core.Result{}, fmt.Errorf("请求接口失败")
-	}
-	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
-	var res core.Result
-	err = json.Unmarshal(body, &res)
-	if err != nil {
-		fmt.Errorf("解析失败")
+		return core.Result{}, err
 	}
 
-	result := core.Result{
-		FileName:         file_name,
-		UID:              c.GetUint("current_user_id"),
-		CreateTime:       time.Now(),
-		TotalScore:       res.TotalScore,
-		StayTime:         res.StayTime,
-		RepeatClick:      res.RepeatClick,
-		PageLoad:         res.PageLoad,
-		FeedbackInterval: res.FeedbackInterval,
-		NoReaction:       res.NoReaction,
-		ErrorCount:       res.ErrorCount,
-		ConsoleErrors:    res.ConsoleErrors,
-		IsBlank:          res.IsBlank,
-		OccurMany:        res.OccurMany,
-		BriefDesc:        res.BriefDesc,
-		DetailDesc:       res.DetailDesc,
-	}
+	result := core.Result{}
+	res.Json(&result)
+
+	result.UID = settings.UID
+	result.FileName = file_name
+	result.CreateTime = time.Now()
+
+	fmt.Println(result)
+
 	err = result.Create()
 	if err != nil {
 		return core.Result{}, fmt.Errorf("保存失败")
