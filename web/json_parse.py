@@ -1,8 +1,8 @@
-
-from chat import gpt_35_api_stream
-from web.reply import replyT
 import json
-from weight import defaultWeight
+from web.chat import gpt_35_api_stream
+from web.reply import replyT
+from web.weight import defaultWeight
+
 
 def jsonParse(jsonPath: str, weights: list) -> replyT:
     data = dict()
@@ -34,6 +34,7 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
         allScores[0] = 60 + (70 - 60) / (5 * 1000 - 0 * 1000) * \
             (stayTime - 0 * 1000)
 
+    allScores[0] = round(allScores[0], 2)  # 得分保留两位小数
     score += allScores[0] * proWeights[0]
 
     # 2. 重复点击
@@ -42,6 +43,7 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
     else:
         allScores[1] = 60
 
+    allScores[1] = round(allScores[1], 2)
     score += allScores[1] * proWeights[1]
 
     # 3. 页面打开慢
@@ -56,6 +58,7 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
         if (allScores[2] < 60):
             allScores[2] = 60
 
+    allScores[2] = round(allScores[2], 2)
     score += allScores[2] * proWeights[2]
 
     # 4. 点击后网络反馈慢
@@ -74,12 +77,14 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
     else:
         allScores[3] = 60
 
+    allScores[3] = round(allScores[3], 2)
     score += allScores[3] * proWeights[3]
 
     # 5. 点击无反应
     allScores[4] = allScores[2] * \
         0.5 + allScores[3] * 0.5
 
+    allScores[4] = round(allScores[4], 2)
     score += allScores[4] * proWeights[4]
 
     # 6. 点击报错
@@ -87,6 +92,7 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
     if allScores[5] < 60:
         allScores[5] = 60
 
+    allScores[5] = round(allScores[5], 2)
     score += allScores[5] * proWeights[5]
 
     # 7. 页面加载报错
@@ -94,6 +100,7 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
     if allScores[6] < 60:
         allScores[6] = 60
 
+    allScores[6] = round(allScores[6], 2)
     score += allScores[6] * proWeights[6]
 
     # 8. 页面加载白屏
@@ -102,6 +109,7 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
     else:
         allScores[7] = 60
 
+    allScores[7] = round(allScores[7], 2)
     score += allScores[7] * proWeights[7]
 
     # 9. 多个同时出现
@@ -110,9 +118,10 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
         if 100 != allScores[i]:
             allScores[8] -= 5
 
+    allScores[8] = round(allScores[8], 2)
     score += allScores[8] * proWeights[8]
 
-    score = round(score, 2)  # 保留两位小数
+    score = round(score, 2)  # 总分同样保留两位小数
 
     # 二. 问题简述
     briefDesc = "经过检测，您本次体验存在的问题如下，以下是问题简述：\n"

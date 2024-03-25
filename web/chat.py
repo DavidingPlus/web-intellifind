@@ -1,7 +1,7 @@
 from openai import OpenAI
 
 api_key = str()
-with open("../res/api_key", encoding="utf-8") as file:
+with open("./res/api_key", encoding="utf-8") as file:
     api_key = file.read()
     file.close()
 
