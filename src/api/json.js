@@ -1,11 +1,27 @@
 // import request from '@/utils/request'
 
+// 获取用户配置信息
+export const getUserConfig = () => 
+    request.get('/core/settings/get')
+// 更新用户配置信息
+export const updateUserConfig = (data) => 
+    request.put('/core/settings/edit_my', data)
+// 上传json文件进行解析
+export const uploadJsonFile = (data) => 
+    request.post('/core/upload-file', data)
 // 获取单次解析信息 
-export const getJsonSolveData = (jsonId) => request.get('/json/solve', { params: {jsonId} })
+export const getJsonSolveData = (jsonId) => 
+    request.get('/core/show-result/once', { jsonId })
 // 获取解析日志信息
-export const getJsonSolveLogData = (userId) => request.get('/json/solvelog', { params: {userId} })
-// 删除解析记录信息
-export const deleteJsonSolveLogData = (jsonId) => request.delete('/json/solvelog', { params: {jsonId} })
+export const getJsonSolveLogData = (userId) => 
+    request.get('/core/show-history/total',  {userId })
+
+
+
+// // 删除解析记录信息
+// export const deleteJsonSolveLogData = (jsonId) => 
+//     request.delete('/json/solvelog',  {jsonId })
+
 
 
 

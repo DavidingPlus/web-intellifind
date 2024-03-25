@@ -4,7 +4,6 @@ import * as echarts from 'echarts';
 import { onMounted, ref } from 'vue';
 import { formatTime } from '@/utils/format.js'
 import { Delete, Search } from '@element-plus/icons-vue'
-import ChannelSelect from './components/ChannelSelect.vue'
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
@@ -47,6 +46,36 @@ const articleList = ref([
   {
     id: 5,
     title: '5- 服了服了别创我了',
+    pub_date: '2021-09-01 12:00:00',
+    grade: 'Grade A+：92'
+  },
+  {
+    id: 6,
+    title: '6- 你小子有点不服？',
+    pub_date: '2021-09-01 12:00:00',
+    grade: 'Grade A ：82'
+  },
+  {
+    id: 7,
+    title: '7- 来嘛，不服创我！',
+    pub_date: '2021-09-01 12:00:00',
+    grade: 'Grade B+：72'
+  },
+  {
+    id: 8,
+    title: '8- 试试就逝世！',
+    pub_date: '2021-09-01 12:00:00',
+    grade: 'Grade A+：90'
+  },
+  {
+    id: 9,
+    title: '9- Duang！！！！',
+    pub_date: '2021-09-01 12:00:00',
+    grade: 'Grade A ：86'
+  },
+  {
+    id: 10,
+    title: '10- 服了服了别创我了',
     pub_date: '2021-09-01 12:00:00',
     grade: 'Grade A+：92'
   }
@@ -153,8 +182,6 @@ onMounted(() => {
     },
     yAxis: {
       type: 'value',
-      // min: Math.min(...chartData.value.map(item => Math.min(...item.data))),  
-      // max: Math.max(...chartData.value.map(item => Math.max(...item.data))),  
     },
     // 通过循环的方式，将历次数据进行展示
     series: chartData.value.map(item => ({
@@ -197,22 +224,6 @@ fetchData()
     <template #extra>
       <el-button type="primary" @click="addJsonSolve">添加解析</el-button>
     </template>
-
-    <!-- 表单区域 -->
-    <el-form inline style="display: flex; justify-content: space-between;">
-      <el-form-item label="解析ID :" style="flex: 1">
-        <channel-select v-model="params.cate_id" width="100px"></channel-select>
-      </el-form-item>
-      <el-form-item label="解析时间 :" style="flex: 1">
-        <!-- 这里后台标记发布状态，就是通过中文标记的，已发布 / 草稿 -->
-        <channel-select v-model="params.state" width="100px"></channel-select>
-      </el-form-item>
-      <el-form-item style="flex: 1">
-        <el-button @click="onSearch" type="primary">搜索</el-button>
-        <el-button @click="onReset">重置</el-button>
-      </el-form-item>
-      <el-form-item style="flex: 1"></el-form-item>
-    </el-form>
 
     <!-- 表格区域 -->
     <el-table :data="articleList" v-loading="loading">

@@ -1,8 +1,9 @@
-import axios from 'axios'
-import { useUserStore } from '@/stores'
-import { ElMessage } from 'element-plus'
 import router from '@/router'
-const baseURL = 'http://big-event-vue-api-t.itheima.net'
+import { useUserStore } from '@/stores'
+import axios from 'axios'
+import { ElMessage } from 'element-plus'
+// const baseURL = 'http://big-event-vue-api-t.itheima.net'
+const baseURL = '8.137.100.0'
 
 
 
@@ -57,3 +58,4 @@ instance.interceptors.response.use(
 
 export default instance
 export { baseURL }
+

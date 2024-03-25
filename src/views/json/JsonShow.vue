@@ -1,6 +1,7 @@
 <script setup>
 import * as echarts from 'echarts';
 import { onMounted, ref } from 'vue';
+import html2canvas from 'html2canvas';
 
 const chartContainRef = ref(null);
 const gradeChartRef = ref(null);
@@ -19,7 +20,7 @@ onMounted(() => {
     gradeChart.resize({ width: chartContainerWidth, height: chartContainerHeight });
       const option1 = {
       title: {
-        text: '综合得分表',
+        text: '     综合得分表',
       },
       series: [
         {
@@ -113,7 +114,7 @@ gradeChart.setOption(option1)}
     ratioChart.resize({ width: chartContainerWidth, height: chartContainerHeight });
     const option2 = {
     title: {
-      text: '各项参数权重图',
+      text: '各项参数权重图    ',
       left: 'center'
     },
     radar: {
@@ -150,8 +151,8 @@ if (exactGradeChartRef.value) {
   const exactGradeChart = echarts.init(exactGradeChartRef.value);
   exactGradeChart.resize({ width: chartContainerWidth, height: chartContainerHeight });
   const option3 = {
-    title: {
-      text: '各项具体得分表',
+    title: { 
+      text: '各项具体得分表         ',
       left: 'right'
     },
     tooltip: {
@@ -189,7 +190,7 @@ if (exactGradeChartRef.value) {
   }
   exactGradeChart.setOption(option3)}})
 
-
+// 表格数据优劣评判
 const tableRowClassName = ({ row }) => {
   if (row.score >= 85) {
     return 'success-row';
@@ -210,6 +211,17 @@ const tableData = [
   { paramName: '参数8', score: 68, comment: '评价较差' },
   { paramName: '参数9', score: 79, comment: '评价一般' }
 ]
+
+// // 将页面中的echarts图表保存为图片
+// const saveAsImage = () => {
+//   html2canvas(chartContainRef.value).then(canvas => {
+//     const imgData = canvas.toDataURL('image/png');
+//     const link = document.createElement('a');
+//     link.download = 'chart.png';
+//     link.href = imgData;
+//     link.click();
+//   });
+// }
 
 </script>
 
@@ -239,6 +251,8 @@ const tableData = [
       <el-table-column prop="comment" label="详细评判" />
     </el-table>
 
+    <!-- <br>
+    <el-button type="primary" @click="saveAsImage" round>保存为图片</el-button> -->
   </page-container>
 </template>
 

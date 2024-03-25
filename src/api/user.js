@@ -8,16 +8,17 @@ export const userRegisterService = ({ username, password, repassword }) =>
 export const userLoginService = ({ username, password }) =>
   request.post('/api/login', { username, password })
 
-// // 获取用户基本信息
-// export const userGetInfoService = () => request.get('/my/userinfo')
+// 获取用户基本信息
+export const userGetInfoService = () => 
+  request.get('/user/info')
 
-// // 更新用户基本信息
-// export const userUpdateInfoService = ({ id, nickname, email }) =>
-//   request.put('/my/userinfo', { id, nickname, email })
+// 更新用户基本信息
+export const userUpdateInfoService = ({ email, id, username, nickname, city }) =>
+  request.put('/user/update', { email, id, username, nickname, city })
 
-// // 更新用户头像
-// export const userUpdateAvatarService = (avatar) =>
-//   request.patch('/my/update/avatar', { avatar })
+// 更新用户头像
+export const userUpdateAvatarService = (avatar) =>
+  request.post('/user/upload-avator', { avatar })
 
 // // 更新用户密码
 // export const userUpdatePasswordService = ({ old_pwd, new_pwd, re_pwd }) =>
