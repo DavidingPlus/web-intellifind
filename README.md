@@ -1,6 +1,6 @@
-# Vue3-big-event-admin
+# main
 
-This template should help get you started developing with Vue 3 in Vite.
+第十五届中国大学生服务外包创新创业大赛的项目.
 
 ## Recommended IDE Setup
 
