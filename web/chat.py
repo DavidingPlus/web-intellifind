@@ -1,15 +1,13 @@
 from openai import OpenAI
 
 api_key = str()
-with open("./res/api_key", encoding="utf-8") as file:
-    api_key = file.read()
-    file.close()
+
 
 client = OpenAI(
     # note： 没有使用 OpenAI 官方的 API，那个要给钱
     # 参考 github 开源项目：https://github.com/chatanywhere/GPT_API_free
     # 这是我的免费的 API KEY
-    api_key=api_key,
+    api_key="sk-ilHiwmIb9kBoQdmcH0uOMWyGdsI1K33OaxbypjfuhvMgG6l7",
     base_url="https://api.chatanywhere.tech/v1"
 )
 
