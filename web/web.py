@@ -27,10 +27,11 @@ def ParseJson():
     no_reaction = data['no_reaction']
     error_count = data['error_count']
     console_errors = data['console_errors']
+    is_blank = data['is_blank']
     occur_many =data['occur_many']
 
     weights = [stay_time, repeat_click, page_load, feedback,
-               no_reaction, error_count, console_errors, occur_many]
+               no_reaction, error_count, console_errors, is_blank,occur_many]
 
     print(weights)
     res = jsonParse(save_path, weights)
