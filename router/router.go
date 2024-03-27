@@ -5,7 +5,6 @@ import (
 	"backend/service/authentication"
 	"backend/service/cores"
 	"backend/service/users"
-	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,7 +12,7 @@ import (
 func Router() *gin.Engine {
 	r := gin.Default()
 
-	r.Use(cors.Default())
+	r.Use(middlewares.Cors())
 
 	//用户认证操作
 	auth := r.Group("/auth", middlewares.GuestJWT())
