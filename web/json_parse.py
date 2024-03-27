@@ -12,6 +12,7 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
     # with open as ... 不用考虑文件关闭， python 会自动再合适的时候关闭
     with open(jsonPath, mode="r", encoding="utf-8") as file:
         data = json.load(file)
+    # print(data)
 
     # 一. 遍历整个 json ，拿到数据
     # 跳出率较高
