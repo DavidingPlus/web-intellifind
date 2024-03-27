@@ -1,24 +1,63 @@
 import json
 from web.chat import gpt_35_api_stream
 from web.reply import replyT
-from web.weight import defaultWeight
 
 
 def jsonParse(jsonPath: str, weights: list) -> replyT:
     data = dict()
     score = 0.0
     allScores = [0.0] * 9
-    proWeights=weights
-
+    proWeights = weights
 
     # with open as ... 不用考虑文件关闭， python 会自动再合适的时候关闭
     with open(jsonPath, mode="r", encoding="utf-8") as file:
         data = json.load(file)
 
-    # 一. 计算得分
+    # 一. 遍历整个 json ，拿到数据
+    # 跳出率较高
+    stayTime: float = 0.0
+    # 重复点击
+    repeatClick: list[int] = [0, 0]
+    # 页面打开慢
+    pageLoad: float = 0.0
+    pageLoadCnt: int = 0
+    # 点击后网络反馈慢
+    feedbackInterval: float = 0.0
+    feedbackIntervalCnt: int = 0
+    # 点击报错
+    errorCount: int = 0
+    # 页面加载报错
+    consoleErrors: int = 0
+    # 页面加载白屏
+    isBlank: list[int] = [0, 0]
 
+    for e in data['data']:
+        if 'stayTime' in e['interactionAttr']:
+            stayTime += e['interactionAttr']['stayTime']['value']
+        if 'repeatClick' in e['interactionAttr']:
+            if 'True' == e['interactionAttr']['repeatClick']['value']:
+                repeatClick[0] += 1
+            else:
+                repeatClick[1] += 1
+        if 'pageLoad' in e['performanceAttr']:
+            pageLoad += e['performanceAttr']['pageLoad']['value']
+            pageLoadCnt += 1
+        if 'feedbackInterval' in e['performanceAttr']:
+            feedbackInterval += e['performanceAttr']['feedbackInterval']['value']
+            feedbackIntervalCnt += 1
+        if 'errorCount' in e['interactionAttr']:
+            errorCount += e['interactionAttr']['errorCount']['value']
+        if 'consoleErrors' in e['performanceAttr']:
+            consoleErrors += e['performanceAttr']['consoleErrors']['value']
+        if 'isBlank' in e['interactionAttr']:
+            if 'True' == e['interactionAttr']['isBlank']['value']:
+                isBlank[0] += 1
+            else:
+                isBlank[1] += 1
+
+    # 二. 计算得分
     # 1. 跳出率较高
-    stayTime = data['interactionAttr']['stayTime']['value']
+    stayTime = round(stayTime, 2)
     if stayTime >= 30 * 1000:
         allScores[0] = 100
     elif stayTime >= 10 * 1000 and stayTime < 30 * 1000:
@@ -35,16 +74,15 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
     score += allScores[0] * proWeights[0]
 
     # 2. 重复点击
-    if str("False") == data['interactionAttr']['repeatClick']['value']:
-        allScores[1] = 100
-    else:
-        allScores[1] = 60
+    allScores[1] = 60 + repeatClick[1] / \
+        (repeatClick[0] + repeatClick[1]) * (100 - 60)
 
     allScores[1] = round(allScores[1], 2)
     score += allScores[1] * proWeights[1]
 
-    # 3. 页面打开慢
-    pageLoad = data['performanceAttr']['pageLoad']['value']
+    # # 3. 页面打开慢
+    # TODO 如果 json 里面没有 pageLoad 字段的处理（绝大多数情况不会）
+    pageLoad = round(pageLoad / pageLoadCnt, 2)
     if pageLoad >= 0 * 1000 and pageLoad < 2 * 1000:
         allScores[2] = 100
     elif pageLoad >= 2 * 1000 and pageLoad < 5 * 1000:
@@ -59,7 +97,7 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
     score += allScores[2] * proWeights[2]
 
     # 4. 点击后网络反馈慢
-    feedbackInterval = data['performanceAttr']['feedbackInterval']['value']
+    feedbackInterval = round(feedbackInterval / feedbackIntervalCnt, 2)
     if feedbackInterval >= 0 and feedbackInterval < 60:
         allScores[3] = 100
     elif feedbackInterval >= 60 and feedbackInterval < 100:
@@ -85,7 +123,7 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
     score += allScores[4] * proWeights[4]
 
     # 6. 点击报错
-    allScores[5] = 100 - 3 * data['interactionAttr']['errorCount']['value']
+    allScores[5] = 100 - 2 * errorCount
     if allScores[5] < 60:
         allScores[5] = 60
 
@@ -93,7 +131,7 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
     score += allScores[5] * proWeights[5]
 
     # 7. 页面加载报错
-    allScores[6] = 100 - 3 * data['performanceAttr']['consoleErrors']['value']
+    allScores[6] = 100 - 2 * consoleErrors
     if allScores[6] < 60:
         allScores[6] = 60
 
@@ -101,10 +139,8 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
     score += allScores[6] * proWeights[6]
 
     # 8. 页面加载白屏
-    if str("False") == data['interactionAttr']['isBlank']['value']:
-        allScores[7] = 100
-    else:
-        allScores[7] = 60
+    allScores[7] = 60 + isBlank[1] / \
+        (isBlank[0] + isBlank[1]) * (100 - 60)
 
     allScores[7] = round(allScores[7], 2)
     score += allScores[7] * proWeights[7]
@@ -120,19 +156,19 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
 
     score = round(score, 2)  # 总分同样保留两位小数
 
-    # 二. 问题简述
+    # 三. 问题简述
     briefDesc = "经过检测，您本次体验存在的问题如下，以下是问题简述：\n"
-    briefDesc += f"1. 关于跳出率较高，停留时长为 {stayTime} 毫秒，得分 {round(allScores[0] , 2)} 分；\n"
-    briefDesc += f"2. 关于重复点击，是否重复点击为 {data['interactionAttr']['repeatClick']['value']} ，得分为 {round(allScores[1] , 2)} 分；\n"
-    briefDesc += f"3. 关于页面打开慢，页面加载时长为 {pageLoad} 毫秒，得分 {round(allScores[2] , 2)} 分；\n"
-    briefDesc += f"4. 关于点击后网络反馈慢，延迟时间为 {feedbackInterval} 毫秒，得分 {round(allScores[3] , 2)} 分；\n"
-    briefDesc += f"5. 关于点击无反应，得分 {round(allScores[4] , 2)} 分；\n"
-    briefDesc += f"6. 关于点击报错，页面错误信息个数为 {data['interactionAttr']['errorCount']['value']}，得分 {round(allScores[5] , 2)} 分；\n"
-    briefDesc += f"7. 关于页面加载报错，控制台的报错信息个数为 {data['performanceAttr']['consoleErrors']['value']}，得分 {round(allScores[6] , 2)} 分；\n"
-    briefDesc += f"8. 关于页面加载白屏，是否白屏为 {data['interactionAttr']['isBlank']['value']}，得分 {round(allScores[7] , 2)} 分；\n"
-    briefDesc += f"9. 关于多个同时出现，上述问题总共出现 {(100 - allScores[8]) // 5} 个，得分 {round(allScores[8] , 2)} 分；\n"
+    briefDesc += f"1. 关于跳出率较高，总共停留时长为 {stayTime} 毫秒，得分 {allScores[0]} 分；\n"
+    briefDesc += f"2. 关于重复点击，重复点击次数为 {repeatClick[0]} 次，未重复点击次数为 {repeatClick[1]} 次，得分为 {allScores[1]} 分；\n"
+    briefDesc += f"3. 关于页面打开慢，页面平均加载时长为 {pageLoad} 毫秒，得分 {allScores[2]} 分；\n"
+    briefDesc += f"4. 关于点击后网络反馈慢，页面平均延迟时间为 {feedbackInterval} 毫秒，得分 {allScores[3]} 分；\n"
+    briefDesc += f"5. 关于点击无反应，得分 {allScores[4]} 分；\n"
+    briefDesc += f"6. 关于点击报错，页面错误信息总数为 {errorCount}，得分 {allScores[5]} 分；\n"
+    briefDesc += f"7. 关于页面加载报错，控制台的报错信息总数为 {consoleErrors}，得分 {allScores[6]} 分；\n"
+    briefDesc += f"8. 关于页面加载白屏，白屏次数为 {isBlank[0]} 次，未白屏次数为 {isBlank[1]} 次，得分 {allScores[7]} 分；\n"
+    briefDesc += f"9. 关于多个同时出现，上述问题总共出现 {(100 - allScores[8]) // 5} 个，得分 {allScores[8]} 分；\n"
 
-    # 三. 询问 GPT ，问题详述
+    # 四. 询问 GPT ，问题详述
     askGPTStr = f"现在我给你一些网站体验过程中的问题简述，并且附有一些数据和得分，请您结合数据和得分详细分析一下这些问题，并且给出合适的优化建议，每一条请严格按照我的格式提行进行补充。\n{briefDesc}"
     detailDesc = gpt_35_api_stream(
         "gpt-3.5-turbo", [{'role': 'user', 'content': askGPTStr}])
