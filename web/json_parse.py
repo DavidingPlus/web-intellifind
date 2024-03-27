@@ -14,11 +14,13 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
     # with open as ... 不用考虑文件关闭， python 会自动再合适的时候关闭
     with open(jsonPath, mode="r", encoding="utf-8") as file:
         data = json.load(file)
+    # print(data)
 
     # 一. 计算得分
 
     # 1. 跳出率较高
     stayTime = data['interactionAttr']['stayTime']['value']
+    print(stayTime)
     if stayTime >= 30 * 1000:
         allScores[0] = 100
     elif stayTime >= 10 * 1000 and stayTime < 30 * 1000:
