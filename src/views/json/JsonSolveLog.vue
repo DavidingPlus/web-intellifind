@@ -1,5 +1,5 @@
 <script setup>
-// import { artDelService, artGetListService } from '@/api/json.js'
+// import { getJsonSolveLogData } from '@/api/json.js'
 import * as echarts from 'echarts';
 import { onMounted, ref } from 'vue';
 import { formatTime } from '@/utils/format.js'
@@ -7,122 +7,71 @@ import { Delete, Search } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
-const total = ref(0) // 总条数
 const loading = ref(false) // loading状态
+const solveLogList = ref([]) // 解析记录列表
 
 // 定义请求参数对象
 const params = ref({
-  pagenum: 1, // 当前页
-  pagesize: 5, // 当前生效的每页条数
-  cate_id: '',
-  grade: '',
+  userId: 1,
 })
 
 const articleList = ref([
   {
     id: 1,
-    title: '1- 你小子有点不服？',
-    pub_date: '2021-09-01 12:00:00',
+    filename: '1- 你小子有点不服？',
+    date: '2021-09-01 12:00:00',
     grade: 'Grade A ：82'
   },
   {
     id: 2,
-    title: '2- 来嘛，不服创我！',
-    pub_date: '2021-09-01 12:00:00',
+    filename: '2- 来嘛，不服创我！',
+    date: '2021-09-01 12:00:00',
     grade: 'Grade B+：72'
   },
   {
     id: 3,
-    title: '3- 试试就逝世！',
-    pub_date: '2021-09-01 12:00:00',
+    filename: '3- 试试就逝世！',
+    date: '2021-09-01 12:00:00',
     grade: 'Grade A+：90'
   },
   {
     id: 4,
-    title: '4- Duang！！！！',
-    pub_date: '2021-09-01 12:00:00',
+    filename: '4- Duang！！！！',
+    date: '2021-09-01 12:00:00',
     grade: 'Grade A ：86'
   },
   {
     id: 5,
-    title: '5- 服了服了别创我了',
-    pub_date: '2021-09-01 12:00:00',
+    filename: '5- 服了服了别创我了',
+    date: '2021-09-01 12:00:00',
     grade: 'Grade A+：92'
   },
   {
     id: 6,
-    title: '6- 你小子有点不服？',
-    pub_date: '2021-09-01 12:00:00',
+    filename: '6- 你小子有点不服？',
+    date: '2021-09-01 12:00:00',
     grade: 'Grade A ：82'
   },
   {
     id: 7,
-    title: '7- 来嘛，不服创我！',
-    pub_date: '2021-09-01 12:00:00',
+    filename: '7- 来嘛，不服创我！',
+    date: '2021-09-01 12:00:00',
     grade: 'Grade B+：72'
-  },
-  {
-    id: 8,
-    title: '8- 试试就逝世！',
-    pub_date: '2021-09-01 12:00:00',
-    grade: 'Grade A+：90'
-  },
-  {
-    id: 9,
-    title: '9- Duang！！！！',
-    pub_date: '2021-09-01 12:00:00',
-    grade: 'Grade A ：86'
-  },
-  {
-    id: 10,
-    title: '10- 服了服了别创我了',
-    pub_date: '2021-09-01 12:00:00',
-    grade: 'Grade A+：92'
   }
 ]) 
 
-// 基于params参数，获取文章列表
-// const getArticleList = async () => {
-//   loading.value = true
+// 基于params参数，获取解析记录
+const getSolveLogList = async () => {
+  loading.value = true
+  // const res = await getJsonSolveLogData(params.value)
+  const res = await getJsonSolveLogData()
+  solveLogList.value = res.data.data
+  total.value = res.data.total
 
-//   const res = await artGetListService(params.value)
-//   articleList.value = res.data.data
-//   total.value = res.data.total
-
-//   loading.value = false
-// }
-// getArticleList()
-
-// 处理分页逻辑
-const onSizeChange = (size) => {
-  // console.log('当前每页条数', size)
-  // 只要是每页条数变化了，那么原本正在访问的当前页意义不大了，数据大概率已经不在原来那一页了
-  // 重新从第一页渲染即可
-  params.value.pagenum = 1
-  params.value.pagesize = size
-  // 基于最新的当前页 和 每页条数，渲染数据
-  getArticleList()
+  loading.value = false
 }
-const onCurrentChange = (page) => {
-  // 更新当前页
-  params.value.pagenum = page
-  // 基于最新的当前页，渲染数据
-  getArticleList()
-}
+// getSolveLogList()
 
-// 搜索逻辑 => 按照最新的条件，重新检索，从第一页开始展示
-const onSearch = () => {
-  params.value.pagenum = 1 // 重置页面
-  getArticleList()
-}
-
-// 重置逻辑 => 将筛选条件清空，重新检索，从第一页开始展示
-const onReset = () => {
-  params.value.pagenum = 1 // 重置页面
-  params.value.cate_id = ''
-  params.value.state = ''
-  getArticleList()
-}
 
 // 删除逻辑
 const onDelete = async (row) => {
@@ -135,9 +84,10 @@ const onDelete = async (row) => {
   await artDelService(row.id)
   ElMessage.success('删除成功')
   // 重新渲染列表
-  getArticleList()
+  getSolveLogList()
 }
 
+// 添加解析
 const addJsonSolve = () => {
   router.push('/json/solve')
 }
@@ -229,7 +179,7 @@ fetchData()
     <el-table :data="articleList" v-loading="loading">
       <el-table-column label="解析ID" prop="title">
         <template #default="{ row }">
-          <el-link type="primary" :underline="false">{{ row.title }}</el-link>
+          <el-link type="primary" :underline="false">{{ row.filename }}</el-link>
         </template>
       </el-table-column>
       <el-table-column label="综合得分" prop="title">
@@ -237,13 +187,12 @@ fetchData()
           <el-link type="primary" :underline="false">{{ row.grade }}</el-link>
         </template>
       </el-table-column>
-      <!-- <el-table-column label="分类" prop="cate_name"></el-table-column> -->
-      <el-table-column label="解析时间" prop="pub_date">
+
+      <el-table-column label="解析时间" prop="date">
         <template #default="{ row }">
-          {{ formatTime(row.pub_date) }}
+          {{ formatTime(row.date) }}
         </template>
       </el-table-column>
-      <!-- <el-table-column label="状态" prop="state"></el-table-column> -->
       <!-- 利用作用域插槽 row 可以获取当前行的数据 => v-for 遍历 item -->
       <el-table-column label="操作">
         <template #default="{ row }">
@@ -265,22 +214,12 @@ fetchData()
       </el-table-column>
     </el-table>
 
-    <!-- 分页区域 -->
-    <el-pagination
-      v-model:current-page="params.pagenum"
-      v-model:page-size="params.pagesize"
-      :page-sizes="[2, 3, 5, 10]"
-      :background="true"
-      layout="jumper, total, sizes, prev, pager, next"
-      :total="total"
-      @size-change="onSizeChange"
-      @current-change="onCurrentChange"
-      style="margin-top: 20px; justify-content: flex-end"
-    />
-
+    <br>
+    <br>
 
     <!-- 图表区域 -->
     <div ref="chartRef" style="width: 100%; height: 400px;"></div>
+    <br>
   </page-container>
 </template>
 

@@ -100,15 +100,19 @@ const init = ()=>
     nextTick(()=>
     {
         changeCheckCode();
+        formDataRef.value.resetFields();
+        formData.value = {};
+        const cookieLoginInfo = proxy.VueCookies.get("loginInfo");
+        if(cookieLoginInfo)
+        {
+            formData.value = cookieLoginInfo;
+        }
     })
 }
-onMounted(()=>
-{
-    init();
-})
+
 
 //login
-const doSumbit = () =>
+const doSubmit = () =>
 {
     formDataRef.value.validate(async(valid) =>
     {
@@ -161,6 +165,11 @@ const doSumbit = () =>
         router.push(firstMenu.menuUrl);
     });
 };
+
+onMounted(()=>
+{
+    init();
+})
 
 </script>
 

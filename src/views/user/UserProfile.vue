@@ -1,23 +1,16 @@
 <script setup>
-// import { userUpdateInfoService } from '@/api/user';
+// import { userGetInfoService, userUpdateInfoService } from '@/api/user';
 import PageContainer from '@/components/PageContainer.vue';
-import { useUserStore } from '@/stores';
 import { ref } from 'vue';
 
 const formRef = ref()
-
-// 是在使用仓库中数据的初始值 (无需响应式) 解构无问题
-const {
-  user: { email, id, username, nickname, city },
-  getUser
-} = useUserStore()
-
+// // 获取当前时间并填入输入框
+// const currentTime = new Date().toLocaleString();
 const form = ref({
-  id,
-  nickname,
-  username,
-  email,
-  city
+  username: '蓬鱼咽',
+  email: '9517538462@pp.com',
+  city: '山河四省',
+  date: '2025年41月31日'
 })
 
 const rules = ref({
@@ -39,6 +32,12 @@ const rules = ref({
   ]
 })
 
+// 更新当前表单用户信息
+const getUser = async () => {
+  const { data } = await userGetInfoService()
+  form.value = data
+}
+
 const submitForm = async () => {
   // 等待校验结果
   await formRef.value.validate()
@@ -50,16 +49,12 @@ const submitForm = async () => {
   ElMessage.success('修改成功')
 }
 
-// // 获取当前时间并填入输入框
-// const currentTime = new Date().toLocaleString();
+
 </script>
 <template>
   <page-container title="基本资料">
     <!-- 表单部分 -->
     <el-form ref="formRef" :model="form" :rules="rules" label-width="100px">
-      <el-form-item label="登录昵称">
-        <el-input v-model="form.nickname" disabled placeholder="不服创我"></el-input>
-      </el-form-item>
       <el-form-item label="用户姓名" prop="username">
         <el-input v-model="form.username" placeholder="蓬鱼咽"></el-input>
       </el-form-item>

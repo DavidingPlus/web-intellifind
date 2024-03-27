@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { Plus, Upload } from '@element-plus/icons-vue'
 import { useUserStore } from '@/stores'
 // import { userUpdateAvatarService } from '@/api/user'
+
 const userStore = useUserStore()
 const imgUrl = ref(userStore.user.user_pic)
 const uploadRef = ref()
@@ -23,6 +24,7 @@ const onUpdateAvatar = async () => {
   // 提示用户
   ElMessage.success('头像更新成功')
 }
+
 </script>
 
 <template>

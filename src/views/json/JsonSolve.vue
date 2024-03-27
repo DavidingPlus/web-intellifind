@@ -1,8 +1,8 @@
 <script setup>
 import { UploadFilled } from '@element-plus/icons-vue';
-import { ElUpload, ElIcon, ElButton } from 'element-plus';
-import { useRouter } from 'vue-router';
+import { ElButton, ElIcon, ElLoading, ElUpload } from 'element-plus';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 
 const router = useRouter()
@@ -15,11 +15,13 @@ const show = (id) => {
 const flag = ref(true)
 const percentage = ref(0.0)
 const perFlag = ref(true)
+const loading = ref(false)
 // 上传文件
 const upload = () => {
   console.log('上传文件')
   setTimeout(() => {
     flag.value = false
+    loading.value = true
     progress()
   }, 3000)
   
@@ -34,7 +36,7 @@ const progress = () => {
         perFlag.value = false
         setTimeout(() => {
           ElMessage.success('解析成功')
-          
+          loading.value = false
         }, 300)
     }
   }
@@ -83,8 +85,8 @@ const submitForm = async () => {
     <!-- 上传文件组件 -->
     <!-- action ： 请求的URL -->
     <!-- action= "8.137.100.0" -->
-      <br>
-      <el-upload
+    <div style="position: relative; width: 100%; max-height:565px;">
+        <el-upload
         class="upload-demo"
         drag
         
@@ -99,23 +101,35 @@ const submitForm = async () => {
           拖动JSON文件到此 或<em @click="upload"> 点此上传 </em>
         </div>
       </el-upload>
-      
 
-      <div v-else="flag" class="demo-progress">
+      <div v-else="flag" class="demo-progress" 
+      style="display: flex; flex-direction: column; 
+      justify-content: center; align-items: center;">
         
+        <!-- <el-loading content="文件上传中..."  />   -->
+        <br>
         <el-progress
           :text-inside="true"
           :stroke-width="24"
-          :percentage=percentage
+          :percentage="percentage"
           status="success"
+          style="width: 80%;"
         />
         <br>
-        <el-button type="success" @click="show" round>点此查看解析详情</el-button>
+        <el-table v-if="loading" v-loading="loading" style="width: 100%">
+        </el-table>
+        <el-button v-else="loading" type="success" @click="show" round>点此查看解析详情</el-button>
       </div>
+    </div>
       <br>
       <br>
 
-      <el-form ref="formRef" :model="form" :rules="rules" >
+      <el-form ref="formRef" :model="form" :rules="rules">
+      <el-row>
+        <el-col :span="24">
+          <h2 style="text-align: left;">自定义配置信息</h2>
+        </el-col>
+      </el-row>
       <el-form-item label="所在城市">
         <el-input v-model="form.city" placeholder="请输入您当前所在城市"></el-input>
       </el-form-item>

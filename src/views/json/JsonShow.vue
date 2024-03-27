@@ -1,7 +1,14 @@
 <script setup>
+import {
+  Iphone,
+  Location,
+  Tickets,
+  Compass
+} from '@element-plus/icons-vue';
 import * as echarts from 'echarts';
+import { ElDescriptions, ElDescriptionsItem, ElTable, ElTableColumn, ElTag } from 'element-plus';
 import { onMounted, ref } from 'vue';
-import html2canvas from 'html2canvas';
+
 
 const chartContainRef = ref(null);
 const gradeChartRef = ref(null);
@@ -128,7 +135,7 @@ gradeChart.setOption(option1)}
         { name: '参数6', max: 25 },
         { name: '参数7', max: 25 },
         { name: '参数8', max: 25 },
-        { name: '参数9', max: 25}
+        { name: '参数9', max: 25 }
       ]
     },
     series: [
@@ -137,7 +144,6 @@ gradeChart.setOption(option1)}
         type: 'radar',
         data: [
           {
-            total: 100,
             value: [5, 15, 25, 10, 5, 20, 5, 15, 10]
           }
         ]
@@ -153,14 +159,10 @@ if (exactGradeChartRef.value) {
   const option3 = {
     title: { 
       text: '各项具体得分表         ',
-      left: 'right'
+      left: 'right' 
     },
     tooltip: {
     trigger: 'item'
-  },
-  legend: {
-    orient: 'vertical',
-    left: 'left'
   },
   series: [
     {
@@ -212,21 +214,98 @@ const tableData = [
   { paramName: '参数9', score: 79, comment: '评价一般' }
 ]
 
-// // 将页面中的echarts图表保存为图片
-// const saveAsImage = () => {
-//   html2canvas(chartContainRef.value).then(canvas => {
-//     const imgData = canvas.toDataURL('image/png');
-//     const link = document.createElement('a');
-//     link.download = 'chart.png';
-//     link.href = imgData;
-//     link.click();
-//   });
-// }
+const pointlist = [
+  { pointname: '参数1', point: 5 },
+  { pointname: '参数2', point: 15 },
+  { pointname: '参数3', point: 25 },
+  { pointname: '参数4', point: 10 },
+  { pointname: '参数5', point: 5 },
+  { pointname: '参数6', point: 20 },
+  { pointname: '参数7', point: 5 },
+  { pointname: '参数8', point: 15 },
+  { pointname: '参数9', point: 10 }
+]
 
 </script>
 
 <template>
-  <page-container title="图表展示">
+  <page-container title="JSON解析详情展示">
+    <el-descriptions
+    class="margin-top"
+    title="用户环境配置信息"
+    :column="3"
+    border
+  >
+  <!-- <el-descriptions-item v-for="(item, index) in envlist" :key="index">
+      <template #label>
+        <div class="cell-item">
+          <el-icon :style="iconStyle">
+            <location />
+          </el-icon>
+          {{item.name}}
+        </div>
+      </template>
+      {{item.value}}
+    </el-descriptions-item> -->
+    <el-descriptions-item>
+      <template #label>
+        <div class="cell-item">
+          <el-icon :style="iconStyle">
+            <location />
+          </el-icon>
+          位置信息
+        </div>
+      </template>
+      country + province + city
+    </el-descriptions-item>
+    <el-descriptions-item>
+      <template #label>
+        <div class="cell-item">
+          <el-icon :style="iconStyle">
+          <Compass />
+          </el-icon>
+          浏览器版本
+        </div>
+      </template>
+      Chrome  88.0.4324.190
+    </el-descriptions-item>
+    <el-descriptions-item>
+      <template #label>
+        <div class="cell-item">
+          <el-icon :style="iconStyle">
+            <iphone />
+          </el-icon>
+          设备操作系统
+        </div>
+      </template>
+      PC端  Windows 11
+    </el-descriptions-item>
+  </el-descriptions>
+
+
+
+
+  <el-descriptions
+    class="margin-top"
+    title="用户权重配置信息"
+    :column="3"
+    border>
+    <el-descriptions-item v-for="(item, index) in pointlist" :key="index">
+      <template #label>
+        <div class="cell-item">
+          <el-icon :style="iconStyle">
+            <tickets />
+          </el-icon>
+          {{item.pointname}}
+        </div>
+      </template>
+      <el-tag>{{item.point}}</el-tag>
+    </el-descriptions-item>
+  </el-descriptions>
+    <br>
+    <br>
+    <br>
+
 
     <div ref="chartContainRef"  style="display: flex; justify-content: space-between;">
 
@@ -262,5 +341,16 @@ const tableData = [
 }
 .el-table .success-row {
   --el-table-tr-bg-color: var(--el-color-success-light-9);
+}
+
+.el-descriptions {
+  margin-top: 20px;
+}
+.cell-item {
+  display: flex;
+  align-items: center;
+}
+.margin-top {
+  margin-top: 20px;
 }
 </style>

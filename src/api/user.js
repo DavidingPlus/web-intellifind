@@ -1,24 +1,25 @@
-import request from '@/utils/request'
+// import request from '@/utils/requestzxy'
 
-// 注册接口
-export const userRegisterService = ({ username, password, repassword }) =>
-  request.post('/api/reg', { username, password, repassword })
 
-// 登录接口
-export const userLoginService = ({ username, password }) =>
-  request.post('/api/login', { username, password })
+// // 注册接口
+// export const userRegisterService = ({ username, password, repassword }) =>
+//   request.post('/api/reg', { username, password, repassword })
+
+// // 登录接口
+// export const userLoginService = ({ username, password }) =>
+//   request.post('/auth/login', { username, password })
 
 // 获取用户基本信息
-export const userGetInfoService = () => 
-  request.get('/user/info')
+export const userGetInfoService = (userId) => 
+  request.get('/user/info', { userId } )
 
 // 更新用户基本信息
-export const userUpdateInfoService = ({ email, id, username, nickname, city }) =>
-  request.put('/user/update', { email, id, username, nickname, city })
+export const userUpdateInfoService = ({ email, id, username, city }) =>
+  request.put('/user/update', { email, id, username, city })
 
 // 更新用户头像
 export const userUpdateAvatarService = (avatar) =>
-  request.post('/user/upload-avator', { avatar })
+  request.post('/user/upload-avatar', { avatar })
 
 // // 更新用户密码
 // export const userUpdatePasswordService = ({ old_pwd, new_pwd, re_pwd }) =>

@@ -1,8 +1,8 @@
-// import request from '@/utils/request'
+// import request from '@/utils/requestzxy'
 
 // 获取用户配置信息
-export const getUserConfig = () => 
-    request.get('/core/settings/get')
+export const getUserConfig = (jsonId) => 
+    request.get('/core/settings/get', { params: {jsonId} })
 // 更新用户配置信息
 export const updateUserConfig = (data) => 
     request.put('/core/settings/edit_my', data)
@@ -11,10 +11,10 @@ export const uploadJsonFile = (data) =>
     request.post('/core/upload-file', data)
 // 获取单次解析信息 
 export const getJsonSolveData = (jsonId) => 
-    request.get('/core/show-result/once', { jsonId })
+    request.get('/core/show-result/once', { params: {jsonId} })
 // 获取解析日志信息
 export const getJsonSolveLogData = (userId) => 
-    request.get('/core/show-history/total',  {userId })
+    request.get('/core/show-history/total',  {params: {userId} })
 
 
 
