@@ -8,11 +8,8 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
     data = dict()
     score = 0.0
     allScores = [0.0] * 9
-    proWeights = []
-    if [] == weights:
-        proWeights = defaultWeight
-    else:
-        proWeights = weights
+    proWeights=weights
+
 
     # with open as ... 不用考虑文件关闭， python 会自动再合适的时候关闭
     with open(jsonPath, mode="r", encoding="utf-8") as file:
