@@ -25,7 +25,7 @@ func GetResult(c *gin.Context, save_path string, file_name string, settings core
 		"occur_many":     settings.OccurMany,
 	}
 
-	url := "http://127.0.0.1:8082/json/parse"
+	url := "http://172.20.219.15:8082/json/parse"
 	res, err := req.Post(url, data)
 
 	if err != nil {
