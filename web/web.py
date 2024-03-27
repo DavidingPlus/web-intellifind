@@ -16,16 +16,18 @@ app = Flask(__name__)
 
 @app.route('/json/parse', methods=['POST'])
 def ParseJson():
-    file_path = request.json.get('file_path')
+    data = request.get_json()
+    file_path=data['file_path']
+
     print(file_path)
-    stay_time = request.json.get('staytime')
-    repeat_click = request.json.get('repeat_click')
-    page_load = request.json.get('page_load')
-    feedback_interval = request.json.get('feedback_interval')
-    no_reaction = request.json.get('no_reaction')
-    error_count = request.json.get('error_count')
-    console_errors = request.json.get('console_errors')
-    occur_many = request.json.get('occur_many')
+    stay_time = data['stay_time']
+    repeat_click = data['repeat_click']
+    page_load =data['page_load']
+    feedback_interval = data['feedback_interval']
+    no_reaction = data['no_reaction']
+    error_count = data['error_count']
+    console_errors = data['console_errors']
+    occur_many =data['occur_many']
 
     weights = [stay_time, repeat_click, page_load, feedback_interval,
                no_reaction, error_count, console_errors, occur_many]
