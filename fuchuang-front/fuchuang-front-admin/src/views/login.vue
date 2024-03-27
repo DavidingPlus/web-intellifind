@@ -45,7 +45,7 @@
                             <span class="iconfont icon-password"></span>
                         </template>
                         </el-input>
-                        <!-- <img :src="checkCodeUrl" class="check-code" @click="changeCheckCode"/> -->
+                        <img :src="checkCodeUrl" class="check-code" @click="changeCheckCode"/>
                     </div>
                 </el-form-item>
                 
@@ -73,7 +73,7 @@ const router = useRouter();
 
 const api = 
 {
-    checkCode:"/auth/capatcha",
+    checkCode:"/capatcha-code",
     login:"/login"
 }
 
@@ -88,27 +88,43 @@ const rules=
 
 //checkcode
 const checkCodeUrl = ref(null);
-const changeCheckCode = ()=>
+//?time=${new Date().getTime()}
+const changeCheckCode = async ()=>
 {
-    checkCodeUrl.value = `${api.checkCode}`;
+    let params =
+    {
+        time:new Date().getTime()
+    };
+    let result = await proxy.Request(
+            {
+                url:api.checkCode,
+                params,
+            });
+            if(result)
+            {
+                checkCodeUrl.value = result.captcha_image;
+            }
 }
-
-
 
 const init = ()=>
 {
-    nextTick(()=>
+    nextTick(()=>   
     {
         changeCheckCode();
+        formDataRef.value.resetFields();
+        formData.value = {};
+        const cookieLoginInfo =  proxy.VueCookies.get("loginInfo");
+        if(cookieLoginInfo)
+        {
+            formData.value = cookieLoginInfo;
+        }
+        
     })
 }
-onMounted(()=>
-{
-    init();
-})
+
 
 //login
-const doSumbit = () =>
+const doSubmit = () =>
 {
     formDataRef.value.validate(async(valid) =>
     {
@@ -117,18 +133,20 @@ const doSumbit = () =>
             return;
         }
         let params = {};
-        Object.assign(params,formData.value);
+        // Object.assign(params,formData.value);
         let cookieLoginInfo = proxy.VueCookies.get("loginInfo");
         let cookiePassword = cookieLoginInfo == null? null:cookieLoginInfo.password;
-        if(params.password !== cookiePassword)
-        {
-            params.password = md5(params.password);
-        }
-        params.password = md5(params.password);
+        // if(params.password !== cookiePassword)
+        // {
+        //     params.password = md5(params.password);
+        // }
+        // params.password = md5(params.password);
         let result = await proxy.Request(
             {
                 url:api.login,
-                params,
+                params:JSON.stringify(params),
+                dataType:'json',
+                // params,
                 errorCallback:()=>
                 {
                     changeCheckCode();
@@ -162,6 +180,10 @@ const doSumbit = () =>
     });
 };
 
+onMounted(()=>
+{
+    init();
+})
 </script>
 
 <style lang="scss" scoped>

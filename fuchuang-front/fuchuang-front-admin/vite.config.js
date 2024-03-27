@@ -16,16 +16,16 @@ export default defineConfig({
   server:
   {
     hmr:true,
-    port:4000,
+    port:8080,
     proxy: 
     {
       "/auth":
       {
-        target:"http://localhost:9091",
+        target:"http://8.137.100.0:8080",
         changeOrigin:true,
         cookiePathRewrite:
         {
-          "^auth":"/auth"
+          "^auth":"auth"
         }
       }
     }
