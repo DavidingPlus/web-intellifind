@@ -169,9 +169,15 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
     briefDesc += f"9. 关于多个同时出现，上述问题总共出现 {(100 - allScores[8]) // 5} 个，得分 {allScores[8]} 分；\n"
 
     # 四. 询问 GPT ，问题详述
-    askGPTStr = f"现在我给你一些网站体验过程中的问题简述，并且附有一些数据和得分，请您结合数据和得分详细分析一下这些问题，并且给出合适的优化建议，每一条请严格按照我的格式提行进行补充。\n{briefDesc}"
-    detailDesc = gpt_35_api_stream(
-        "gpt-3.5-turbo", [{'role': 'user', 'content': askGPTStr}])
+    model = "gpt-3.5-turbo"
+    messages = [
+        {
+            'role': 'system', 'content': '你是一个网站体验分析师。现在我给你一些网站体验过程中的问题简述，并且附有一些数据和得分，请您结合数据和得分详细分析一下这些问题，并且给出合适的优化建议，每一条请严格按照我的格式提行进行补充。'
+        },
+        {
+            'role': 'user', 'content': briefDesc
+        },]
+    detailDesc = gpt_35_api_stream(model=model, messages=messages)
 
     # 四. 封装为结构体返回
     return replyT(score, allScores, briefDesc, detailDesc)
