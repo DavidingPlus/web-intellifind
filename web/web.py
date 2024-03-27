@@ -17,6 +17,7 @@ app = Flask(__name__)
 @app.route('/json/parse', methods=['POST'])
 def ParseJson():
     file_path = request.json.get('file_path')
+    print(file_path)
     stay_time = request.json.get('staytime')
     repeat_click = request.json.get('repeat_click')
     page_load = request.json.get('page_load')
@@ -29,8 +30,10 @@ def ParseJson():
     weights = [stay_time, repeat_click, page_load, feedback_interval,
                no_reaction, error_count, console_errors, occur_many]
 
+    print(weights)
     res = jsonParse(file_path, weights)
 
+    print(res)
     resp = {
         # 总分
         "total_score": res.m_totalScore,
