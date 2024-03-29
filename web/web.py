@@ -19,6 +19,7 @@ def ParseJson():
     data = request.get_json()
     save_path=data['save_path']
 
+    save_path="/www/wwwroot/backend/"+save_path
     print(save_path)
     stay_time = data['stay_time']
     repeat_click = data['repeat_click']
