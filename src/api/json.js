@@ -1,20 +1,24 @@
-// import request from '@/utils/requestzxy'
+import request from '@/utils/requestzxy'
 
-// 获取用户配置信息
-export const getUserConfig = (jsonId) => 
-    request.get('/core/settings/get', { params: {jsonId} })
+
+// 获取用户本次解析配置信息
+export const getUserConfig = (file_name) => 
+    request.get('/core/settings/get', { params: {file_name} })
 // 更新用户配置信息
 export const updateUserConfig = (data) => 
     request.put('/core/settings/edit_my', data)
 // 上传json文件进行解析
-export const uploadJsonFile = (data) => 
-    request.post('/core/upload-file', data)
+export const uploadJsonFile = (formData) => 
+    request.post('/core/upload-file', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        }})
 // 获取单次解析信息 
-export const getJsonSolveData = (jsonId) => 
-    request.get('/core/show-result/once', { params: {jsonId} })
+export const getJsonSolveData = (file_name) => 
+    request.get('/core/show-result/once', { params: { file_name } })
 // 获取解析日志信息
 export const getJsonSolveLogData = (userId) => 
-    request.get('/core/show-history/total',  {params: {userId} })
+    request.get('/core/show-history/total',  {userId })
 
 
 

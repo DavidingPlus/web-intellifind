@@ -7,18 +7,67 @@ import {
 } from '@element-plus/icons-vue';
 import * as echarts from 'echarts';
 import { ElDescriptions, ElDescriptionsItem, ElTable, ElTableColumn, ElTag } from 'element-plus';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
+import { getJsonSolveData } from '@/api/json.js';
+import { useRoute } from 'vue-router';
 
 
-const chartContainRef = ref(null);
+// 接收路由参数
+const props = defineProps({
+  file_name: {
+    type: String,
+    required: true
+  }
+})
+const route = useRoute()
+const file_name = ref('')
+
+// 获取解析数据
+const getJsonSolveChartData = async () => {
+  // console.log(file_name.value);
+  console.log(typeof(file_name.value));
+  const { data } = await getJsonSolveData(file_name.value)
+  // const { data } = await getJsonSolveData('13_1711182941_2.json')
+  gradeChartData.value = data.data
+  ratioChartData.value = data.data
+  exactGradeChartData.value = data.data
+}
+
+
+
+// 图标大小
+const size = ref('default')
+const iconStyle = computed(() => {
+  const marginMap = {
+    large: '8px',
+    default: '6px',
+    small: '4px',
+  }
+  return {
+    marginRight: marginMap[size.value] || marginMap.default,
+  }
+})
+
+const chartContainRef = ref([]);
 const gradeChartRef = ref(null);
+const gradeChartData = ref([]);
 const ratioChartRef = ref(null);
+const ratioChartData = ref([]);
 const exactGradeChartRef = ref(null);
+const exactGradeChartData = ref([]);
 
 onMounted(() => {
+  // 获取路由传参
+  file_name.value = route.query.file_name
+  console.log(file_name.value);
 
+  // 获取解析数据
+  getJsonSolveChartData()
+
+  // 图表数据
+  if (chartContainRef.value) {
   // 设置容器宽高
-  const chartContainerWidth = chartContainRef.value.clientWidth / 3; // 分成两份
+  const chartContainerWidth = chartContainRef.value.clientWidth / 3; // 分成三份
   const chartContainerHeight = 390; 
 
   // 综合得分表展示
@@ -190,7 +239,7 @@ if (exactGradeChartRef.value) {
     }
   ]
   }
-  exactGradeChart.setOption(option3)}})
+  exactGradeChart.setOption(option3)}}})
 
 // 表格数据优劣评判
 const tableRowClassName = ({ row }) => {

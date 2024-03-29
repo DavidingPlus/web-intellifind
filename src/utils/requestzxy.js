@@ -1,5 +1,4 @@
 import router from '@/router'
-import { useUserStore } from '@/stores'
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 // const baseURL = 'http://big-event-vue-api-t.itheima.net'
@@ -21,7 +20,7 @@ instance.interceptors.request.use(
     // if (useStore.token) {
     //   config.headers.Authorization = useStore.token
     // }
-    config.headers.Authorization = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTMiLCJ1c2VyX25hbWUiOiJtYXgiLCJleHBpcmVfdGltZSI6MjQyOTU2MzgwMSwiZXhwIjoyNDI5NTYzODAxLCJpYXQiOjE3MDk1NjM4MDEsImlzcyI6InRlc3RfYmFja2VuZCIsIm5iZiI6MTcwOTU2MzgwMX0.V9Zwvwsy1dIc74T_fqj5qYyolFQWYk0_47OTzDa4CjQ'
+    config.headers.Authorization = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTMiLCJ1c2VyX25hbWUiOiJtYXgiLCJleHBpcmVfdGltZSI6MjQzMTUzMjA2MiwiZXhwIjoyNDMxNTMyMDYyLCJpYXQiOjE3MTE1MzIwNjIsImlzcyI6InRlc3RfYmFja2VuZCIsIm5iZiI6MTcxMTUzMjA2Mn0.oQoYmYZk48bHOIS9Wg3VV-iluD36UaKKNRal_a-0M1U'
     return config
   },
   (err) => Promise.reject(err)
@@ -31,7 +30,8 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (res) => {
     // TODO 4. 摘取核心响应数据
-    if (res.data.code === 0) {
+    // if (res.data.code === 0) {
+    if (res.data.code === 1) {
       return res
     }
     // TODO 3. 处理业务失败

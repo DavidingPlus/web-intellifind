@@ -2,12 +2,19 @@
 import { ref } from 'vue'
 import { Plus, Upload } from '@element-plus/icons-vue'
 import { useUserStore } from '@/stores'
-// import { userUpdateAvatarService } from '@/api/user'
+import { userUpdateAvatarService } from '@/api/user'
 
-const userStore = useUserStore()
+
+const userStore = useUserStore();
+const uploadRef = ref();
 const imgUrl = ref(userStore.user.user_pic)
-const uploadRef = ref()
+
 const onSelectFile = (uploadFile) => {
+  if (!uploadFile.raw) {
+    console.error('未选择图片');
+    return;
+  }
+  uploadRef.value = uploadFile.raw;
   // 基于 FileReader 读取图片做预览
   const reader = new FileReader()
   reader.readAsDataURL(uploadFile.raw)
@@ -17,19 +24,31 @@ const onSelectFile = (uploadFile) => {
 }
 
 const onUpdateAvatar = async () => {
-  // 发送请求更新头像
-  await userUpdateAvatarService(imgUrl.value)
-  // userStore 重新渲染
-  await userStore.getUser()
-  // 提示用户
-  ElMessage.success('头像更新成功')
-}
+  if (!uploadRef.value) {
+    ElMessage.error('请选择图片');
+    return;
+  }
+  const formData = new FormData();
+  formData.append('avatar', uploadRef.value);
+  try {
+    // 发送请求更新头像
+    await userUpdateAvatarService(formData);
+    // userStore 重新渲染
+    userStore.getUser();
+    // 提示用户
+    ElMessage.success('头像更新成功');
+  } catch (error) {
+    console.error('更新头像失败:', error);
+    ElMessage.error('更新头像失败，请稍后重试');
+  }
+};
 
 </script>
 
 <template>
   <page-container title="更换头像">
     <el-upload
+      type="file"
       ref="uploadRef"
       :auto-upload="false"
       class="avatar-uploader"

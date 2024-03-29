@@ -1,37 +1,58 @@
 <script setup>
 import { UploadFilled } from '@element-plus/icons-vue';
-import { ElButton, ElIcon, ElLoading, ElUpload } from 'element-plus';
+import { ElButton, ElIcon, ElLoading, ElMessage, ElUpload } from 'element-plus';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { uploadJsonFile, updateUserConfig } from '@/api/json';
+import axios from 'axios';
 
+const params = {
+  file_name: ''
+}
+const uploadRef = ref()
+// 获取上传的文件
+const onSelectFile = (uploadFile) => {
+  if (!uploadFile.raw) {
+    console.error('未选择文件')
+    return
+  }
+  uploadRef.value = uploadFile.raw
+  onupload()
+}
 
-const router = useRouter()
-// 跳转到新开页面并展示详情
-const show = (id) => {
-  console.log(id)
-  router.push('/json/show')
+// 上传json文件函数
+const upload = async (res) => {
+  if (!uploadRef.value) {
+    ElMessage.error('未选择文件')
+    return
+  }
+  const formData = new FormData()
+  formData.append('json_file', uploadRef.value)
+  try {
+    res = await axios.post('http://8.137.100.0:8080/core/upload-file', formData, {
+          headers: {
+            'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTMiLCJ1c2VyX25hbWUiOiJtYXgiLCJleHBpcmVfdGltZSI6MjQzMDE2MzQ1NSwiZXhwIjoyNDMwMTYzNDU1LCJpYXQiOjE3MTAxNjM0NTUsImlzcyI6InRlc3RfYmFja2VuZCIsIm5iZiI6MTcxMDE2MzQ1NX0.9cVo0XpzZiwlwLJ1oepX03LsPdh7XEIeqIFoBv2ZBgI'
+          }
+        })
+    params.file_name = res.data.data.file_name
+    console.log('上传文件成功:', params.file_name);
+  } catch (error) {
+    console.error('上传文件失败:', error)
+    ElMessage.error('上传文件失败，请稍后重试')
+  }
 }
 
 const flag = ref(true)
 const percentage = ref(0.0)
 const perFlag = ref(true)
 const loading = ref(false)
-// 上传文件
-const upload = () => {
-  console.log('上传文件')
-  setTimeout(() => {
-    flag.value = false
-    loading.value = true
-    progress()
-  }, 3000)
-  
-}
+
 // 进度函数
 const progress = () => {
   percentage.value = 0.0
   setInterval(() => {
     if (perFlag.value) {
-      percentage.value += 2.0
+      percentage.value += 1.3
       if (percentage.value === 100) {
         perFlag.value = false
         setTimeout(() => {
@@ -40,7 +61,23 @@ const progress = () => {
         }, 300)
     }
   }
-}, 100)
+}, 250)
+}
+// 上传文件
+const onupload = () => {
+  upload()
+  setTimeout(() => {
+    flag.value = false
+    loading.value = true
+    progress()
+  }, 3000)
+}
+
+const router = useRouter()
+// 跳转到新开页面并展示详情
+const show = () => {
+  console.log(params.file_name);
+  router.push({ path: '/json/show', query: {file_name: params.file_name} })
 }
 
 // 用户配置表单
@@ -70,9 +107,7 @@ const submitForm = async () => {
   // 等待校验结果
   await formRef.value.validate()
   // 提交修改
-  await userUpdateInfoService(form.value)
-  // 通知 user 模块，进行数据的更新
-  getUser()
+  await updateUserConfig(form.value)
   // 提示用户
   ElMessage.success('修改成功')
 }
@@ -87,18 +122,20 @@ const submitForm = async () => {
     <!-- action= "8.137.100.0" -->
     <div style="position: relative; width: 100%; max-height:565px;">
         <el-upload
+        type="file"
         class="upload-demo"
         drag
-        
         multiple
+        action="#"
         v-if="flag"
-        @click="upload"
+        :auto-upload="false"
+        :on-change="onSelectFile"
       >
-        <el-icon class="el-icon--upload" @click="upload"><upload-filled @click="upload" /></el-icon>
+        <el-icon class="el-icon--upload"><upload-filled /></el-icon>
         <br>
         <br>
-        <div class="el-upload__text" @click="upload">
-          拖动JSON文件到此 或<em @click="upload"> 点此上传 </em>
+        <div class="el-upload__text">
+          拖动JSON文件到此 或<em> 点此上传 </em>
         </div>
       </el-upload>
 

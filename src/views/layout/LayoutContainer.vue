@@ -5,7 +5,6 @@ import {
   CaretBottom,
   Crop,
   EditPen,
-  Management,
   Promotion,
   Grid,
   SwitchButton,

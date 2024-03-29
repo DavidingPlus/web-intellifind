@@ -1,5 +1,5 @@
 <script setup>
-// import { getJsonSolveLogData } from '@/api/json.js'
+import { getJsonSolveLogData } from '@/api/json.js'
 import * as echarts from 'echarts';
 import { onMounted, ref } from 'vue';
 import { formatTime } from '@/utils/format.js'
@@ -9,68 +9,21 @@ import { useRouter } from 'vue-router';
 const router = useRouter()
 const loading = ref(false) // loading状态
 const solveLogList = ref([]) // 解析记录列表
+const total = ref(0) // 总数
 
 // 定义请求参数对象
-const params = ref({
-  userId: 1,
-})
+const userId = 1
 
-const articleList = ref([
-  {
-    id: 1,
-    filename: '1- 你小子有点不服？',
-    date: '2021-09-01 12:00:00',
-    grade: 'Grade A ：82'
-  },
-  {
-    id: 2,
-    filename: '2- 来嘛，不服创我！',
-    date: '2021-09-01 12:00:00',
-    grade: 'Grade B+：72'
-  },
-  {
-    id: 3,
-    filename: '3- 试试就逝世！',
-    date: '2021-09-01 12:00:00',
-    grade: 'Grade A+：90'
-  },
-  {
-    id: 4,
-    filename: '4- Duang！！！！',
-    date: '2021-09-01 12:00:00',
-    grade: 'Grade A ：86'
-  },
-  {
-    id: 5,
-    filename: '5- 服了服了别创我了',
-    date: '2021-09-01 12:00:00',
-    grade: 'Grade A+：92'
-  },
-  {
-    id: 6,
-    filename: '6- 你小子有点不服？',
-    date: '2021-09-01 12:00:00',
-    grade: 'Grade A ：82'
-  },
-  {
-    id: 7,
-    filename: '7- 来嘛，不服创我！',
-    date: '2021-09-01 12:00:00',
-    grade: 'Grade B+：72'
-  }
-]) 
 
 // 基于params参数，获取解析记录
 const getSolveLogList = async () => {
   loading.value = true
-  // const res = await getJsonSolveLogData(params.value)
-  const res = await getJsonSolveLogData()
+  const res = await getJsonSolveLogData(userId)
   solveLogList.value = res.data.data
-  total.value = res.data.total
-
+  total.value = res.data.length
   loading.value = false
 }
-// getSolveLogList()
+getSolveLogList()
 
 
 // 删除逻辑
@@ -81,7 +34,7 @@ const onDelete = async (row) => {
     cancelButtonText: '取消',
     type: 'warning'
   })
-  await artDelService(row.id)
+  await artDelService(row.file_name)
   ElMessage.success('删除成功')
   // 重新渲染列表
   getSolveLogList()
@@ -91,17 +44,19 @@ const onDelete = async (row) => {
 const addJsonSolve = () => {
   router.push('/json/solve')
 }
+// 路由挑战并携带file_name参数
 const onShow = (row) => {
-  console.log(row.id)
-  router.push('/json/show')
+  console.log(row.file_name);
+  console.log(typeof(row.file_name))
+  router.push({ path: '/json/show', query: {file_name: row.file_name} })
 }
-
-
 
 // 通过echarts 中的折线图进行历次数据展示
 const chartRef = ref(null)
 const chartData = ref([])
 onMounted(() => {
+
+  // 图表
   if (chartRef.value) {
   const chart = echarts.init(chartRef.value)
   const option = {
@@ -176,21 +131,21 @@ fetchData()
     </template>
 
     <!-- 表格区域 -->
-    <el-table :data="articleList" v-loading="loading">
-      <el-table-column label="解析ID" prop="title">
+    <el-table :data="solveLogList" v-loading="loading">
+      <el-table-column label="解析文件名" prop="title">
         <template #default="{ row }">
-          <el-link type="primary" :underline="false">{{ row.filename }}</el-link>
+          <el-link type="primary" :underline="false">{{ row.file_name }}</el-link>
         </template>
       </el-table-column>
       <el-table-column label="综合得分" prop="title">
         <template #default="{ row }">
-          <el-link type="primary" :underline="false">{{ row.grade }}</el-link>
+          <el-link type="primary" :underline="false">{{ row.total_score }}</el-link>
         </template>
       </el-table-column>
 
       <el-table-column label="解析时间" prop="date">
         <template #default="{ row }">
-          {{ formatTime(row.date) }}
+          {{ formatTime(row.create_time) }}
         </template>
       </el-table-column>
       <!-- 利用作用域插槽 row 可以获取当前行的数据 => v-for 遍历 item -->

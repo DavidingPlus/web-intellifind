@@ -1,4 +1,4 @@
-// import request from '@/utils/requestzxy'
+import request from '@/utils/requestzxy'
 
 
 // // 注册接口
@@ -18,8 +18,12 @@ export const userUpdateInfoService = ({ email, id, username, city }) =>
   request.put('/user/update', { email, id, username, city })
 
 // 更新用户头像
-export const userUpdateAvatarService = (avatar) =>
-  request.post('/user/upload-avatar', { avatar })
+export const userUpdateAvatarService = (formData) =>
+  request.post('/user/upload-avatar', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
 
 // // 更新用户密码
 // export const userUpdatePasswordService = ({ old_pwd, new_pwd, re_pwd }) =>
