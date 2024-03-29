@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/kirinlabs/HttpRequest"
+	"github.com/spf13/viper"
 	"time"
 )
 
@@ -25,7 +26,7 @@ func GetResult(c *gin.Context, save_path string, file_name string, settings core
 		"occur_many":     settings.OccurMany,
 	}
 
-	url := "http://172.20.219.15:8082/json/parse"
+	url := viper.GetString("Algorithm.url")
 	res, err := req.Post(url, data)
 
 	if err != nil {

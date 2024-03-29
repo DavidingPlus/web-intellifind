@@ -37,6 +37,9 @@ Mail:
 Verifycode:
   code_length: 6
 
+Algorithm:
+  url: http://127.0.0.1:8082/parse/json
+
 #时区
 TimeZone: Asia/Shanghai
 
