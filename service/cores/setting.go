@@ -25,15 +25,15 @@ func EditSetting(req core.Settings) error {
 func CreateDefaultSettings(uid uint) (core.Settings, error) {
 	default_settings := core.Settings{
 		UID:              uid,
-		StayTime:         0,
-		RepeatClick:      0,
-		PageLoad:         0,
-		FeedbackInterval: 0,
-		NoReaction:       0,
-		ErrorCount:       0,
-		ConsoleErrors:    0,
-		IsBlank:          0,
-		OccurMany:        0,
+		StayTime:         0.15,
+		RepeatClick:      0.05,
+		PageLoad:         0.15,
+		FeedbackInterval: 0.15,
+		NoReaction:       0.1,
+		ErrorCount:       0.1,
+		ConsoleErrors:    0.1,
+		IsBlank:          0.05,
+		OccurMany:        0.15,
 	}
 	err := core.CreateSetting(default_settings)
 	if err != nil {
