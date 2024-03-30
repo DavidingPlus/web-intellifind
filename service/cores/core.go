@@ -62,8 +62,9 @@ func UploadFile(c *gin.Context) {
 		return
 	}
 	c.JSON(200, gin.H{
-		"code":    1,
-		"message": "解析成功",
+		"code":      1,
+		"message":   "解析成功",
+		"file_name": file_name,
 	})
 
 }
@@ -96,7 +97,8 @@ func ShowResultOnce(c *gin.Context) {
 		response.Abort500(c, err.Error())
 		return
 	}
-	var data map[string]interface{}
+
+	data := make(map[string]interface{})
 	data["basic_info"] = json_info
 	data["settings"] = settings
 	data["result"] = res
