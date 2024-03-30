@@ -33,3 +33,19 @@ func (s *SaveJsonFile) Create() error {
 	}
 	return nil
 }
+
+func GetJsonInfo(fileName string) (SaveJsonFile, error) {
+	var res SaveJsonFile
+	result := utils.DB.Where("file_name = ?", fileName).Find(&res)
+	if result.RowsAffected == 0 {
+		return SaveJsonFile{}, fmt.Errorf("查询为空")
+	}
+	return res, nil
+}
+func DeleteJsonInfo(fileName string) error {
+	result := utils.DB.Where("file_name = ?", fileName).Delete(&SaveJsonFile{})
+	if result.RowsAffected == 0 {
+		return fmt.Errorf("删除失败")
+	}
+	return nil
+}

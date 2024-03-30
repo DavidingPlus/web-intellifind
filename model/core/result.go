@@ -42,6 +42,7 @@ func (r *Result) Create() error {
 
 func GetHistory(uid uint) ([]Result, error) {
 	var history []Result
+
 	result := utils.DB.Select("create_time, file_name, total_score").Where("uid = ?", uid).Find(&history)
 	if result.RowsAffected == 0 {
 		return nil, fmt.Errorf("查询为空")
@@ -58,4 +59,12 @@ func GetResultOnce(fileName string) (Result, error) {
 		return Result{}, fmt.Errorf("查询为空")
 	}
 	return res, nil
+}
+
+func DelteHistoryOnce(fileName string) error {
+	result := utils.DB.Where("file_name = ?", fileName).Delete(&Result{})
+	if result.RowsAffected == 0 {
+		return fmt.Errorf("删除失败")
+	}
+	return nil
 }

@@ -19,6 +19,5 @@ func main() {
 	db.AutoMigrate(&core.SaveJsonFile{})
 	db.AutoMigrate(&core.Settings{})
 	db.AutoMigrate(&core.Result{})
-	//db.AutoMigrate(&models.GroupBasic{})
 
 }

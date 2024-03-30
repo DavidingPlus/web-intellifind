@@ -6,7 +6,8 @@ import (
 )
 
 type Settings struct {
-	UID uint `gorm:"primary_key" json:"uid"`
+	FileName string `gorm:"primary_key" json:"file_name"`
+	UID      uint   `gorm:"uid" json:"uid"`
 
 	//下面这一部分是每一个部分的得分
 	StayTime         float64 `gorm:"stay_time" json:"stay_time" form:"stay_time"`                         // 1. 跳出率较高
@@ -45,9 +46,18 @@ func DeleteSetting(uid uint) error {
 
 }
 
-func GetSetting(uid uint) (Settings, error) {
+func GetSettingByUid(uid uint) (Settings, error) {
 	var res Settings
-	result := utils.DB.Where("uid = ?", uid).First(&res)
+	result := utils.DB.Where("uid = ?", uid).Last(&res)
+	if result.RowsAffected == 0 {
+		return Settings{}, fmt.Errorf("查询为空")
+	}
+	return res, nil
+}
+
+func GetSettingByFileName(fileName string) (Settings, error) {
+	var res Settings
+	result := utils.DB.Where("file_name = ?", fileName).First(&res)
 	if result.RowsAffected == 0 {
 		return Settings{}, fmt.Errorf("查询为空")
 	}

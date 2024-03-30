@@ -4,18 +4,48 @@ import (
 	"backend/model/core"
 )
 
-func GetHistory(uid uint) ([]core.Result, error) {
+func GetHistory(uid uint, page int, size int) ([]core.Result, int, error) {
 	history, err := core.GetHistory(uid)
 	if err != nil {
-		return nil, err
+		return nil, 0, err
 	}
-	return history, nil
+
+	length := len(history)
+	total_page := length/size + 1
+	start := (page - 1) * size
+	var end int
+	if length > page*size {
+		end = page * size
+		return history[start:end], total_page, nil
+	}
+	return history[start:], total_page, nil
+
 }
 
-func GetResultOnce(fileName string) (core.Result, error) {
+func GetResultOnce(fileName string) (core.SaveJsonFile, core.Settings, core.Result, error) {
+	json_info, err := core.GetJsonInfo(fileName)
+	settings, err := core.GetSettingByFileName(fileName)
 	result, err := core.GetResultOnce(fileName)
+
 	if err != nil {
-		return core.Result{}, err
+		return core.SaveJsonFile{}, core.Settings{}, core.Result{}, err
+	}
+	return json_info, settings, result, nil
+}
+
+func DeleteHistoryOnceService(fileName string) error {
+	err := core.DelteHistoryOnce(fileName)
+	err = core.DeleteJsonInfo(fileName)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func ShowJsonInfoService(fileName string) (core.SaveJsonFile, error) {
+	result, err := core.GetJsonInfo(fileName)
+	if err != nil {
+		return core.SaveJsonFile{}, err
 	}
 	return result, nil
 }

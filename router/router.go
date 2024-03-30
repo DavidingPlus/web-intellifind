@@ -46,12 +46,12 @@ func Router() *gin.Engine {
 	core := r.Group("/core", middlewares.AuthJWT())
 	{
 		core.POST("/upload-file", middlewares.LimitPerRoute("2-M"), cores.UploadFile) //上传JSON文件
-		core.PUT("/settings/edit_my", cores.EditSettings)                             // 编辑配置
-		core.GET("/settings/get", cores.GetSetting)                                   // 获得配置
-		//core.GET("/show-result/report",temp) todo
-		core.GET("/show-history/total", cores.ShowHistory)  //解析的历史记录
-		core.GET("/show-result/once", cores.ShowResultOnce) //查看具体的某一次解析
-		//core.DELETE("/delete-history",temp)todo
+		//core.PUT("/settings/edit_my", cores.EditSettings)                             // 编辑配置
+		core.GET("/settings/get", cores.GetSettingLast)              // 获得用户上一次解析的配置
+		core.GET("/show-history/total", cores.ShowHistory)           //解析的历史记录
+		core.GET("/show-result/once", cores.ShowResultOnce)          //查看具体的某一次解析
+		core.DELETE("/delete-history/once", cores.DeleteHistoryOnce) //删除某一次历史记录
+		core.GET("/show/json-info", cores.ShowJsonInfo)              //展示用户上传的json文件中的基本信息
 	}
 
 	return r

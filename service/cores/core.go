@@ -38,10 +38,24 @@ func UploadFile(c *gin.Context) {
 		return
 	}
 
-	//获取解析的结果
+	//进行解析
 	uid := c.GetUint("current_user_id")
-	settings, _ := GetSettingService(uid)
-	data, err := GetResult(c, save_path, file_name, settings)
+	settings := core.Settings{
+		UID:              uid,
+		FileName:         file_name,
+		StayTime:         req.StayTime,
+		RepeatClick:      req.RepeatClick,
+		PageLoad:         req.PageLoad,
+		FeedbackInterval: req.FeedbackInterval,
+		NoReaction:       req.NoReaction,
+		ErrorCount:       req.ErrorCount,
+		ConsoleErrors:    req.ConsoleErrors,
+		IsBlank:          req.IsBlank,
+		OccurMany:        req.OccurMany,
+	}
+	core.CreateSetting(settings)
+
+	_, err = GetResult(c, save_path, file_name, settings)
 	if err != nil {
 		fmt.Println(err)
 		response.Abort500(c, err.Error())
@@ -50,34 +64,43 @@ func UploadFile(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"code":    1,
 		"message": "解析成功",
-		"data":    data,
 	})
 
 }
 
 func ShowHistory(c *gin.Context) {
+
+	var req requests.ShowHistoryRequest
+	c.ShouldBind(&req)
+
 	current_uid := c.GetUint("current_user_id")
 
-	history, err := GetHistory(current_uid)
+	history, total_page, err := GetHistory(current_uid, req.Page, req.Size)
 
 	if err != nil {
 		response.Abort500(c, "查询历史失败")
 		return
 	}
 	c.JSON(200, gin.H{
-		"code": 1,
-		"data": history,
+		"code":       1,
+		"total_page": total_page,
+		"data":       history,
 	})
 }
 func ShowResultOnce(c *gin.Context) {
 
 	req := requests.ShowResultOnceRequest{}
 	c.ShouldBind(&req)
-	data, err := GetResultOnce(req.FileName)
+	json_info, settings, res, err := GetResultOnce(req.FileName)
 	if err != nil {
 		response.Abort500(c, err.Error())
 		return
 	}
+	var data map[string]interface{}
+	data["basic_info"] = json_info
+	data["settings"] = settings
+	data["result"] = res
+
 	c.JSON(200, gin.H{
 		"code": 1,
 		"data": data,
@@ -85,16 +108,15 @@ func ShowResultOnce(c *gin.Context) {
 
 }
 
-func GetSetting(c *gin.Context) {
+func GetSettingLast(c *gin.Context) {
 	uid := c.GetUint("current_user_id")
-	settings, err := GetSettingService(uid)
+	settings, err := GetSettingLastService(uid)
 	if err != nil {
 		if settings.UID == 0 {
-			default_setting, _ := CreateDefaultSettings(uid)
 			c.JSON(200, gin.H{
 				"code":    1,
 				"message": "默认设置",
-				"data":    default_setting,
+				"data":    settings,
 			})
 			return
 		}
@@ -103,7 +125,7 @@ func GetSetting(c *gin.Context) {
 	}
 	c.JSON(200, gin.H{
 		"code":    1,
-		"message": "用户设置如下",
+		"message": "用户上一次解析的设置如下",
 		"data":    settings,
 	})
 
@@ -124,6 +146,38 @@ func EditSettings(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"code": 1,
 		"data": "更新成功",
+	})
+
+}
+
+func DeleteHistoryOnce(c *gin.Context) {
+
+	req := requests.ShowResultOnceRequest{}
+	c.ShouldBind(&req)
+	err := DeleteHistoryOnceService(req.FileName)
+	if err != nil {
+		response.Abort500(c, err.Error())
+		return
+	}
+	c.JSON(200, gin.H{
+		"code": 1,
+		"data": "删除成功",
+	})
+}
+
+func ShowJsonInfo(c *gin.Context) {
+	req := requests.ShowResultOnceRequest{}
+	c.ShouldBind(&req)
+
+	res, err := ShowJsonInfoService(req.FileName)
+
+	if err != nil {
+		response.Abort500(c, err.Error())
+		return
+	}
+	c.JSON(200, gin.H{
+		"code": 1,
+		"data": res,
 	})
 
 }
