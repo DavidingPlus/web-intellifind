@@ -21,18 +21,19 @@ def ParseJson():
 
     save_path="/www/wwwroot/backend/"+save_path
     print(save_path)
-    stay_time = data['stay_time']
-    repeat_click = data['repeat_click']
-    page_load =data['page_load']
-    feedback = data['feedback']
-    no_reaction = data['no_reaction']
-    error_count = data['error_count']
-    console_errors = data['console_errors']
-    is_blank = data['is_blank']
-    occur_many =data['occur_many']
+    stay_time = data['stay_time']/900
+    repeat_click = data['repeat_click']/900
+    page_load =data['page_load']/900
+    feedback = data['feedback']/900
+    no_reaction = data['no_reaction']/900
+    error_count = data['error_count']/900
+    console_errors = data['console_errors']/900
+    is_blank = data['is_blank']/900
+    occur_many =data['occur_many']/900
 
     weights = [stay_time, repeat_click, page_load, feedback,
                no_reaction, error_count, console_errors, is_blank,occur_many]
+
 
     print(weights)
     res = jsonParse(save_path, weights)
