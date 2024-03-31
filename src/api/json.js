@@ -17,14 +17,12 @@ export const uploadJsonFile = (formData) =>
 export const getJsonSolveData = (file_name) => 
     request.get('/core/show-result/once', { params: { file_name } })
 // 获取解析日志信息
-export const getJsonSolveLogData = (userId) => 
-    request.get('/core/show-history/total',  {userId })
+export const getJsonSolveLogData = (params) => 
+    request.get('/core/show-history/total',  {params })
 
-
-
-// // 删除解析记录信息
-// export const deleteJsonSolveLogData = (jsonId) => 
-//     request.delete('/json/solvelog',  {jsonId })
+// 删除解析记录信息
+export const deleteJsonSolveLogData = (file_name) => 
+    request.delete('/json/solvelog',  {file_name })
 
 
 

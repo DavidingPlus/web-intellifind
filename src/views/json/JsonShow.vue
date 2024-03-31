@@ -24,15 +24,11 @@ const file_name = ref('')
 
 // 获取解析数据
 const getJsonSolveChartData = async () => {
-  // console.log(file_name.value);
   console.log(typeof(file_name.value));
   const { data } = await getJsonSolveData(file_name.value)
-  // const { data } = await getJsonSolveData('13_1711182941_2.json')
-  gradeChartData.value = data.data
   ratioChartData.value = data.data
   exactGradeChartData.value = data.data
 }
-
 
 
 // 图标大小

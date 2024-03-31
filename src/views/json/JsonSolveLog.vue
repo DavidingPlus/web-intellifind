@@ -6,24 +6,39 @@ import { formatTime } from '@/utils/format.js'
 import { Delete, Search } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router';
 
+
 const router = useRouter()
 const loading = ref(false) // loading状态
 const solveLogList = ref([]) // 解析记录列表
 const total = ref(0) // 总数
 
 // 定义请求参数对象
-const userId = 1
-
+const params = ref({
+  page: 1,
+  size: 7
+})
 
 // 基于params参数，获取解析记录
 const getSolveLogList = async () => {
   loading.value = true
-  const res = await getJsonSolveLogData(userId)
+  const res = await getJsonSolveLogData(params.value)
   solveLogList.value = res.data.data
-  total.value = res.data.length
+  total.value = res.data.total_page
   loading.value = false
+  console.log(total.value);
 }
 getSolveLogList()
+
+// 处理分页逻辑
+const onSizeChange = (size) => {
+  params.value.page = 1
+  params.value.size = size
+  getSolveLogList()
+}
+const onCurrentChange = (page) => {
+  params.value.page = page
+  getSolveLogList()
+}
 
 
 // 删除逻辑
@@ -34,7 +49,7 @@ const onDelete = async (row) => {
     cancelButtonText: '取消',
     type: 'warning'
   })
-  await artDelService(row.file_name)
+  await deleteJsonSolveLogData(row.file_name)
   ElMessage.success('删除成功')
   // 重新渲染列表
   getSolveLogList()
@@ -61,7 +76,7 @@ onMounted(() => {
   const chart = echarts.init(chartRef.value)
   const option = {
     title: {
-      text: '最近七次解析反馈数据'
+      text: '七次解析反馈数据'
     },
     tooltip: {
       trigger: 'axis'
@@ -97,6 +112,15 @@ onMounted(() => {
   }
 chart.setOption(option)}})
 
+// 通过解析得到的数据按解析时间获取最新的七次数据
+// const fetchData = () => {
+//   chartData.value.sort((a, b) => a.date - b.date)
+//   chartData.value = chartData.value.slice(0, 7)
+// }
+// fetchData()
+// console.log(chartData.value);
+
+// 模拟数据
 const fetchData = () => {
   chartData.value = [{
       name: 'JSON1',
@@ -168,6 +192,19 @@ fetchData()
         </template>
       </el-table-column>
     </el-table>
+
+    <!-- 分页区域 -->
+    <!-- :page-sizes="[3, 5, 10]" -->
+    <el-pagination
+      :current-page="params.page"
+      :page-size="params.size"
+      :background="true"
+      layout="jumper, total, prev, pager, next, ->"
+      :total="total"
+      @size-change="onSizeChange"
+      @current-change="onCurrentChange"
+      style="margin-top: 20px; justify-content: flex-end"
+    />
 
     <br>
     <br>

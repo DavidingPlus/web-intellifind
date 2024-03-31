@@ -1,7 +1,7 @@
 <script setup>
-import { UploadFilled } from '@element-plus/icons-vue';
+import { UploadFilled, Tickets } from '@element-plus/icons-vue';
 import { ElButton, ElIcon, ElLoading, ElMessage, ElUpload } from 'element-plus';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { uploadJsonFile, updateUserConfig } from '@/api/json';
 import axios from 'axios';
@@ -52,7 +52,7 @@ const progress = () => {
   percentage.value = 0.0
   setInterval(() => {
     if (perFlag.value) {
-      percentage.value += 1.3
+      percentage.value += 2.0
       if (percentage.value === 100) {
         perFlag.value = false
         setTimeout(() => {
@@ -80,37 +80,141 @@ const show = () => {
   router.push({ path: '/json/show', query: {file_name: params.file_name} })
 }
 
+
+
+
+
+
 // 用户配置表单
 const formRef = ref()
-const form = ref({
-  city: '',
-  system: '',
-  ratio1: '',
-  ratio1Score: '',
-  ratio2: '',
-  ratio2Score: ''
-})
-// 表单校验规则
-const rules = {
-  ratio1Score: [
-    // 不是必填项，如果有，则数据应在0~25之间
-    { required: false, validator: (value) => value >= 0 && 
-      value <= 25 ? Promise.resolve() : Promise.reject('请输入0~25之间的数值'), trigger: 'blur' }
-  ],
-  ratio2Score: [
-  { required: false, validator: (value) => value >= 0 && 
-      value <= 25 ? Promise.resolve() : Promise.reject('请输入0~25之间的数值'), trigger: 'blur' }
-  ]
-}
+
+const ratioList = [{
+  name: 'stay_time',
+  value: 5
+  }, {
+  name: 'repeat_click',
+  value: 5
+  }, {
+  name: 'page_load',
+  value: 5
+  }, {
+  name: 'feedback_interval',
+  value: 5
+  }, {
+  name: 'no_reaction',
+  value: 5
+  }, {
+  name: 'error_count',
+  value: 5
+  }, {
+  name: 'console_errors',
+  value: 5
+  }, {
+  name: 'is_blank',
+  value: 5
+  }, {
+  name: 'occur_many',
+  value: 5
+  }
+]
+  
+const formModel = ref({  
+  items: [{
+    name: '',
+    value: ''
+  }]  
+});  
+
+const count = ref(1);
+const addItem = () => {  
+  if (count.value >= 9) {  
+    ElMessage.error('最多只能添加9个权重配置项');  
+    return;  
+  }
+  formModel.value.items.push({ name: '', value: '' });  
+  selectedItems.value.push({ name: '' });
+  count.value ++;
+};  
+  
+const removeItem = (index) => {  
+  formModel.value.items.splice(index, 1);  
+};  
+
 // 上传用户配置信息
 const submitForm = async () => {
+  if (!formRef.value) {
+    ElMessage.error('表单未初始化')
+    return
+  }
   // 等待校验结果
   await formRef.value.validate()
   // 提交修改
-  await updateUserConfig(form.value)
+  await updateUserConfig(formModel.value)
   // 提示用户
   ElMessage.success('修改成功')
 }
+
+// 选中的选项
+const selectedItems = ref(formModel.value.items 
+    ? formModel.value.items.map(item => ({ name: item.name ?? '' })) 
+    : [])
+
+
+const handleSelectChange = (index) => {  
+  // 获取当前选中的选项
+  const selectedItem = selectedItems.value[index];
+  const duplicateNames = selectedItems.value.filter((item, idx) => idx !== index && item.name === selectedItem.name);  
+    
+  if (duplicateNames.length > 0) {  
+    ElMessage.error(`配置中不能存在重复的权重属性名：${selectedItem.name}`);  
+    selectedItems.value[index].name = '' 
+  }  else {
+    selectedItems.value[index] = selectedItem // 更新选中的选项
+  }
+
+  // 更新表单项的校验规则
+  const selectedName = selectedItems[index].name;
+  const item = formModel.items[index];
+  
+  if (selectedName) {
+    item.name = selectedName;
+    item.rules = [{ required: false, message: '请输入权重值', trigger: 'change' }];
+  } else {
+    item.name = '';
+    item.rules = [{ required: true, message: '请输入权重值', trigger: 'change' }];
+  }
+};
+
+// 获取可选的权重属性(去除已经被选中的)
+const getAvailableOptions = computed(() => {  
+  return (index) => {  
+    // 获取当前所有被选中的name，并过滤掉空字符串  
+    const selectedNames = selectedItems.value.map(item => item.name)
+                            .filter(name => name);
+    // 如果没有被选中的数据，则返回ratioList中的所有数据  
+    if (selectedNames.length === 0) {  
+      return ratioList.map(option => ({ name: option.name}))
+    }  
+  
+    // 否则，过滤 ratioList排除已经被选中的name  
+    const excludedNames = [...selectedNames.slice(0, index), ...selectedNames.slice(index + 1)];
+    return ratioList.map(option => ({ name: option.name})).filter(item => !excludedNames.includes(item.name));
+  };  
+});  
+
+// 控制输入值的范围
+const checkNumber = (item) => {
+  const value = parseFloat(item.value);
+  if (isNaN(value) || value < 0 || value > 10) {
+    item.value = ''; // 清空输入框
+    ElMessage.error('请输入0~10之间的数值');
+  }
+};
+
+const iconStyle = {  
+  fontSize: '15px',  
+  marginRight: '10px'  
+};
 
 </script>
 
@@ -161,30 +265,69 @@ const submitForm = async () => {
       <br>
       <br>
 
-      <el-form ref="formRef" :model="form" :rules="rules">
-      <el-row>
-        <el-col :span="24">
-          <h2 style="text-align: left;">自定义配置信息</h2>
-        </el-col>
-      </el-row>
-      <el-form-item label="所在城市">
-        <el-input v-model="form.city" placeholder="请输入您当前所在城市"></el-input>
-      </el-form-item>
-      <el-form-item label="所使用系统">
-        <el-input v-model="form.system" placeholder="请输入您当前使用的主机系统（Windows、MacOS、Linux）"></el-input>
-      </el-form-item>
-      <el-form-item label="权重点1" style="display: flex; justify-content: space-between;">
-          <el-select style="flex: 1" v-model="form.ratio1" placeholder="请选择你对本次解析看重的点"></el-select>
-          <el-input style="flex: 1" v-model="form.ratio1Score" placeholder="请输入您为其设定的权重值（0~25）"></el-input>
-      </el-form-item>
-      <el-form-item label="权重点2" style="display: flex; align-items: center;">
-          <el-select style="flex: 1" v-model="form.ratio2" placeholder="请选择你对本次解析看重的点"></el-select>
-          <el-input style="flex: 1" v-model="form.ratio2Score" placeholder="请输入您为其设定的权重值（0~25）"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm">保存配置</el-button>
-      </el-form-item>
-    </el-form>
+
+
+
+<el-form ref="formRef" :model="formModel" style="display: flex; flex-direction: column;">  
+
+    <el-row>  
+      <el-col :span="24">  
+        <h2 style="text-align: left;">自定义配置信息</h2>  
+      </el-col>  
+    </el-row>  
+    
+    <el-descriptions
+        class="margin-top"
+        title="用户权重配置信息"
+        :column="3"
+        border>
+        <el-descriptions-item v-for="(item, index) in ratioList" :key="index">
+          <template #label>
+            <div class="cell-item">
+              <el-icon :style="iconStyle">
+                <tickets />
+              </el-icon>
+              {{item.name}}
+            </div>
+          </template>
+          <el-tag>{{item.value}}</el-tag>
+        </el-descriptions-item>
+      </el-descriptions>
+  
+      <br>
+      <br>
+    
+    <el-form-item
+    v-for="(item, index) in formModel.items"
+    :key="index"
+    :prop="'items.' + index + '.name'" 
+    
+  >
+    <div style="display: flex; align-items: center;">
+      <el-select v-model="selectedItems[index].name" 
+      @change="handleSelectChange(index)" 
+      placeholder="请选择权重属性">
+        <el-option 
+          v-for="(option, optionIndex) in getAvailableOptions(index)" 
+          :key="optionIndex" 
+          :label="option.name" 
+          :value="option.name">
+        </el-option>
+      </el-select>
+      <el-input 
+        v-model="item.value" 
+        type="number" 
+        @input="checkNumber(item)" 
+        placeholder="请输入0~10之间的数值"></el-input>
+      <el-button type="danger" @click="removeItem(index)" class="cancel">删除</el-button>
+    </div>
+  </el-form-item>
+  
+    <el-form-item>  
+      <el-button type="primary" @click="submitForm">保存配置</el-button>  
+      <el-button @click="addItem">新增权重配置</el-button>  
+    </el-form-item>  
+  </el-form> 
 
 
   </page-container>
@@ -195,6 +338,20 @@ const submitForm = async () => {
   margin-bottom: 15px;
   max-width: 600px;
 }
+
+/* 使用深度选择器来覆盖 Element UI 组件的内部样式 */  
+::v-deep(.el-select .el-input__inner)  {  
+  width: 200px; 
+}  
+::v-deep(.el-input__inner)  {
+  width: 200px;
+  margin-left: 10px;
+}
+
+.cancel {
+  margin-left: 10px; /* 添加一些间距，使得按钮与 select/input 分开 */  
+}
+
 </style>
 
 
