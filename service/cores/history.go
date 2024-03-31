@@ -4,10 +4,10 @@ import (
 	"backend/model/core"
 )
 
-func GetHistory(uid uint, page int, size int) ([]core.Result, int, error) {
+func GetHistory(uid uint, page int, size int) ([]core.Result, int, int, error) {
 	history, err := core.GetHistory(uid)
 	if err != nil {
-		return nil, 0, err
+		return nil, 0, 0, err
 	}
 
 	length := len(history)
@@ -16,9 +16,9 @@ func GetHistory(uid uint, page int, size int) ([]core.Result, int, error) {
 	var end int
 	if length > page*size {
 		end = page * size
-		return history[start:end], total_page, nil
+		return history[start:end], length, total_page, nil
 	}
-	return history[start:], total_page, nil
+	return history[start:], length, total_page, nil
 
 }
 

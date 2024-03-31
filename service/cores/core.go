@@ -76,7 +76,7 @@ func ShowHistory(c *gin.Context) {
 
 	current_uid := c.GetUint("current_user_id")
 
-	history, total_page, err := GetHistory(current_uid, req.Page, req.Size)
+	history, length, total_page, err := GetHistory(current_uid, req.Page, req.Size)
 
 	if err != nil {
 		response.Abort500(c, "查询历史失败")
@@ -84,6 +84,7 @@ func ShowHistory(c *gin.Context) {
 	}
 	c.JSON(200, gin.H{
 		"code":       1,
+		"length":     length,
 		"total_page": total_page,
 		"data":       history,
 	})
