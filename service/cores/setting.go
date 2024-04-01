@@ -27,12 +27,13 @@ func GetSettingLastService(uid uint) (core.Settings, error) {
 
 }
 
-func EditSetting(req core.Settings) error {
-
-	err := core.EditSettings(req)
-	if err != nil {
-		return err
-	}
-	return nil
-
-}
+//
+//func EditSetting(req core.Settings) error {
+//
+//	err := core.EditSettings(req)
+//	if err != nil {
+//		return err
+//	}
+//	return nil
+//
+//}

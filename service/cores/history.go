@@ -36,6 +36,7 @@ func GetResultOnce(fileName string) (core.SaveJsonFile, core.Settings, core.Resu
 func DeleteHistoryOnceService(fileName string) error {
 	err := core.DelteHistoryOnce(fileName)
 	err = core.DeleteJsonInfo(fileName)
+	err = core.DeleteSetting(fileName)
 	if err != nil {
 		return err
 	}

@@ -134,24 +134,24 @@ func GetSettingLast(c *gin.Context) {
 
 }
 
-func EditSettings(c *gin.Context) {
-	req := core.Settings{}
-	c.ShouldBind(&req)
-
-	uid := c.GetUint("current_user_id")
-	req.UID = uid
-	err := EditSetting(req)
-
-	if err != nil {
-		response.Abort500(c, err.Error())
-		return
-	}
-	c.JSON(200, gin.H{
-		"code": 1,
-		"data": "更新成功",
-	})
-
-}
+//func EditSettings(c *gin.Context) {
+//	req := core.Settings{}
+//	c.ShouldBind(&req)
+//
+//	uid := c.GetUint("current_user_id")
+//	req.UID = uid
+//	err := EditSetting(req)
+//
+//	if err != nil {
+//		response.Abort500(c, err.Error())
+//		return
+//	}
+//	c.JSON(200, gin.H{
+//		"code": 1,
+//		"data": "更新成功",
+//	})
+//
+//}
 
 func DeleteHistoryOnce(c *gin.Context) {
 

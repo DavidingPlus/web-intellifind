@@ -36,9 +36,9 @@ func CreateSetting(req Settings) error {
 	return nil
 }
 
-func DeleteSetting(uid uint) error {
+func DeleteSetting(file_name string) error {
 
-	result := utils.DB.Where("uid = ?", uid).Delete(&Settings{})
+	result := utils.DB.Where("file_name = ?", file_name).Delete(&Settings{})
 	if result.RowsAffected == 0 {
 		return fmt.Errorf("删除失败")
 	}
@@ -64,12 +64,12 @@ func GetSettingByFileName(fileName string) (Settings, error) {
 	return res, nil
 }
 
-func EditSettings(req Settings) error {
-	var err error
-	err = DeleteSetting(req.UID)
-	err = CreateSetting(req)
-	if err != nil {
-		return fmt.Errorf("更新失败")
-	}
-	return nil
-}
+//func EditSettings(req Settings) error {
+//	var err error
+//	err = DeleteSetting(req.UID)
+//	err = CreateSetting(req)
+//	if err != nil {
+//		return fmt.Errorf("更新失败")
+//	}
+//	return nil
+//}
