@@ -1,5 +1,5 @@
 <script setup>
-import { getJsonSolveLogData } from '@/api/json.js'
+import { getJsonSolveLogData, deleteJsonSolveLogData } from '@/api/json.js'
 import * as echarts from 'echarts';
 import { onMounted, ref } from 'vue';
 import { formatTime } from '@/utils/format.js'
@@ -11,6 +11,7 @@ const router = useRouter()
 const loading = ref(false) // loading状态
 const solveLogList = ref([]) // 解析记录列表
 const total = ref(0) // 总数
+const totalPage = ref(0) // 总页数
 
 // 定义请求参数对象
 const params = ref({
@@ -23,7 +24,8 @@ const getSolveLogList = async () => {
   loading.value = true
   const res = await getJsonSolveLogData(params.value)
   solveLogList.value = res.data.data
-  total.value = res.data.total_page
+  total.value = res.data.length
+  totalPage.value = res.data.total_page
   loading.value = false
   console.log(total.value);
 }
@@ -81,9 +83,9 @@ onMounted(() => {
     tooltip: {
       trigger: 'axis'
     },
-    legend: {
-      data: ['JSON1', 'JSON2', 'JSON3', 'JSON4', 'JSON5']
-    },
+    // legend: {
+    //   data: ['JSON1', 'JSON2', 'JSON3', 'JSON4', 'JSON5']
+    // },
     grid: {
       left: '3%',
       right: '4%',
@@ -198,8 +200,9 @@ fetchData()
     <el-pagination
       :current-page="params.page"
       :page-size="params.size"
+      :page-sizes="[7, 10, 15]"
       :background="true"
-      layout="jumper, total, prev, pager, next, ->"
+      layout="jumper, total, prev, sizes, pager, next, ->"
       :total="total"
       @size-change="onSizeChange"
       @current-change="onCurrentChange"

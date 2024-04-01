@@ -22,14 +22,38 @@ const props = defineProps({
 const route = useRoute()
 const file_name = ref('')
 
+const pointList = ref([{
+  pointname: '',
+  point: 5
+}])
+
 // 获取解析数据
 const getJsonSolveChartData = async () => {
   console.log(typeof(file_name.value));
   const { data } = await getJsonSolveData(file_name.value)
-  ratioChartData.value = data.data
-  exactGradeChartData.value = data.data
+
+  // 权重信息表数据
+  pointList.value.pointname = data.settings.map(item => item.name)
+  pointList.value.point = data.settings.map(item => item.value)
 }
 
+/*
+
+const pointList.value[0].pointname = '参数1'
+const pointList.value[1].pointname = '参数2'
+const pointList.value[2].pointname
+const pointList.value[3].pointname
+const pointList.value[4].pointname
+const pointList.value[5].pointname
+const pointList.value[6].pointname
+const pointList.value[7].pointname
+const pointList.value[8].pointname
+
+..........................................
+const pointList.value[0].point = 5
+const pointList.value[1].point = 15
+
+*/
 
 // 图标大小
 const size = ref('default')
@@ -259,17 +283,17 @@ const tableData = [
   { paramName: '参数9', score: 79, comment: '评价一般' }
 ]
 
-const pointlist = [
-  { pointname: '参数1', point: 5 },
-  { pointname: '参数2', point: 15 },
-  { pointname: '参数3', point: 25 },
-  { pointname: '参数4', point: 10 },
-  { pointname: '参数5', point: 5 },
-  { pointname: '参数6', point: 20 },
-  { pointname: '参数7', point: 5 },
-  { pointname: '参数8', point: 15 },
-  { pointname: '参数9', point: 10 }
-]
+// const pointlist = [
+//   { pointname: '参数1', point: 5 },
+//   { pointname: '参数2', point: 15 },
+//   { pointname: '参数3', point: 25 },
+//   { pointname: '参数4', point: 10 },
+//   { pointname: '参数5', point: 5 },
+//   { pointname: '参数6', point: 20 },
+//   { pointname: '参数7', point: 5 },
+//   { pointname: '参数8', point: 15 },
+//   { pointname: '参数9', point: 10 }
+// ]
 
 </script>
 
