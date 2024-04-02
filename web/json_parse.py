@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 import json
 from web.chat import gpt_35_api_stream
 from web.reply import replyT
@@ -24,6 +26,8 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
     # 点击后网络反馈慢
     feedbackInterval: float = 0.0
     feedbackIntervalCnt: int = 0
+    # 点击无反应
+    clickNoReaction: list[int] = [0, 0]
     # 点击报错
     errorCount: int = 0
     # 页面加载报错
@@ -45,6 +49,11 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
         if 'feedbackInterval' in e['performanceAttr']:
             feedbackInterval += e['performanceAttr']['feedbackInterval']['value']
             feedbackIntervalCnt += 1
+        if 'clickNoReaction' in e['interactionAttr']:
+            if 'True' == e['interactionAttr']['clickNoReaction']['value']:
+                clickNoReaction[0] += 1
+            else:
+                clickNoReaction[1] += 1
         if 'errorCount' in e['interactionAttr']:
             errorCount += e['interactionAttr']['errorCount']['value']
         if 'consoleErrors' in e['performanceAttr']:
@@ -81,7 +90,7 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
     score += allScores[1] * proWeights[1]
 
     # # 3. 页面打开慢
-    # TODO 如果 json 里面没有 pageLoad 字段的处理（绝大多数情况不会）
+    # TODO 如果 json 里面没有 pageLoad 字段的处理（测试样例和其他的绝大多数情况不会）
     pageLoad = round(pageLoad / pageLoadCnt, 2)
     if pageLoad >= 0 * 1000 and pageLoad < 2 * 1000:
         allScores[2] = 100
@@ -116,8 +125,8 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
     score += allScores[3] * proWeights[3]
 
     # 5. 点击无反应
-    allScores[4] = allScores[2] * \
-        0.5 + allScores[3] * 0.5
+    allScores[4] = 60 + clickNoReaction[1] / \
+        (clickNoReaction[0] + clickNoReaction[1]) * (100 - 60)
 
     allScores[4] = round(allScores[4], 2)
     score += allScores[4] * proWeights[4]
@@ -162,17 +171,17 @@ def jsonParse(jsonPath: str, weights: list) -> replyT:
     briefDesc += f"2. 关于重复点击，重复点击次数为 {repeatClick[0]} 次，未重复点击次数为 {repeatClick[1]} 次，得分为 {allScores[1]} 分；\n"
     briefDesc += f"3. 关于页面打开慢，页面平均加载时长为 {pageLoad} 毫秒，得分 {allScores[2]} 分；\n"
     briefDesc += f"4. 关于点击后网络反馈慢，页面平均延迟时间为 {feedbackInterval} 毫秒，得分 {allScores[3]} 分；\n"
-    briefDesc += f"5. 关于点击无反应，得分 {allScores[4]} 分；\n"
+    briefDesc += f"5. 关于点击无反应，点击无反应次数为 {clickNoReaction[0]} 次，点击响应正常次数为 {clickNoReaction[1]} 次，得分 {allScores[4]} 分；\n"
     briefDesc += f"6. 关于点击报错，页面错误信息总数为 {errorCount}，得分 {allScores[5]} 分；\n"
     briefDesc += f"7. 关于页面加载报错，控制台的报错信息总数为 {consoleErrors}，得分 {allScores[6]} 分；\n"
     briefDesc += f"8. 关于页面加载白屏，白屏次数为 {isBlank[0]} 次，未白屏次数为 {isBlank[1]} 次，得分 {allScores[7]} 分；\n"
-    briefDesc += f"9. 关于多个同时出现，上述问题总共出现 {(100 - allScores[8]) // 5} 个，得分 {allScores[8]} 分；\n"
+    briefDesc += f"9. 关于多个同时出现，上述问题总共出现 {(100 - allScores[8]) // 5} 个，得分 {allScores[8]} 分。\n"
 
     # 四. 询问 GPT ，问题详述
     model = "gpt-3.5-turbo"
     messages = [
         {
-            'role': 'system', 'content': '你是一个网站体验分析师。现在我给你一些网站体验过程中的问题简述，并且附有一些数据和得分，请您结合数据和得分详细分析一下这些问题，并且给出合适的优化建议，每一条请严格按照我的格式提行进行补充。'
+            'role': 'system', 'content': '你是一个网站体验分析师。现在我给你一些网站体验过程中的问题简述，并且附有一些数据和得分。请结合数据和得分详细分析一下这些问题，并且给出合适的优化建议，每一条请严格按照我的格式提行进行补充。请使用第三人称进行回答。'
         },
         {
             'role': 'user', 'content': briefDesc

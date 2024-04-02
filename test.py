@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 # 自己作算法本地测试的主程序
 from web.json_parse import jsonParse
 

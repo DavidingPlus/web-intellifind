@@ -59,7 +59,7 @@
                     "order": "15",
                     "value": 2000
                 },
-                "viewporChinaidth": {
+                "viewportWidth": {
                     "displayName": "Window Width",
                     "order": "14",
                     "value": 3456
@@ -103,6 +103,11 @@
                     "displayName": "Time From Session Start",
                     "order": "18",
                     "value": 0
+                },
+                "clickNoReaction": {
+                    "displayName": "Click No Reaction",
+                    "order": "16",
+                    "value": "False"
                 }
             },
             "pageAttr": {
@@ -242,7 +247,7 @@
                     "order": "15",
                     "value": 2000
                 },
-                "viewporChinaidth": {
+                "viewportWidth": {
                     "displayName": "Window Width",
                     "order": "14",
                     "value": 3456
@@ -256,6 +261,11 @@
                     "displayName": "Time From Session Start",
                     "order": "18",
                     "value": 4791
+                },
+                "clickNoReaction": {
+                    "displayName": "Click No Reaction",
+                    "order": "16",
+                    "value": "True"
                 }
             },
             "pageAttr": {
@@ -410,7 +420,7 @@
                     "order": "15",
                     "value": 2000
                 },
-                "viewporChinaidth": {
+                "viewportWidth": {
                     "displayName": "Window Width",
                     "order": "14",
                     "value": 3456
@@ -578,7 +588,7 @@
                     "order": "15",
                     "value": 2000
                 },
-                "viewporChinaidth": {
+                "viewportWidth": {
                     "displayName": "Window Width",
                     "order": "14",
                     "value": 3456
@@ -607,6 +617,11 @@
                     "displayName": "Time From Session Start",
                     "order": "18",
                     "value": 11898
+                },
+                "clickNoReaction": {
+                    "displayName": "Click No Reaction",
+                    "order": "16",
+                    "value": "False"
                 }
             },
             "pageAttr": {
@@ -761,7 +776,7 @@
                     "order": "15",
                     "value": 2000
                 },
-                "viewporChinaidth": {
+                "viewportWidth": {
                     "displayName": "Window Width",
                     "order": "14",
                     "value": 3456
@@ -790,6 +805,11 @@
                     "displayName": "Time From Session Start",
                     "order": "18",
                     "value": 12012
+                },
+                "clickNoReaction": {
+                    "displayName": "Click No Reaction",
+                    "order": "16",
+                    "value": "False"
                 }
             },
             "pageAttr": {
@@ -909,8 +929,8 @@
                     "order": "17",
                     "value": 2.9
                 },
-                "slowNeChinaork": {
-                    "displayName": "Delayed NeChinaork",
+                "slowNetWork": {
+                    "displayName": "Delayed NetWork",
                     "order": "18",
                     "value": "False"
                 }
@@ -979,7 +999,7 @@
                     "order": "15",
                     "value": 2000
                 },
-                "viewporChinaidth": {
+                "viewportWidth": {
                     "displayName": "Window Width",
                     "order": "14",
                     "value": 3456
@@ -1127,8 +1147,8 @@
                     "order": "17",
                     "value": 1972.6
                 },
-                "slowNeChinaork": {
-                    "displayName": "Delayed NeChinaork",
+                "slowNetWork": {
+                    "displayName": "Delayed NetWork",
                     "order": "18",
                     "value": "False"
                 }
@@ -1197,7 +1217,7 @@
                     "order": "15",
                     "value": 2000
                 },
-                "viewporChinaidth": {
+                "viewportWidth": {
                     "displayName": "Window Width",
                     "order": "14",
                     "value": 3456
@@ -1345,8 +1365,8 @@
                     "order": "17",
                     "value": 2.3000002
                 },
-                "slowNeChinaork": {
-                    "displayName": "Delayed NeChinaork",
+                "slowNetWork": {
+                    "displayName": "Delayed NetWork",
                     "order": "18",
                     "value": "False"
                 }
@@ -1415,7 +1435,7 @@
                     "order": "15",
                     "value": 2000
                 },
-                "viewporChinaidth": {
+                "viewportWidth": {
                     "displayName": "Window Width",
                     "order": "14",
                     "value": 3456
@@ -1444,6 +1464,11 @@
                     "displayName": "Time From Session Start",
                     "order": "18",
                     "value": 21242
+                },
+                "clickNoReaction": {
+                    "displayName": "Click No Reaction",
+                    "order": "16",
+                    "value": "False"
                 }
             },
             "pageAttr": {
@@ -1563,8 +1588,8 @@
                     "order": "17",
                     "value": 2.1
                 },
-                "slowNeChinaork": {
-                    "displayName": "Delayed NeChinaork",
+                "slowNetWork": {
+                    "displayName": "Delayed NetWork",
                     "order": "18",
                     "value": "False"
                 }
@@ -1633,7 +1658,7 @@
                     "order": "15",
                     "value": 2000
                 },
-                "viewporChinaidth": {
+                "viewportWidth": {
                     "displayName": "Window Width",
                     "order": "14",
                     "value": 3456
@@ -1662,6 +1687,11 @@
                     "displayName": "Time From Session Start",
                     "order": "18",
                     "value": 22576
+                },
+                "clickNoReaction": {
+                    "displayName": "Click No Reaction",
+                    "order": "16",
+                    "value": "True"
                 }
             },
             "pageAttr": {
@@ -1781,8 +1811,8 @@
                     "order": "17",
                     "value": 1.9000001
                 },
-                "slowNeChinaork": {
-                    "displayName": "Delayed NeChinaork",
+                "slowNetWork": {
+                    "displayName": "Delayed NetWork",
                     "order": "18",
                     "value": "False"
                 }
@@ -1851,7 +1881,7 @@
                     "order": "15",
                     "value": 2000
                 },
-                "viewporChinaidth": {
+                "viewportWidth": {
                     "displayName": "Window Width",
                     "order": "14",
                     "value": 3456
@@ -1880,6 +1910,11 @@
                     "displayName": "Time From Session Start",
                     "order": "18",
                     "value": 23428
+                },
+                "clickNoReaction": {
+                    "displayName": "Click No Reaction",
+                    "order": "16",
+                    "value": "False"
                 }
             },
             "pageAttr": {
@@ -1999,8 +2034,8 @@
                     "order": "17",
                     "value": 1.9000001
                 },
-                "slowNeChinaork": {
-                    "displayName": "Delayed NeChinaork",
+                "slowNetWork": {
+                    "displayName": "Delayed NetWork",
                     "order": "18",
                     "value": "False"
                 }
@@ -2069,7 +2104,7 @@
                     "order": "15",
                     "value": 2000
                 },
-                "viewporChinaidth": {
+                "viewportWidth": {
                     "displayName": "Window Width",
                     "order": "14",
                     "value": 3456
@@ -2098,6 +2133,11 @@
                     "displayName": "Time From Session Start",
                     "order": "18",
                     "value": 25352
+                },
+                "clickNoReaction": {
+                    "displayName": "Click No Reaction",
+                    "order": "16",
+                    "value": "False"
                 }
             },
             "pageAttr": {
@@ -2217,8 +2257,8 @@
                     "order": "17",
                     "value": 2.6
                 },
-                "slowNeChinaork": {
-                    "displayName": "Delayed NeChinaork",
+                "slowNetWork": {
+                    "displayName": "Delayed NetWork",
                     "order": "18",
                     "value": "False"
                 }
@@ -2287,7 +2327,7 @@
                     "order": "15",
                     "value": 2000
                 },
-                "viewporChinaidth": {
+                "viewportWidth": {
                     "displayName": "Window Width",
                     "order": "14",
                     "value": 3456
@@ -2435,8 +2475,8 @@
                     "order": "17",
                     "value": 2.1000004
                 },
-                "slowNeChinaork": {
-                    "displayName": "Delayed NeChinaork",
+                "slowNetWork": {
+                    "displayName": "Delayed NetWork",
                     "order": "18",
                     "value": "False"
                 }
@@ -2505,7 +2545,7 @@
                     "order": "15",
                     "value": 2000
                 },
-                "viewporChinaidth": {
+                "viewportWidth": {
                     "displayName": "Window Width",
                     "order": "14",
                     "value": 3456
@@ -2653,8 +2693,8 @@
                     "order": "17",
                     "value": 2
                 },
-                "slowNeChinaork": {
-                    "displayName": "Delayed NeChinaork",
+                "slowNetWork": {
+                    "displayName": "Delayed NetWork",
                     "order": "18",
                     "value": "False"
                 }
@@ -2723,7 +2763,7 @@
                     "order": "15",
                     "value": 2000
                 },
-                "viewporChinaidth": {
+                "viewportWidth": {
                     "displayName": "Window Width",
                     "order": "14",
                     "value": 3456
@@ -2752,6 +2792,11 @@
                     "displayName": "Time From Session Start",
                     "order": "18",
                     "value": 29116
+                },
+                "clickNoReaction": {
+                    "displayName": "Click No Reaction",
+                    "order": "16",
+                    "value": "False"
                 }
             },
             "pageAttr": {
@@ -2871,8 +2916,8 @@
                     "order": "17",
                     "value": 2.2999997
                 },
-                "slowNeChinaork": {
-                    "displayName": "Delayed NeChinaork",
+                "slowNetWork": {
+                    "displayName": "Delayed NetWork",
                     "order": "18",
                     "value": "False"
                 }
@@ -2941,7 +2986,7 @@
                     "order": "15",
                     "value": 2000
                 },
-                "viewporChinaidth": {
+                "viewportWidth": {
                     "displayName": "Window Width",
                     "order": "14",
                     "value": 3456
@@ -2970,6 +3015,11 @@
                     "displayName": "Time From Session Start",
                     "order": "18",
                     "value": 29266
+                },
+                "clickNoReaction": {
+                    "displayName": "Click No Reaction",
+                    "order": "16",
+                    "value": "True"
                 }
             },
             "pageAttr": {
@@ -3089,8 +3139,8 @@
                     "order": "17",
                     "value": 6.3
                 },
-                "slowNeChinaork": {
-                    "displayName": "Delayed NeChinaork",
+                "slowNetWork": {
+                    "displayName": "Delayed NetWork",
                     "order": "18",
                     "value": "False"
                 }
@@ -3159,7 +3209,7 @@
                     "order": "15",
                     "value": 2000
                 },
-                "viewporChinaidth": {
+                "viewportWidth": {
                     "displayName": "Window Width",
                     "order": "14",
                     "value": 3456
@@ -3307,8 +3357,8 @@
                     "order": "17",
                     "value": 1.6999998
                 },
-                "slowNeChinaork": {
-                    "displayName": "Delayed NeChinaork",
+                "slowNetWork": {
+                    "displayName": "Delayed NetWork",
                     "order": "18",
                     "value": "False"
                 }
@@ -3382,12 +3432,12 @@
                     "order": "17",
                     "value": 1000
                 },
-                "viewporChinaidth": {
+                "viewportWidth": {
                     "displayName": "Window Width",
                     "order": "14",
                     "value": 3840
                 },
-                "viewporChinaidthPre": {
+                "viewportWidthPre": {
                     "displayName": "Pre-Resizing Window Width",
                     "order": "16",
                     "value": 1728
@@ -3407,7 +3457,7 @@
                     "order": "14",
                     "value": -0.01
                 },
-                "viewporChinaidthChangeRate": {
+                "viewportWidthChangeRate": {
                     "displayName": "Window Width Change",
                     "order": "13",
                     "value": 0.11
@@ -3555,12 +3605,12 @@
                     "order": "17",
                     "value": 1000
                 },
-                "viewporChinaidth": {
+                "viewportWidth": {
                     "displayName": "Window Width",
                     "order": "14",
                     "value": 3840
                 },
-                "viewporChinaidthPre": {
+                "viewportWidthPre": {
                     "displayName": "Pre-Resizing Window Width",
                     "order": "16",
                     "value": 1728
@@ -3580,7 +3630,7 @@
                     "order": "14",
                     "value": -0.01
                 },
-                "viewporChinaidthChangeRate": {
+                "viewportWidthChangeRate": {
                     "displayName": "Window Width Change",
                     "order": "13",
                     "value": 0.11
@@ -3723,7 +3773,7 @@
                     "order": "15",
                     "value": 1990
                 },
-                "viewporChinaidth": {
+                "viewportWidth": {
                     "displayName": "Window Width",
                     "order": "14",
                     "value": 3840

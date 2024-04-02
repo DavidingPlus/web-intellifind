@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 class replyT:
 
     def __init__(self, totalScore, allScore, briefDesc, detailDesc):
