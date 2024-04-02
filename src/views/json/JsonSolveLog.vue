@@ -52,9 +52,14 @@ const onDelete = async (row) => {
     type: 'warning'
   })
   await deleteJsonSolveLogData(row.file_name)
-  ElMessage.success('删除成功')
+  console.log('删除成功' + row.file_name);
   // 重新渲染列表
-  getSolveLogList()
+  setTimeout(() => {
+    getSolveLogList()
+    console.log('列表刷新成功' + row.file_name);
+    ElMessage.success('删除成功')
+    console.log(total.value);
+  }, 300)
 }
 
 // 添加解析
@@ -78,14 +83,14 @@ onMounted(() => {
   const chart = echarts.init(chartRef.value)
   const option = {
     title: {
-      text: '七次解析反馈数据'
+      text: '最近七次解析反馈数据'
     },
     tooltip: {
       trigger: 'axis'
     },
-    // legend: {
-    //   data: ['JSON1', 'JSON2', 'JSON3', 'JSON4', 'JSON5']
-    // },
+    legend: {
+      data: ['JSON1', 'JSON2', 'JSON3', 'JSON4', 'JSON5']
+    },
     grid: {
       left: '3%',
       right: '4%',

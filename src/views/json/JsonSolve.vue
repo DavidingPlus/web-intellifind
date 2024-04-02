@@ -45,21 +45,15 @@ const ratioList = ref([{
   }
 ])
 
-const params = {
+const param = {
   file_name: '',
-  // name: ratioList.value.map(item => item.name),
-  // value: ratioList.value.map(item => item.value)
-  name: [],
-  value: []
 }
 // 生成params对象，优先使用formModel的值  
 const generateParams = () => {  
-  const params = {  
-    file_name: '',  
+  const params = {   
     name: [],  
     value: []  
   };  
-  
   // 遍历ratioList中的每一项  
   ratioList.value.forEach(item => {  
     let found = false;  
@@ -78,7 +72,7 @@ const generateParams = () => {
       params.value.push(item.value);  
     }  
   })
-  return params;}
+return params}
 
 
 const uploadRef = ref()
@@ -114,8 +108,8 @@ const upload = async (res) => {
             'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTMiLCJ1c2VyX25hbWUiOiJtYXgiLCJleHBpcmVfdGltZSI6MjQzMDE2MzQ1NSwiZXhwIjoyNDMwMTYzNDU1LCJpYXQiOjE3MTAxNjM0NTUsImlzcyI6InRlc3RfYmFja2VuZCIsIm5iZiI6MTcxMDE2MzQ1NX0.9cVo0XpzZiwlwLJ1oepX03LsPdh7XEIeqIFoBv2ZBgI'
           }
         })
-    params.file_name = res.data.file_name
-    console.log('上传文件成功:', params.file_name);
+    param.file_name = res.data.file_name
+    console.log('上传文件成功:', param.file_name);
   } catch (error) {
     console.error('上传文件失败:', error)
     ElMessage.error('上传文件失败，请稍后重试')
@@ -156,8 +150,8 @@ const onupload = () => {
 const router = useRouter()
 // 跳转到新开页面并展示详情
 const show = () => {
-  console.log(params.file_name);
-  router.push({ path: '/json/show', query: {file_name: params.file_name} })
+  console.log(param.file_name);
+  router.push({ path: '/json/show', query: {file_name: param.file_name } })
 }
 
 

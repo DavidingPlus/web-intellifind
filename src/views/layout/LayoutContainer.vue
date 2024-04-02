@@ -51,7 +51,11 @@ const handleCommand = async (key) => {
   -->
   <el-container class="layout-container">
     <el-aside width="200px">
+      <br>
+      <br>
       <div class="el-aside__logo"></div>
+      <br>
+      <br>
       <el-menu
         active-text-color="#ffd04b"
         background-color="#232323"
@@ -67,20 +71,18 @@ const handleCommand = async (key) => {
           <el-icon><Promotion /></el-icon>
           <span>解析历史</span>
         </el-menu-item>
-        <!-- <el-menu-item index="/json/show">
-          <el-icon><Management /></el-icon>
-          <span>图表展示</span>
+        <!-- <el-menu-item index="/user/profile">
+          <el-icon><User /></el-icon>
+          <span>个人信息</span>
         </el-menu-item> -->
         
 
         <el-sub-menu index="/user">
-          <!-- 多级菜单的标题 - 具名插槽 title -->
           <template #title>
             <el-icon><UserFilled /></el-icon>
             <span>个人中心</span>
           </template>
 
-          <!-- 展开的内容 - 默认插槽 -->
           <el-menu-item index="/user/profile">
             <el-icon><User /></el-icon>
             <span>基本资料</span>

@@ -103,6 +103,11 @@
                     "displayName": "Time From Session Start",
                     "order": "18",
                     "value": 0
+                },
+                "cilckNoReaction": {
+                    "displayName": "Click No Reaction",
+                    "order": "16",
+                    "value": "False"
                 }
             },
             "pageAttr": {

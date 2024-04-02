@@ -22,7 +22,10 @@ export const getJsonSolveLogData = (params) =>
 
 // 删除解析记录信息
 export const deleteJsonSolveLogData = (file_name) => 
-    request.delete('/core/delete-history/once',  {params: { file_name } })
+    {const data = {file_name}
+    request.delete('/core/delete-history/once',   {data: data} , {headers: {
+        'Content-Type': 'application/json',
+    } })}
 
 
 
