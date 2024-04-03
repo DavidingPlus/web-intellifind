@@ -14,8 +14,8 @@ export const userGetInfoService = (userId) =>
   request.get('/user/info', { userId } )
 
 // 更新用户基本信息
-export const userUpdateInfoService = ({ email, id, username, city }) =>
-  request.put('/user/update', { email, id, username, city })
+export const userUpdateInfoService = ({ email, id, username, city, tel, date, gender }) =>
+  request.put('/user/update', { email, id, username, city, tel, date, gender })
 
 // 更新用户头像
 export const userUpdateAvatarService = (formData) =>

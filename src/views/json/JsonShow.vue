@@ -101,7 +101,7 @@ const getJsonSolveChartData = async () => {
   // console.log(ratioList.value);
 
   // 综合得分表总得分     (.toFixed(2) 保留两位有效数字)
-  gradeChartTotalScore.value = (data.result.total_score / 5.00 ).toFixed(2)
+  gradeChartTotalScore.value = (data.result.total_score / 2.00 ).toFixed(2)
   // console.log(gradeChartTotalScore.value);
 
   // 权重比例图数据

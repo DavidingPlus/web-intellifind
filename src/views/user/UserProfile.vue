@@ -5,23 +5,34 @@ import { ref } from 'vue';
 import { useUserStore } from '@/stores';
 import { Plus, Upload } from '@element-plus/icons-vue'
 
+
 const userStore = useUserStore()
 const formRef = ref()
 const uploadRef = ref();
 const imgUrl = ref(userStore.user.user_pic)
 
-
 const form = ref({
   user_name: '蓬鱼咽',
   email: '9517538462@pp.com',
   city: '山河四省',
-  // date: '2025年41月31日'
-  avatar: ''
+  Birthday: '2056-10-10',
+  Tel: '123456789',
+  Gender: '男',
+  avatar: '',
+  create_time: '2021-10-10',
 })
 
+// 格式化时间
+const formatDate = (dateTimeString) => {  
+    const date = new Date(dateTimeString);  
+    const year = date.getFullYear();  
+    const month = (1 + date.getMonth()).toString().padStart(2, '0'); // 月份从0开始，所以加1  
+    const day = date.getDate().toString().padStart(2, '0');  
+    return `${year}-${month}-${day}`;  
+}
 
 const rules = ref({
-  username: [
+  user_name: [
     { required: true, message: '请输入用户姓名', trigger: 'blur' },
     {
       pattern: /^\S{2,10}/,
@@ -36,6 +47,14 @@ const rules = ref({
       message: '请输入正确的邮箱格式',
       trigger: ['blur', 'change']
     }
+  ],
+  Tel: [
+    { required: true, message: '请输入电话号码', trigger: 'blur' },
+    {
+      pattern: /^1[3-9]\d{9}$/,
+      message: '请输入正确的电话号码',
+      trigger: 'blur'
+    }
   ]
 })
 
@@ -44,11 +63,15 @@ const getUser = async () => {
   const {data}  = await userGetInfoService()
   form.value = data.data
   userStore.user.user_pic = data.data.avatar
+  form.value.create_time = formatDate(data.data.create_time)
+  // console.log(data.create_time);
+  console.log(form.value.create_time);
 }
 
 const submitForm = async () => {
   // 等待校验结果
   await formRef.value.validate()
+  form.value.Birthday = formatDate(form.value.Birthday)
   // 提交修改
   await userUpdateInfoService(form.value)
   // 通知 user 模块，进行数据的更新
@@ -101,21 +124,40 @@ getUser()
     <div style="display: flex; align-items: center; justify-content: space-between;">
       <div style="flex: 1">
       <el-form ref="formRef" :model="form" :rules="rules" label-width="100px">
-      <el-form-item label="用户姓名" prop="username">
-        <el-input v-model="form.user_name" placeholder="蓬鱼咽"></el-input>
-      </el-form-item>
-      <el-form-item label="用户邮箱" prop="email">
-        <el-input v-model="form.email" placeholder="9517538462@pp.com" disabled="true"></el-input>
-      </el-form-item>
-      <el-form-item label="所在城市">
-        <el-input v-model="form.city" placeholder="山河四省"></el-input>
-      </el-form-item>
-      <!-- <el-form-item label="注册时间">
-        <el-input></el-input>
-      </el-form-item> -->
-      <el-form-item>
-        <el-button type="primary" @click="submitForm">提交修改</el-button>
-      </el-form-item>
+        
+        <el-form-item label="用户姓名">
+          <el-input v-model="form.user_name" placeholder="请输入姓名"></el-input>
+        </el-form-item>
+        <el-form-item label="所在城市">
+          <el-input v-model="form.city" placeholder="请输入所在城市"></el-input>
+        </el-form-item>
+        <el-form-item label="生日">
+          <el-date-picker
+            v-model="form.Birthday"
+            type="date"
+            placeholder="请选择日期"
+          />
+        </el-form-item>
+        <el-form-item label="性别">
+          <div>
+            <el-radio-group v-model="form.Gender">
+              <el-radio label="男" size="large"> 男 </el-radio>
+              <el-radio label="女" size="large"> 女 </el-radio>
+            </el-radio-group>
+          </div>
+        </el-form-item>
+        <el-form-item label="电话">
+          <el-input v-model="form.Tel" placeholder="请输入电话号码"></el-input>
+        </el-form-item>
+        <el-form-item label="用户邮箱">
+          <el-input v-model="form.email" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="注册时间">
+          <el-input v-model="form.create_time" disabled></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="submitForm">提交修改</el-button>
+        </el-form-item>
       </el-form>
     </div>
 

@@ -9,39 +9,39 @@ import axios from 'axios';
 const ratioList = ref([{
   word: '跳出率较高',
   name: 'stay_time',
-  value: 5
+  value: 50
   }, {
   word: '重复点击',
   name: 'repeat_click',
-  value: 5
+  value: 50
   }, {
   word: '页面加载慢',
   name: 'page_load',
-  value: 5
+  value: 50
   }, {
   word: '网络响应慢',
   name: 'feedback_interval',
-  value: 5
+  value: 50
   }, {
   word: '页面无响应',
   name: 'no_reaction',
-  value: 5
+  value: 50
   }, {
   word: '点击报错',
   name: 'error_count',
-  value: 5
+  value: 50
   }, {
   word: '页面加载报错',
   name: 'console_errors',
-  value: 5
+  value: 50
   }, {
   word: '页面出现白屏',
   name: 'is_blank',
-  value: 5
+  value: 50
   }, {
   word: '出现多类问题',
   name: 'occur_many',
-  value: 5
+  value: 50
   }
 ])
 
@@ -164,11 +164,11 @@ const formModel = ref({
   items: [{
     name: '',
     word: '',
-    value: '5'
+    value: '50'
   }, {
     name: '',
     word: '',
-    value: '5'
+    value: '50'
   }]  
 });  
 
@@ -266,8 +266,8 @@ const getAvailableOptions = computed(() => {
 // 控制输入值的范围
 const checkNumber = (item) => {
   const value = parseFloat(item.value);
-  if (isNaN(value) || value < 0 || value > 10) {
-    ElMessage.error('请输入0~10之间的数值');
+  if (isNaN(value) || value < 0 || value > 100) {
+    ElMessage.error('请输入0~100之间的数值');
   }
 };
 
@@ -375,7 +375,7 @@ const iconStyle = {
         v-model="item.value" 
         type="number" 
         @input="checkNumber(item)" 
-        placeholder="请输入0~10之间的数值"></el-input>
+        placeholder="请输入0~100之间的数值"></el-input>
       <el-button type="danger" @click="removeItem(index)" class="cancel">删除</el-button>
     </div>
   </el-form-item>
