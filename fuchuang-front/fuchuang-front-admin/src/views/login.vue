@@ -196,7 +196,7 @@ const api =
 {
     checkCode:"/capatcha-code",
     login:"/login",
-    signup:"/signup",
+    signup:"/sign-up",
     sendcode:"/send-code",
     reset:"/reset",
     isexist:"/is-exist"
@@ -334,7 +334,7 @@ const sendEmail = ()=>
             }, 1000);
         }
         let params = {};
-        Object.assign(params,{eamil:formData2.value.email});
+        Object.assign(params,{email:formData2.value.email});
         let result1 = await proxy.Request(
             {
                 url:api.isexist,
@@ -378,7 +378,7 @@ const doRegis = ()=>
         Object.assign(params,formData2.value);
         let result = await proxy.Request(
             {
-                url:api.doRegis,
+                url:api.signup,
                 params:JSON.stringify(params),
                 dataType:'json',
             });
@@ -448,7 +448,7 @@ const sendEmail2 = ()=>
 };
 const doChange = ()=>
 {
-    formData3.value.validate(async(valid)=>
+    formDataRef3.value.validate(async(valid)=>
     {
         if(!valid)
         {
@@ -458,7 +458,7 @@ const doChange = ()=>
         Object.assign(params,formData3.value);
         let result = await proxy.Request(
             {
-                url:api.doChange,
+                url:api.reset,
                 params:JSON.stringify(params),
                 dataType:'json',
             });
