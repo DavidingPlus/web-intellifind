@@ -64,8 +64,7 @@ const getUser = async () => {
   form.value = data.data
   userStore.user.user_pic = data.data.avatar
   form.value.create_time = formatDate(data.data.create_time)
-  // console.log(data.create_time);
-  console.log(form.value.create_time);
+  console.log(form.value);
 }
 
 const submitForm = async () => {
@@ -73,6 +72,7 @@ const submitForm = async () => {
   await formRef.value.validate()
   form.value.Birthday = formatDate(form.value.Birthday)
   // 提交修改
+  console.log(form.value);
   await userUpdateInfoService(form.value)
   // 通知 user 模块，进行数据的更新
   getUser()
