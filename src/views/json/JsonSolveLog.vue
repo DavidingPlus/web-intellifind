@@ -177,7 +177,7 @@ chart.setOption(option)}  }
       </el-table-column>
       <el-table-column label="综合得分" prop="title">
         <template #default="{ row }">
-          <el-link type="primary" :underline="false">{{ row.total_score }}</el-link>
+          <el-link type="primary" :underline="false">{{ (row.total_score * 20).toFixed(2) }}</el-link>
         </template>
       </el-table-column>
 
