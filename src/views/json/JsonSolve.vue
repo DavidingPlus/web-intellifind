@@ -5,6 +5,8 @@ import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { uploadJsonFile, updateUserConfig } from '@/api/json';
 import axios from 'axios';
+import { useUserStore } from '@/stores/modules/user';
+
 
 const ratioList = ref([{
   word: '跳出率较高',
@@ -45,6 +47,8 @@ const ratioList = ref([{
   }
 ])
 
+
+const userStore = useUserStore()
 const param = {
   file_name: '',
 }
@@ -105,7 +109,7 @@ const upload = async (res) => {
   try {
     res = await axios.post('http://8.137.100.0:8080/core/upload-file', formData, {
           headers: {
-            'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTMiLCJ1c2VyX25hbWUiOiJtYXgiLCJleHBpcmVfdGltZSI6MjQzMDE2MzQ1NSwiZXhwIjoyNDMwMTYzNDU1LCJpYXQiOjE3MTAxNjM0NTUsImlzcyI6InRlc3RfYmFja2VuZCIsIm5iZiI6MTcxMDE2MzQ1NX0.9cVo0XpzZiwlwLJ1oepX03LsPdh7XEIeqIFoBv2ZBgI'
+            'Authorization': userStore.token,
           }
         })
     param.file_name = res.data.file_name

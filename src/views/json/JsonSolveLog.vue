@@ -42,10 +42,10 @@ const getSolveLogList = async () => {
   console.log(total.value);
   // 折线图数据
   // console.log(res.data.data[0].total_score);
-  totalScoreList.value = res.data.data.map(item => item.total_score)
-  pageErrorScoreList.value = res.data.data.map(item => item.page_error)
-  pageLoadScoreList.value = res.data.data.map(item => item.page_load)
-  pageExperienceScoreList.value = res.data.data.map(item => item.page_experience)
+  totalScoreList.value = res.data.data.map(item => (item.total_score).toFixed(2))
+  pageErrorScoreList.value = res.data.data.map(item => (item.page_error).toFixed(2))
+  pageLoadScoreList.value = res.data.data.map(item => (item.page_load).toFixed(2))
+  pageExperienceScoreList.value = res.data.data.map(item => (item.page_experience).toFixed(2))
   fetchData()
 }
 getSolveLogList()
@@ -177,7 +177,7 @@ chart.setOption(option)}  }
       </el-table-column>
       <el-table-column label="综合得分" prop="title">
         <template #default="{ row }">
-          <el-link type="primary" :underline="false">{{ (row.total_score * 20).toFixed(2) }}</el-link>
+          <el-link type="primary" :underline="false">{{ (row.total_score * 2).toFixed(2) }}</el-link>
         </template>
       </el-table-column>
 

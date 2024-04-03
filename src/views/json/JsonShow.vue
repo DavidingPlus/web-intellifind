@@ -101,7 +101,7 @@ const getJsonSolveChartData = async () => {
   // console.log(ratioList.value);
 
   // 综合得分表总得分     (.toFixed(2) 保留两位有效数字)
-  gradeChartTotalScore.value = (data.result.total_score / 5.00 ).toFixed(2)
+  gradeChartTotalScore.value = (data.result.total_score / 50.00 ).toFixed(2)
   // console.log(gradeChartTotalScore.value);
 
   // 权重比例图数据
@@ -133,12 +133,12 @@ const getJsonSolveChartData = async () => {
   const str1 = data.result.brief_desc
   const regex = /(?<=，)(.*?)(?=，得分)/g;
   briefResultList.value = str1.match(regex);
-  tableData.value[0].comment = briefResultList.value[6]
-  tableData.value[1].comment = briefResultList.value[5]
+  tableData.value[0].comment = briefResultList.value[5]
+  tableData.value[1].comment = briefResultList.value[4]
   tableData.value[2].comment = briefResultList.value[3]
-  tableData.value[3].comment = briefResultList.value[7]
-  tableData.value[4].comment = briefResultList.value[4]
-  tableData.value[5].comment = briefResultList.value[8]
+  tableData.value[3].comment = briefResultList.value[6]
+  tableData.value[4].comment = '网络流畅情况下，未出现明显页面无响应情况'
+  tableData.value[5].comment = briefResultList.value[7]
   tableData.value[6].comment = briefResultList.value[2]
   tableData.value[7].comment = briefResultList.value[1]
   tableData.value[8].comment = briefResultList.value[0]
