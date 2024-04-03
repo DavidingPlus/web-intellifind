@@ -2,7 +2,6 @@ package authentication
 
 import (
 	"backend/requests"
-	"backend/tools/captcha"
 	"backend/tools/verifycode"
 	"github.com/gin-gonic/gin"
 )
@@ -12,13 +11,6 @@ func SendUsingEmail(c *gin.Context) {
 	// 1. 验证表单
 	request := requests.VerifyCaptchaRequest{}
 	c.ShouldBind(&request)
-	if match := captcha.NewCaptcha().VerifyCaptcha(request.CaptchaId, request.Answer); match != true {
-		c.JSON(200, gin.H{
-			"code":    -1,
-			"message": "验证码错误",
-		})
-		return
-	}
 
 	// 2. 发送邮件
 	err := verifycode.NewVerifyCode().SendEmail(request.Email)

@@ -68,10 +68,14 @@ func GetUserInfo(c *gin.Context) {
 	userInfo := user.GetUser(id_string)
 
 	res := requests.GetUserInfoResponse{
-		UserName: userInfo.Username,
-		Email:    userInfo.Email,
-		Avatar:   userInfo.Avatar,
-		City:     userInfo.City,
+		UserName:   userInfo.Username,
+		Email:      userInfo.Email,
+		CreateTime: userInfo.CreatedAt,
+		Avatar:     userInfo.Avatar,
+		City:       userInfo.City,
+		Gender:     userInfo.Gender,
+		Tel:        userInfo.Tel,
+		Birthday:   userInfo.Birthday,
 	}
 
 	c.JSON(200, gin.H{

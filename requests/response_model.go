@@ -3,16 +3,24 @@ package requests
 import "time"
 
 type GetUserInfoResponse struct {
-	UserName string `json:"user_name"`
-	Email    string `json:"email"`
-	Avatar   string `json:"avatar"`
-	City     string `json:"city"`
+	UserName   string    `json:"user_name"`
+	CreateTime time.Time `json:"create_time"`
+	Email      string    `json:"email"`
+	Avatar     string    `json:"avatar"`
+	City       string    `json:"city"`
+	Gender     string    `gorm:"column:gender"`
+	Tel        string    `gorm:"column:tel"`
+	Birthday   string    `gorm:"column:birthday"`
 }
 
-type ShowHistory struct {
+type ShowHistoryResponse struct {
 	CreateTime time.Time `json:"create_time"`
 	FileName   string    `json:"file_name"`
 	TotalScore float64   `json:"total_score"`
+
+	PageError      float64 `json:"page_error"`
+	PageLoad       float64 `json:"page_load"`
+	PageExperience float64 `json:"page_experience"`
 }
 
 type ParseJsonResp struct {

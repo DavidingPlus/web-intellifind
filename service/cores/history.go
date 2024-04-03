@@ -2,10 +2,23 @@ package cores
 
 import (
 	"backend/model/core"
+	"backend/requests"
 )
 
-func GetHistory(uid uint, page int, size int) ([]core.Result, int, int, error) {
+func GetHistory(uid uint, page int, size int) ([]requests.ShowHistoryResponse, int, int, error) {
 	history, err := core.GetHistory(uid)
+	var res []requests.ShowHistoryResponse
+	for _, v := range history {
+		temp := requests.ShowHistoryResponse{
+			FileName:       v.FileName,
+			TotalScore:     v.TotalScore,
+			PageError:      (v.ErrorCount + v.ConsoleErrors) / 2,
+			PageLoad:       (v.PageLoad + v.FeedbackInterval + v.IsBlank) / 3,
+			PageExperience: (v.NoReaction + v.StayTime + v.RepeatClick) / 3,
+		}
+		res = append(res, temp)
+
+	}
 	if err != nil {
 		return nil, 0, 0, err
 	}
@@ -16,9 +29,9 @@ func GetHistory(uid uint, page int, size int) ([]core.Result, int, int, error) {
 	var end int
 	if length > page*size {
 		end = page * size
-		return history[start:end], length, total_page, nil
+		return res[start:end], length, total_page, nil
 	}
-	return history[start:], length, total_page, nil
+	return res[start:], length, total_page, nil
 
 }
 

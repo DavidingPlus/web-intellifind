@@ -17,9 +17,7 @@ type SignUpRequest struct {
 }
 
 type VerifyCaptchaRequest struct {
-	CaptchaId string `json:"captcha_id"`
-	Answer    string `json:"answer"`
-	Email     string `json:"email"`
+	Email string `json:"email"`
 }
 
 type VerifyCodeRequest struct {
@@ -28,8 +26,9 @@ type VerifyCodeRequest struct {
 }
 
 type ResetPasswordRequest struct {
-	Email    string `json:"email"`
-	Password string `json:"password"`
+	Email      string `json:"email"`
+	Password   string `json:"password"`
+	VerifyCode string `json:"verify_code"`
 }
 
 type UpdatePasswordRequest struct {
@@ -62,8 +61,11 @@ type UploadJsonFileRequest struct {
 }
 
 type UpdateUserInfoRequest struct {
-	UserName string `form:"user_name"`
-	City     string `form:"city"`
+	UserName string `form:"user_name" json:"user_name"`
+	City     string `form:"city" json:"city"`
+	Gender   string `form:"column:gender" json:"gender"`
+	Tel      string `form:"column:tel" json:"tel"`
+	Birthday string `form:"column:birthday" json:"birthday"`
 }
 
 type ShowResultOnceRequest struct {

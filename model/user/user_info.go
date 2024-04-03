@@ -15,7 +15,9 @@ type UserInfos struct {
 	Password string `gorm:"column:password"`
 	Avatar   string `gorm:"column:avator"` //头像
 	City     string ` gorm:"column:city"`  //城市
-
+	Gender   string `gorm:"column:gender"`
+	Tel      string `gorm:"column:tel"`
+	Birthday string `gorm:"column:birthday"`
 }
 
 // 获取用户列表

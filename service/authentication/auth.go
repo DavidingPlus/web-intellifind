@@ -3,6 +3,7 @@ package authentication
 import (
 	"backend/model/user"
 	"backend/requests"
+	"backend/tools/verifycode"
 	"fmt"
 	"github.com/gin-gonic/gin"
 )
@@ -20,7 +21,7 @@ func LoginVerify(c *gin.Context) {
 	token, err := LoginService(c, login_request)
 
 	if err != nil {
-		c.JSON(200, gin.H{
+		c.JSON(401, gin.H{
 			"code":    -1,
 			"message": err.Error(),
 		})
@@ -76,6 +77,15 @@ func Reset(c *gin.Context) {
 
 	c.ShouldBind(&req)
 
+	if flag := verifycode.NewVerifyCode().CheckAnswer(req.Email, req.VerifyCode); flag == false {
+		//验证码错误
+		c.JSON(200, gin.H{
+			"code":    -1,
+			"message": "验证码错误！",
+		})
+		return
+	}
+
 	user.UpdatePassword(req.Password, req.Email)
 
 	c.JSON(200, gin.H{
@@ -92,8 +102,8 @@ func IsExist(c *gin.Context) {
 	flag := user.GetUser(req.Email)
 
 	if flag.Username == "" {
-		c.JSON(401, gin.H{
-			"code":    -1,
+		c.JSON(200, gin.H{
+			"code":    2,
 			"message": "邮箱未注册",
 		})
 		return
