@@ -11,6 +11,7 @@ func GetHistory(uid uint, page int, size int) ([]requests.ShowHistoryResponse, i
 	for _, v := range history {
 		temp := requests.ShowHistoryResponse{
 			FileName:       v.FileName,
+			CreateTime:     v.CreateTime,
 			TotalScore:     v.TotalScore,
 			PageError:      (v.ErrorCount + v.ConsoleErrors) / 2,
 			PageLoad:       (v.PageLoad + v.FeedbackInterval + v.IsBlank) / 3,
