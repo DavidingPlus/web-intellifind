@@ -49,7 +49,6 @@ instance.interceptors.response.use(
             loading.close();    
         }
         const responseData = response.data;
-        console.log(response);
         // 正常请求
         if(response.status == 200)
         {
