@@ -21,5 +21,22 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  server:
+  {
+    hmr:true,
+    port:8080,
+    proxy: 
+    {
+      "/auth":
+      {
+        target:"http://8.137.100.0:8080",
+        changeOrigin:true,
+        cookiePathRewrite:
+        {
+          "^auth":"auth"
+        }
+      }
+    }
   }
 })

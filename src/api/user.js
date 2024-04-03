@@ -10,12 +10,12 @@ import request from '@/utils/requestzxy'
 //   request.post('/auth/login', { username, password })
 
 // 获取用户基本信息
-export const userGetInfoService = (userId) => 
-  request.get('/user/info', { userId } )
+export const userGetInfoService = () => 
+  request.get('/user/info' )
 
 // 更新用户基本信息
-export const userUpdateInfoService = ({ email, id, username, city }) =>
-  request.put('/user/update', { email, id, username, city })
+export const userUpdateInfoService = ({ email, user_name, city, Tel, Birthday, Gender, create_time }) =>
+  request.put('/user/update', { email, user_name, city, Tel, Birthday, Gender, create_time })
 
 // 更新用户头像
 export const userUpdateAvatarService = (formData) =>

@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2866960",
+      "name": "邮箱验证码",
+      "font_class": "youxiangyanzhengma",
+      "unicode": "e66a",
+      "unicode_decimal": 58986
+    },
+    {
+      "icon_id": "924722",
+      "name": "用户名",
+      "font_class": "yonghuming",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
       "icon_id": "553324",
       "name": "验证 验证码",
       "font_class": "checkcode_email",

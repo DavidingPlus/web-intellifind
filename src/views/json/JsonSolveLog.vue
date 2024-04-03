@@ -1,5 +1,5 @@
 <script setup>
-import { getJsonSolveLogData } from '@/api/json.js'
+import { getJsonSolveLogData, deleteJsonSolveLogData } from '@/api/json.js'
 import * as echarts from 'echarts';
 import { onMounted, ref } from 'vue';
 import { formatTime } from '@/utils/format.js'
@@ -11,6 +11,18 @@ const router = useRouter()
 const loading = ref(false) // loading状态
 const solveLogList = ref([]) // 解析记录列表
 const total = ref(0) // 总数
+const totalPage = ref(0) // 总页数
+
+// 折线图数据
+const totalScoreList = ref([])
+const pageErrorScoreList = ref([])
+const pageLoadScoreList = ref([])
+const pageExperienceScoreList = ref([])
+
+// 通过echarts 中的折线图进行历次数据展示
+const chartRef = ref(null)
+const chartData = ref([])
+
 
 // 定义请求参数对象
 const params = ref({
@@ -22,10 +34,19 @@ const params = ref({
 const getSolveLogList = async () => {
   loading.value = true
   const res = await getJsonSolveLogData(params.value)
+  // 七次解析数据
   solveLogList.value = res.data.data
-  total.value = res.data.total_page
+  total.value = res.data.length
+  totalPage.value = res.data.total_page
   loading.value = false
   console.log(total.value);
+  // 折线图数据
+  // console.log(res.data.data[0].total_score);
+  totalScoreList.value = res.data.data.map(item => item.total_score)
+  pageErrorScoreList.value = res.data.data.map(item => item.page_error)
+  pageLoadScoreList.value = res.data.data.map(item => item.page_load)
+  pageExperienceScoreList.value = res.data.data.map(item => item.page_experience)
+  fetchData()
 }
 getSolveLogList()
 
@@ -50,9 +71,14 @@ const onDelete = async (row) => {
     type: 'warning'
   })
   await deleteJsonSolveLogData(row.file_name)
-  ElMessage.success('删除成功')
+  console.log('删除成功' + row.file_name);
   // 重新渲染列表
-  getSolveLogList()
+  setTimeout(() => {
+    getSolveLogList()
+    console.log('列表刷新成功' + row.file_name);
+    ElMessage.success('删除成功')
+    console.log(total.value);
+  }, 300)
 }
 
 // 添加解析
@@ -66,23 +92,41 @@ const onShow = (row) => {
   router.push({ path: '/json/show', query: {file_name: row.file_name} })
 }
 
-// 通过echarts 中的折线图进行历次数据展示
-const chartRef = ref(null)
-const chartData = ref([])
-onMounted(() => {
+
+
+
+  // 获取数据
+  const fetchData = () => {
+    chartData.value = [{
+        name: '综合得分',
+        data: totalScoreList.value
+      },
+      {
+        name: '页面报错得分',
+        data: pageErrorScoreList.value
+      },
+      {
+        name: '页面加载得分',
+        data: pageLoadScoreList.value
+      },
+      {
+        name: '页面体验得分',
+        data: pageExperienceScoreList.value
+      }]
+    // console.log(chartData.value);
 
   // 图表
   if (chartRef.value) {
   const chart = echarts.init(chartRef.value)
   const option = {
     title: {
-      text: '七次解析反馈数据'
+      text: '最近七次解析反馈数据'
     },
     tooltip: {
       trigger: 'axis'
     },
     legend: {
-      data: ['JSON1', 'JSON2', 'JSON3', 'JSON4', 'JSON5']
+      data: ['综合得分', '页面报错得分', '页面加载得分', '页面体验得分']
     },
     grid: {
       left: '3%',
@@ -110,40 +154,10 @@ onMounted(() => {
       type: 'line',
     }))
   }
-chart.setOption(option)}})
+chart.setOption(option)}  }
 
-// 通过解析得到的数据按解析时间获取最新的七次数据
-// const fetchData = () => {
-//   chartData.value.sort((a, b) => a.date - b.date)
-//   chartData.value = chartData.value.slice(0, 7)
-// }
-// fetchData()
-// console.log(chartData.value);
 
-// 模拟数据
-const fetchData = () => {
-  chartData.value = [{
-      name: 'JSON1',
-      data: [10, 42, 11, 14, 90, 23, 51]
-    },
-    {
-      name: 'JSON2',
-      data: [42, 8, 91, 60, 29, 33, 10]
-    },
-    {
-      name: 'JSON3',
-      data: [15, 32, 20, 54, 87, 60, 61]
-    },
-    {
-      name: 'JSON4',
-      data: [32, 13, 1, 34, 39, 42, 20]
-    },
-    {
-      name: 'JSON5',
-      data: [82, 23, 10, 24, 29, 36, 40]
-    }]
-}
-fetchData()
+
 
 
 </script>
@@ -163,7 +177,7 @@ fetchData()
       </el-table-column>
       <el-table-column label="综合得分" prop="title">
         <template #default="{ row }">
-          <el-link type="primary" :underline="false">{{ row.total_score }}</el-link>
+          <el-link type="primary" :underline="false">{{ (row.total_score * 20).toFixed(2) }}</el-link>
         </template>
       </el-table-column>
 
@@ -199,7 +213,7 @@ fetchData()
       :current-page="params.page"
       :page-size="params.size"
       :background="true"
-      layout="jumper, total, prev, pager, next, ->"
+      layout="jumper, total, prev, sizes, pager, next, ->"
       :total="total"
       @size-change="onSizeChange"
       @current-change="onCurrentChange"

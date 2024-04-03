@@ -10,15 +10,14 @@ const contentTypeJson = 'application/json'
 
 let loading = null;
 const instance = axios.create({
-    // baseURL: '/api',
-    baseURL: '8.137.100.0',
-    timeout: 10000,
+    baseURL: '/auth',
+    timeout: 10*1000,
+    headers: {'Content-Type': 'application/json'},
 });
 
 //请求前拦截器
 instance.interceptors.request.use(
     (config) =>{
-        debugger;
         if(config.showloading)
         {
             loading = ElLoading.service(
@@ -44,17 +43,17 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
     (response) =>
     {
-        const{showloading,errorCallback,showError = true} = response.config;
+        const{showloading,errorCallback,showError = true,successCallback} = response.config;
         if(showloading && loading)
         {
             loading.close();    
         }
         const responseData = response.data;
         // 正常请求
-        if(responseData.code == 200)
+        if(response.status == 200)
         {
             return responseData;
-        }else if(responseData.code == 901)
+        }else if(responseData.code == 401)
         {
             //登录超时
             setTimeout(() => {
@@ -81,11 +80,11 @@ instance.interceptors.response.use(
     }
 );
 
-const request = async (config) =>
+const request = (config) =>
 {
     const{url,params,dataType,showloading = true} = config;
     let contentType = contentTypeForm;
-    let formData = new formData();
+    let formData = new FormData();
     for(let key in params)
     {
         formData.append(key,params[key] == undefined ?"":params[key]);
@@ -99,7 +98,7 @@ const request = async (config) =>
         'Content-Type':contentType,
         'X-Requested-With':'XMLHttpRequest',
     }
-    return instance.post(url,formData,
+    return instance.post(url,params,
         {
             headers:headers,
             showloading:showloading,

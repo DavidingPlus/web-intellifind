@@ -1,11 +1,12 @@
 import router from '@/router'
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-// const baseURL = 'http://big-event-vue-api-t.itheima.net'
-// const baseURL = 'http://baidu.com'
+import { useUserStore } from '@/stores/modules/user'
+import { ref } from 'vue'
+
 const baseURL = 'http://8.137.100.0:8080'
 
-
+const userStore = ref()
 const instance = axios.create({
   // TODO 1. 基础地址，超时时间
   baseURL,
@@ -14,13 +15,14 @@ const instance = axios.create({
 
 // 请求拦截器
 instance.interceptors.request.use(
-  (config) => {
+  async (config) => {
     // TODO 2. 携带token
-    // const useStore = useUserStore()
-    // if (useStore.token) {
-    //   config.headers.Authorization = useStore.token
-    // }
-    config.headers.Authorization = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTMiLCJ1c2VyX25hbWUiOiJtYXgiLCJleHBpcmVfdGltZSI6MjQzMTUzMjA2MiwiZXhwIjoyNDMxNTMyMDYyLCJpYXQiOjE3MTE1MzIwNjIsImlzcyI6InRlc3RfYmFja2VuZCIsIm5iZiI6MTcxMTUzMjA2Mn0.oQoYmYZk48bHOIS9Wg3VV-iluD36UaKKNRal_a-0M1U'
+    if (!userStore.value) {
+      userStore.value = useUserStore()}
+    if (userStore.value.token) {
+      config.headers.Authorization = userStore.value.token
+    }
+    // config.headers.Authorization = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTMiLCJ1c2VyX25hbWUiOiJtYXgiLCJleHBpcmVfdGltZSI6MjQzMTUzMjA2MiwiZXhwIjoyNDMxNTMyMDYyLCJpYXQiOjE3MTE1MzIwNjIsImlzcyI6InRlc3RfYmFja2VuZCIsIm5iZiI6MTcxMTUzMjA2Mn0.oQoYmYZk48bHOIS9Wg3VV-iluD36UaKKNRal_a-0M1U'
     return config
   },
   (err) => Promise.reject(err)

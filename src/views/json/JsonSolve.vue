@@ -6,9 +6,75 @@ import { useRouter } from 'vue-router';
 import { uploadJsonFile, updateUserConfig } from '@/api/json';
 import axios from 'axios';
 
-const params = {
-  file_name: ''
+const ratioList = ref([{
+  word: '跳出率较高',
+  name: 'stay_time',
+  value: 50
+  }, {
+  word: '重复点击',
+  name: 'repeat_click',
+  value: 50
+  }, {
+  word: '页面加载慢',
+  name: 'page_load',
+  value: 50
+  }, {
+  word: '网络响应慢',
+  name: 'feedback_interval',
+  value: 50
+  }, {
+  word: '页面无响应',
+  name: 'no_reaction',
+  value: 50
+  }, {
+  word: '点击报错',
+  name: 'error_count',
+  value: 50
+  }, {
+  word: '页面加载报错',
+  name: 'console_errors',
+  value: 50
+  }, {
+  word: '页面出现白屏',
+  name: 'is_blank',
+  value: 50
+  }, {
+  word: '出现多类问题',
+  name: 'occur_many',
+  value: 50
+  }
+])
+
+const param = {
+  file_name: '',
 }
+// 生成params对象，优先使用formModel的值  
+const generateParams = () => {  
+  const params = {   
+    name: [],  
+    value: []  
+  };  
+  // 遍历ratioList中的每一项  
+  ratioList.value.forEach(item => {  
+    let found = false;  
+    // 在formModel中查找对应的项  
+    formModel.value.items.forEach(formItem => {  
+      if (formItem.name === item.name) {  
+        // 如果找到了，则使用formModel的值  
+        params.name.push(formItem.name);  
+        params.value.push(formItem.value);  
+        found = true;  
+      }  
+    });  
+    // 如果没有在formModel中找到，则使用ratioList的值  
+    if (!found) {  
+      params.name.push(item.name);  
+      params.value.push(item.value);  
+    }  
+  })
+return params}
+
+
 const uploadRef = ref()
 // 获取上传的文件
 const onSelectFile = (uploadFile) => {
@@ -26,16 +92,24 @@ const upload = async (res) => {
     ElMessage.error('未选择文件')
     return
   }
+
   const formData = new FormData()
+  // 携带上传文件
   formData.append('json_file', uploadRef.value)
+  // 携带权重配置信息
+  const params = generateParams()
+  params.name.forEach((name, index) => {
+    formData.append(name, params.value[index])
+  })
+  
   try {
     res = await axios.post('http://8.137.100.0:8080/core/upload-file', formData, {
           headers: {
             'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTMiLCJ1c2VyX25hbWUiOiJtYXgiLCJleHBpcmVfdGltZSI6MjQzMDE2MzQ1NSwiZXhwIjoyNDMwMTYzNDU1LCJpYXQiOjE3MTAxNjM0NTUsImlzcyI6InRlc3RfYmFja2VuZCIsIm5iZiI6MTcxMDE2MzQ1NX0.9cVo0XpzZiwlwLJ1oepX03LsPdh7XEIeqIFoBv2ZBgI'
           }
         })
-    params.file_name = res.data.data.file_name
-    console.log('上传文件成功:', params.file_name);
+    param.file_name = res.data.file_name
+    console.log('上传文件成功:', param.file_name);
   } catch (error) {
     console.error('上传文件失败:', error)
     ElMessage.error('上传文件失败，请稍后重试')
@@ -76,52 +150,25 @@ const onupload = () => {
 const router = useRouter()
 // 跳转到新开页面并展示详情
 const show = () => {
-  console.log(params.file_name);
-  router.push({ path: '/json/show', query: {file_name: params.file_name} })
+  console.log(param.file_name);
+  router.push({ path: '/json/show', query: {file_name: param.file_name } })
 }
-
-
 
 
 
 
 // 用户配置表单
 const formRef = ref()
-
-const ratioList = [{
-  name: 'stay_time',
-  value: 5
-  }, {
-  name: 'repeat_click',
-  value: 5
-  }, {
-  name: 'page_load',
-  value: 5
-  }, {
-  name: 'feedback_interval',
-  value: 5
-  }, {
-  name: 'no_reaction',
-  value: 5
-  }, {
-  name: 'error_count',
-  value: 5
-  }, {
-  name: 'console_errors',
-  value: 5
-  }, {
-  name: 'is_blank',
-  value: 5
-  }, {
-  name: 'occur_many',
-  value: 5
-  }
-]
   
 const formModel = ref({  
   items: [{
     name: '',
-    value: ''
+    word: '',
+    value: '50'
+  }, {
+    name: '',
+    word: '',
+    value: '50'
   }]  
 });  
 
@@ -131,8 +178,8 @@ const addItem = () => {
     ElMessage.error('最多只能添加9个权重配置项');  
     return;  
   }
-  formModel.value.items.push({ name: '', value: '' });  
-  selectedItems.value.push({ name: '' });
+  formModel.value.items.push({ word: '', name: '', value: '' });  
+  selectedItems.value.push({ word: '' });
   count.value ++;
 };  
   
@@ -140,7 +187,7 @@ const removeItem = (index) => {
   formModel.value.items.splice(index, 1);  
 };  
 
-// 上传用户配置信息
+// 保存配置更改信息并刷新信息表
 const submitForm = async () => {
   if (!formRef.value) {
     ElMessage.error('表单未初始化')
@@ -148,66 +195,79 @@ const submitForm = async () => {
   }
   // 等待校验结果
   await formRef.value.validate()
-  // 提交修改
-  await updateUserConfig(formModel.value)
+  // 根据form表单修改信息表
+  const updatedRatioList = [...ratioList.value]
+  for (const item of formModel.value.items) {  
+    const existingItem = updatedRatioList.find(existing => existing.word === item.word)  
+    if (existingItem) {  
+      // 如果找到对应的项，则更新它的值  
+      existingItem.value = item.value  
+    }
+  }
+  ratioList.value = updatedRatioList
   // 提示用户
-  ElMessage.success('修改成功')
+  ElMessage.success('保存成功')
 }
+
 
 // 选中的选项
 const selectedItems = ref(formModel.value.items 
-    ? formModel.value.items.map(item => ({ name: item.name ?? '' })) 
-    : [])
+    ? formModel.value.items.map(item => ({ word: item.word ?? '' })) 
+    : [{ word: '', value: '', name: ''}])
 
 
 const handleSelectChange = (index) => {  
+  if (formModel.value && formModel.value.items) { 
   // 获取当前选中的选项
   const selectedItem = selectedItems.value[index];
-  const duplicateNames = selectedItems.value.filter((item, idx) => idx !== index && item.name === selectedItem.name);  
+  const duplicatewords = selectedItems.value.filter((item, idx) => idx !== index && item.word === selectedItem.word);  
     
-  if (duplicateNames.length > 0) {  
-    ElMessage.error(`配置中不能存在重复的权重属性名：${selectedItem.name}`);  
-    selectedItems.value[index].name = '' 
+  if (duplicatewords.length > 0) {  
+    ElMessage.error(`配置中不能存在重复的权重属性名：${selectedItem.word}`);  
+    selectedItems.value[index].word = '' 
   }  else {
     selectedItems.value[index] = selectedItem // 更新选中的选项
   }
 
   // 更新表单项的校验规则
-  const selectedName = selectedItems[index].name;
-  const item = formModel.items[index];
+  const selectedWords = selectedItems.value?.length > 0 ?   
+    (selectedItems.value[index]?.word || '') : '';
+  const item = formModel.value.items[index];
   
-  if (selectedName) {
-    item.name = selectedName;
+  if (selectedWords) {
+    item.word = selectedWords;
     item.rules = [{ required: false, message: '请输入权重值', trigger: 'change' }];
   } else {
-    item.name = '';
+    item.word = '';
     item.rules = [{ required: true, message: '请输入权重值', trigger: 'change' }];
   }
+} else {  
+    console.error('formModel 或 formModel.items 是 undefined');  
+  } 
 };
 
 // 获取可选的权重属性(去除已经被选中的)
 const getAvailableOptions = computed(() => {  
   return (index) => {  
-    // 获取当前所有被选中的name，并过滤掉空字符串  
-    const selectedNames = selectedItems.value.map(item => item.name)
-                            .filter(name => name);
-    // 如果没有被选中的数据，则返回ratioList中的所有数据  
-    if (selectedNames.length === 0) {  
-      return ratioList.map(option => ({ name: option.name}))
+    // 获取当前所有被选中的word，并过滤掉空字符串  
+    const selectedWords = selectedItems.value.map(item => item.word)
+                            .filter(word => word);
+    // 
+    if (selectedWords.length === 0) {  
+      return ratioList.value.map(option => ({ word: option.word}))
     }  
   
-    // 否则，过滤 ratioList排除已经被选中的name  
-    const excludedNames = [...selectedNames.slice(0, index), ...selectedNames.slice(index + 1)];
-    return ratioList.map(option => ({ name: option.name})).filter(item => !excludedNames.includes(item.name));
+    // 否则，过滤 ratioList排除已经被选中的word  
+    const excludedWords = [...selectedWords.slice(0, index), ...selectedWords.slice(index + 1)];
+    return ratioList.value.map(option => ({ word: option.word})).filter(item => !excludedWords.includes(item.word));
   };  
 });  
 
 // 控制输入值的范围
 const checkNumber = (item) => {
   const value = parseFloat(item.value);
-  if (isNaN(value) || value < 0 || value > 10) {
-    item.value = ''; // 清空输入框
-    ElMessage.error('请输入0~10之间的数值');
+  if (isNaN(value) || value < 0 || value > 100) {
+    ElMessage.error('请输入0~100之间的数值');
   }
 };
 
@@ -263,10 +323,26 @@ const iconStyle = {
       </div>
     </div>
       <br>
+
+
+      <el-descriptions
+        :column="3"
+        border>
+        <el-descriptions-item 
+          v-for="(item, index) in ratioList" 
+          :key="index" >
+          <template #label>
+            <div class="cell-item">
+              <el-icon :style="iconStyle">
+                <tickets />
+              </el-icon>
+              {{item.word}}
+            </div>
+          </template>
+          <el-tag>{{item.value}}</el-tag>
+        </el-descriptions-item>
+      </el-descriptions>
       <br>
-
-
-
 
 <el-form ref="formRef" :model="formModel" style="display: flex; flex-direction: column;">  
 
@@ -275,50 +351,31 @@ const iconStyle = {
         <h2 style="text-align: left;">自定义配置信息</h2>  
       </el-col>  
     </el-row>  
-    
-    <el-descriptions
-        class="margin-top"
-        title="用户权重配置信息"
-        :column="3"
-        border>
-        <el-descriptions-item v-for="(item, index) in ratioList" :key="index">
-          <template #label>
-            <div class="cell-item">
-              <el-icon :style="iconStyle">
-                <tickets />
-              </el-icon>
-              {{item.name}}
-            </div>
-          </template>
-          <el-tag>{{item.value}}</el-tag>
-        </el-descriptions-item>
-      </el-descriptions>
-  
-      <br>
+
       <br>
     
     <el-form-item
     v-for="(item, index) in formModel.items"
     :key="index"
-    :prop="'items.' + index + '.name'" 
+    :prop="'items.' + index + '.word'" 
     
   >
     <div style="display: flex; align-items: center;">
-      <el-select v-model="selectedItems[index].name" 
+      <el-select v-model="selectedItems[index].word" 
       @change="handleSelectChange(index)" 
       placeholder="请选择权重属性">
         <el-option 
           v-for="(option, optionIndex) in getAvailableOptions(index)" 
           :key="optionIndex" 
-          :label="option.name" 
-          :value="option.name">
+          :label="option.word" 
+          :value="option.word">
         </el-option>
       </el-select>
       <el-input 
         v-model="item.value" 
         type="number" 
         @input="checkNumber(item)" 
-        placeholder="请输入0~10之间的数值"></el-input>
+        placeholder="请输入0~100之间的数值"></el-input>
       <el-button type="danger" @click="removeItem(index)" class="cancel">删除</el-button>
     </div>
   </el-form-item>
