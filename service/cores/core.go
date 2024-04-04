@@ -71,7 +71,7 @@ func UploadFile(c *gin.Context) {
 
 func ShowHistory(c *gin.Context) {
 
-	var req requests.ShowHistoryRequest
+	req := requests.ShowHistoryRequest{}
 	c.ShouldBind(&req)
 
 	current_uid := c.GetUint("current_user_id")

@@ -116,6 +116,9 @@ func UpdateUserInfo(c *gin.Context) {
 	currentUser := CurrentUser(c)
 	currentUser.Username = req.UserName
 	currentUser.City = req.City
+	currentUser.Tel = req.Tel
+	currentUser.Gender = req.Gender
+	currentUser.Birthday = req.Birthday
 
 	err := currentUser.Save()
 	if err != nil {
