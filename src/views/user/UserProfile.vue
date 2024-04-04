@@ -36,16 +36,8 @@ const rules = ref({
     { required: true, message: '请输入用户姓名', trigger: 'blur' },
     {
       pattern: /^\S{2,10}/,
-      message: '用户姓名长度在2-5个非空字符',
+      message: '用户姓名长度在2-10个非空字符',
       trigger: 'blur'
-    }
-  ],
-  email: [
-    { required: true, message: '请输入用户邮箱', trigger: 'blur' },
-    {
-      type: 'email',
-      message: '请输入正确的邮箱格式',
-      trigger: ['blur', 'change']
     }
   ],
   Tel: [

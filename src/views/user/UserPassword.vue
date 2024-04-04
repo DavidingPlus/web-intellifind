@@ -49,21 +49,21 @@ const router = useRouter()
 
 const submitForm = async () => {
   await formRef.value.validate()
-  await userUpdatePasswordService(pwdForm.value)
+  // await userUpdatePasswordService(pwdForm.value)
   ElMessage.success('密码修改成功')
 
   // 密码修改成功后，退出重新登录
   // 清空本地存储的 token 和 个人信息
   userStore.setToken('')
-  userStore.setUser({})
+  // userStore.setUser({})
 
   // 拦截登录
   router.push('/login')
 }
 
-const resetForm = () => {
-  formRef.value.resetFields()
-}
+// const resetForm = () => {
+//   formRef.value.resetFields()
+// }
 </script>
 
 <template>
@@ -87,7 +87,7 @@ const resetForm = () => {
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm">修改密码</el-button>
-            <el-button @click="resetForm">重置</el-button>
+            <!-- <el-button @click="resetForm">重置</el-button> -->
           </el-form-item>
         </el-form></el-col
       >
