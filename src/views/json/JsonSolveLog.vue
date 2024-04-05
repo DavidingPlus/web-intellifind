@@ -39,8 +39,13 @@ const getSolveLogList = async () => {
   solveLogList.value = res.data.data
   total.value = res.data.length
   totalPage.value = res.data.total_page
-  loading.value = false
-  console.log(total.value);
+  if (!total.value) {
+    emptyFlag.value = true
+  } else {
+    loading.value = false
+    console.log(total.value);
+  }
+
   // 折线图数据
   // console.log(res.data.data[0].total_score);
   totalScoreList.value = res.data.data.map(item => (item.total_score).toFixed(2))
@@ -49,9 +54,7 @@ const getSolveLogList = async () => {
   pageExperienceScoreList.value = res.data.data.map(item => (item.page_experience).toFixed(2))
   fetchData()
 
-  if (!total.value) {
-    emptyFlag.value = true
-  }
+  
 }
 getSolveLogList()
 
