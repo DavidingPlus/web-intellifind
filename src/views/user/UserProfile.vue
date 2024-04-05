@@ -54,8 +54,8 @@ const rules = ref({
 const getUser = async () => {
   const {data}  = await userGetInfoService()
   form.value = data.data
-  userStore.user.user_pic = data.data.avatar
-  console.log(userStore.user.user_pic);
+  // userStore.user.user_pic = data.data.avatar
+  // console.log(userStore.user.user_pic);
   form.value.create_time = formatDate(data.data.create_time)
   console.log(form.value);
 }
@@ -100,6 +100,7 @@ const onUpdateAvatar = async () => {
     await userUpdateAvatarService(formData);
     // userStore 重新渲染
     userStore.user.user_pic = imgUrl.value
+    console.log(imgUrl.value);
     // userStore.getUser();
     // 提示用户
     ElMessage.success('头像更新成功');

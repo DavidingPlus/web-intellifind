@@ -483,7 +483,7 @@ const doChange = ()=>
 .login-body
 {
     height: calc(100vh);
-    background: url("../assets/backg.webp");
+    background: url("../../assets/backg.webp");
     background-size: cover;
     display: flex;
     .bg
@@ -491,9 +491,9 @@ const doChange = ()=>
         flex: 1;
         background-size:cover;
         background-position: center;
-        background-size:800px;
+        background-size:520px;
         background-repeat: no-repeat;
-        background-image: url("../assets/tou.jpg");
+        background-image: url("../../assets/Webzx.jpg");
     }
     .login-panel
     {
