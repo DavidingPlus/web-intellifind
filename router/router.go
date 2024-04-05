@@ -5,12 +5,34 @@ import (
 	"backend/service/authentication"
 	"backend/service/cores"
 	"backend/service/users"
+	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
+	"io/ioutil"
+
+	"strings"
 )
 
 // 路由 api
 func Router() *gin.Engine {
 	r := gin.Default()
+
+	r.Use(static.Serve("/", static.LocalFile("dist", true)))
+	r.NoRoute(func(c *gin.Context) {
+		accept := c.Request.Header.Get("Accept")
+		flag := strings.Contains(accept, "text/html")
+		if flag {
+			content, err := ioutil.ReadFile("dist/index.html")
+			if (err) != nil {
+				c.Writer.WriteHeader(404)
+				c.Writer.WriteString("Not Found")
+				return
+			}
+			c.Writer.WriteHeader(200)
+			c.Writer.Header().Add("Accept", "text/html")
+			c.Writer.Write((content))
+			c.Writer.Flush()
+		}
+	})
 
 	r.Use(middlewares.Cors())
 
