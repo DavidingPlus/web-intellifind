@@ -43,7 +43,7 @@ func (r *Result) Create() error {
 func GetHistory(uid uint) ([]Result, error) {
 	var history []Result
 
-	result := utils.DB.Where("uid = ?", uid).Find(&history)
+	result := utils.DB.Where("uid = ?", uid).Order("create_time desc").Find(&history)
 	if result.RowsAffected == 0 {
 		return nil, fmt.Errorf("查询为空")
 	}
