@@ -101,7 +101,7 @@ const handleCommand = async (key) => {
     <el-container>
       <el-header>
         <div>
-          尊贵的用户： <strong> 不服创我 </strong>
+          <strong> 尊贵的用户，欢迎使用Web智寻系统 </strong>
         </div>
         <el-dropdown placement="bottom-end" @command="handleCommand">
           <!-- 展示给用户，默认看到的 -->
@@ -116,9 +116,9 @@ const handleCommand = async (key) => {
               <el-dropdown-item command="profile" :icon="User"
                 >基本资料</el-dropdown-item
               >
-              <el-dropdown-item command="avatar" :icon="Crop"
+              <!-- <el-dropdown-item command="avatar" :icon="Crop"
                 >更换头像</el-dropdown-item
-              >
+              > -->
               <el-dropdown-item command="password" :icon="EditPen"
                 >重置密码</el-dropdown-item
               >

@@ -55,6 +55,7 @@ const getUser = async () => {
   const {data}  = await userGetInfoService()
   form.value = data.data
   userStore.user.user_pic = data.data.avatar
+  console.log(userStore.user.user_pic);
   form.value.create_time = formatDate(data.data.create_time)
   console.log(form.value);
 }
@@ -98,7 +99,8 @@ const onUpdateAvatar = async () => {
     // 发送请求更新头像
     await userUpdateAvatarService(formData);
     // userStore 重新渲染
-    userStore.getUser();
+    userStore.user.user_pic = imgUrl.value
+    // userStore.getUser();
     // 提示用户
     ElMessage.success('头像更新成功');
   } catch (error) {
