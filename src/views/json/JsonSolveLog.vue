@@ -6,7 +6,7 @@ import { formatTime } from '@/utils/format.js'
 import { Delete, Search } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router';
 
-
+const emptyFlag = ref()
 const router = useRouter()
 const loading = ref(false) // loading状态
 const solveLogList = ref([]) // 解析记录列表
@@ -32,6 +32,7 @@ const params = ref({
 
 // 基于params参数，获取解析记录
 const getSolveLogList = async () => {
+  emptyFlag.value = false
   loading.value = true
   const res = await getJsonSolveLogData(params.value)
   // 七次解析数据
@@ -47,6 +48,10 @@ const getSolveLogList = async () => {
   pageLoadScoreList.value = res.data.data.map(item => (item.page_load).toFixed(2))
   pageExperienceScoreList.value = res.data.data.map(item => (item.page_experience).toFixed(2))
   fetchData()
+
+  if (!total.value) {
+    emptyFlag.value = true
+  }
 }
 getSolveLogList()
 
@@ -168,8 +173,9 @@ chart.setOption(option)}  }
       <el-button type="primary" @click="addJsonSolve">添加解析</el-button>
     </template>
 
+    <el-empty v-if="emptyFlag" description="暂无解析记录" />
     <!-- 表格区域 -->
-    <el-table :data="solveLogList" v-loading="loading">
+    <el-table v-else :data="solveLogList" v-loading="loading">
       <el-table-column label="解析文件名" prop="title">
         <template #default="{ row }">
           <el-link type="primary" :underline="false">{{ row.file_name }}</el-link>
