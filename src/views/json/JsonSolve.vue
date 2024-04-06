@@ -189,6 +189,7 @@ const addItem = () => {
   
 const removeItem = (index) => {  
   formModel.value.items.splice(index, 1);  
+  count.value --
 };  
 
 // 保存配置更改信息并刷新信息表
@@ -326,10 +327,16 @@ const iconStyle = {
         <el-button v-else="loading" type="success" @click="show" round>点此查看解析详情</el-button>
       </div>
     </div>
-      <br>
 
+<el-form ref="formRef" :model="formModel" style="display: flex; flex-direction: column;">  
 
-      <el-descriptions
+    <el-row>  
+      <el-col :span="24">  
+        <h2 style="text-align: left;">自定义配置信息</h2>  
+      </el-col>  
+    </el-row>  
+
+    <el-descriptions
         :column="3"
         border>
         <el-descriptions-item 
@@ -347,15 +354,6 @@ const iconStyle = {
         </el-descriptions-item>
       </el-descriptions>
       <br>
-
-<el-form ref="formRef" :model="formModel" style="display: flex; flex-direction: column;">  
-
-    <el-row>  
-      <el-col :span="24">  
-        <h2 style="text-align: left;">自定义配置信息</h2>  
-      </el-col>  
-    </el-row>  
-
       <br>
     
     <el-form-item
@@ -402,11 +400,10 @@ const iconStyle = {
 
 /* 使用深度选择器来覆盖 Element UI 组件的内部样式 */  
 ::v-deep(.el-select .el-input__inner)  {  
-  width: 200px; 
+  width: 200px !important; 
 }  
 ::v-deep(.el-input__inner)  {
-  width: 200px;
-  margin-left: 10px;
+  width: 200px !important;
 }
 
 .cancel {

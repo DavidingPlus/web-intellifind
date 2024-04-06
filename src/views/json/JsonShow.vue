@@ -3,7 +3,8 @@ import {
   Iphone,
   Location,
   Tickets,
-  Compass
+  Compass,
+  StarFilled
 } from '@element-plus/icons-vue';
 import * as echarts from 'echarts';
 import { ElDescriptions, ElDescriptionsItem, ElTable, ElTableColumn, ElTag } from 'element-plus';
@@ -72,8 +73,7 @@ const tableData = ref([
 // 简要检测结果
 const briefResultList = ref([])
 // 综合分析及建议
-const allAnalysis = ref('')
-
+const allAnalysis = ref([])
 
 // 获取解析数据
 const getJsonSolveChartData = async () => {
@@ -131,8 +131,8 @@ const getJsonSolveChartData = async () => {
 
   // 简要检测结果
   const str1 = data.result.brief_desc
-  const regex = /(?<=，)(.*?)(?=，得分)/g;
-  briefResultList.value = str1.match(regex);
+  const regex1 = /(?<=，)(.*?)(?=，得分)/g;
+  briefResultList.value = str1.match(regex1);
   tableData.value[0].comment = briefResultList.value[5]
   tableData.value[1].comment = briefResultList.value[4]
   tableData.value[2].comment = briefResultList.value[3]
@@ -144,9 +144,16 @@ const getJsonSolveChartData = async () => {
   tableData.value[8].comment = briefResultList.value[0]
 
   // 综合分析及建议
-  const str2 = data.result.detail_desc
-  allAnalysis.value = str2.replace(/\n/g, '<br> &nbsp; &nbsp; &nbsp; &nbsp;')  // 将换行符替换为<br>标签 
+  let str2 = data.result.detail_desc;  
+  str2 = str2.replace(/\n\n/g, '\n');
+  allAnalysis.value = str2.split('\n').filter(item => item.trim() !== '')
 }
+
+// 判断是否应该显示分隔线  
+const divide = (index) => {  
+  return (index + 1) % 3 === 0 && index !== allAnalysis.value.length - 1;  
+};  
+  
 
 
 // 图标大小
@@ -363,17 +370,6 @@ const tableRowClassName = ({ row }) => {
     :column="3"
     border
   >
-  <!-- <el-descriptions-item v-for="(item, index) in envlist" :key="index">
-      <template #label>
-        <div class="cell-item">
-          <el-icon :style="iconStyle">
-            <location />
-          </el-icon>
-          {{item.name}}
-        </div>
-      </template>
-      {{item.value}}
-    </el-descriptions-item> -->
     <el-descriptions-item>
       <template #label>
         <div class="cell-item">
@@ -463,12 +459,19 @@ const tableRowClassName = ({ row }) => {
     <!-- 此处添加 -->
  
           <div class="long-text-container">  
-            <el-card>
-            <h3>综合分析及建议</h3>
-            <p v-html="allAnalysis" ></p>  
+            <el-card class="card" style="background-color: #f0f9eb;">
+            <h2>综合分析及建议</h2>
+            <el-divider></el-divider>
+            <template v-for="(item, index) in allAnalysis" :key="index">
+              <div>
+                <p>{{ item }}</p>  
+                <el-divider v-if="divide(index)">
+                  <el-icon><star-filled /></el-icon>
+                </el-divider>
+              </div>
+            </template>
           </el-card>
           </div>  
- 
 
   </page-container>
 </template>
@@ -499,5 +502,9 @@ const tableRowClassName = ({ row }) => {
   color: #333; /* 文本颜色 */  
   margin-bottom: 20px; /* 段间距 */  
   /* 其他你需要的样式 */  
-}  
+}   
+.card {
+  border-radius: 10px; /* 设置圆角 */
+}
+
 </style>
