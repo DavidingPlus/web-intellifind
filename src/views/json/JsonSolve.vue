@@ -176,7 +176,7 @@ const formModel = ref({
   }]  
 });  
 
-const count = ref(1);
+const count = ref(2);
 const addItem = () => {  
   if (count.value >= 9) {  
     ElMessage.error('最多只能添加9个权重配置项');  
