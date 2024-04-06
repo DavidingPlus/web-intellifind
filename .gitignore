@@ -80,3 +80,4 @@ CMakeLists.txt.user*
 # 4.针对前端框架
 node_modules/
 db.json
+dist/
