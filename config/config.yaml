@@ -26,15 +26,15 @@ Capatcha:
 Mail:
 #  // 默认是 Mailhog 的配置
   smtp:
-    host: smtp.qq.com
+    host: smtp.exmail.qq.com
 #    host:  smtp.aliyun.com
     port:  587
-    username: 1731978669@qq.com
-    password:  owrrvioqmnjbbafg
+    username: liuzhixue@lzx0626.me
+    password:  7aGjEVAfzoAgNeik
     ssl_port: 465
   from:
-    address: 1731978669@qq.com
-    name: max_test
+    address: noreply@lzx0626.me
+    name: 邮箱助手
 
 Verifycode:
   code_length: 6

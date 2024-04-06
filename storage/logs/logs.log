@@ -46,3 +46,18 @@
 {"level":"DEBUG","time":"2024-04-03 14:34:35","caller":"verifycode/vertify_code.go:69","message":"验证码","生成验证码":"{\"lihangyu01@xiaoduotech.com\":\"420410\"}"}
 {"level":"DEBUG","time":"2024-04-03 14:38:36","caller":"verifycode/vertify_code.go:69","message":"验证码","生成验证码":"{\"lihangyu01@xiaoduotech.com\":\"735338\"}"}
 {"level":"DEBUG","time":"2024-04-03 14:38:38","caller":"mail/driver_smtp.go:44","message":"发送邮件","发件成功":""}
+{"level":"DEBUG","time":"2024-04-06 16:05:57","caller":"verifycode/vertify_code.go:69","message":"验证码","生成验证码":"{\"lihangyu01@xiaoduotech.com\":\"697254\"}"}
+{"level":"DEBUG","time":"2024-04-06 16:07:07","caller":"verifycode/vertify_code.go:69","message":"验证码","生成验证码":"{\"lihangyu01@xiaoduotech.com\":\"275446\"}"}
+{"level":"DEBUG","time":"2024-04-06 16:08:18","caller":"verifycode/vertify_code.go:69","message":"验证码","生成验证码":"{\"lihangyu01@xiaoduotech.com\":\"455388\"}"}
+{"level":"DEBUG","time":"2024-04-06 16:10:21","caller":"verifycode/vertify_code.go:69","message":"验证码","生成验证码":"{\"lihangyu01@xiaoduotech.com\":\"487084\"}"}
+{"level":"DEBUG","time":"2024-04-06 16:13:37","caller":"mail/driver_smtp.go:44","message":"发送邮件","发件成功":""}
+{"level":"DEBUG","time":"2024-04-06 16:15:06","caller":"verifycode/vertify_code.go:69","message":"验证码","生成验证码":"{\"lihangyu01@xiaoduotech.com\":\"242275\"}"}
+{"level":"DEBUG","time":"2024-04-06 16:17:18","caller":"verifycode/vertify_code.go:69","message":"验证码","生成验证码":"{\" 2065666169@qq.com\":\"098784\"}"}
+{"level":"DEBUG","time":"2024-04-06 16:18:49","caller":"verifycode/vertify_code.go:69","message":"验证码","生成验证码":"{\" 2065666169@qq.com\":\"239331\"}"}
+{"level":"DEBUG","time":"2024-04-06 16:19:53","caller":"verifycode/vertify_code.go:69","message":"验证码","生成验证码":"{\" 2065666169@qq.com\":\"646319\"}"}
+{"level":"DEBUG","time":"2024-04-06 16:19:58","caller":"mail/driver_smtp.go:44","message":"发送邮件","发件成功":""}
+{"level":"DEBUG","time":"2024-04-06 16:21:15","caller":"verifycode/vertify_code.go:69","message":"验证码","生成验证码":"{\" 2065666169@qq.com\":\"007012\"}"}
+{"level":"DEBUG","time":"2024-04-06 16:21:18","caller":"mail/driver_smtp.go:44","message":"发送邮件","发件成功":""}
+{"level":"DEBUG","time":"2024-04-06 16:24:59","caller":"verifycode/vertify_code.go:69","message":"验证码","生成验证码":"{\" lihangyu01@xiaoduotech.com\":\"863159\"}"}
+{"level":"DEBUG","time":"2024-04-06 16:26:12","caller":"verifycode/vertify_code.go:69","message":"验证码","生成验证码":"{\"2065666169@qq.com\":\"905165\"}"}
+{"level":"DEBUG","time":"2024-04-06 16:26:16","caller":"mail/driver_smtp.go:44","message":"发送邮件","发件成功":""}
