@@ -11,7 +11,7 @@
                     ref="formDataRef"
                     @submit.prevent
                     >
-                    <div class="login-title">服创</div>
+                    <div class="login-title">Web智寻</div>
                     <el-form-item  prop="email">
                     <el-input 
                     size="large"
@@ -38,16 +38,18 @@
                     </el-form-item>
 
                     <el-form-item  prop="answer">
-                        <el-input 
-                        size="large"    
-                        clearable 
-                        placeholder="请输入图形验证码" 
-                        v-model.trim="formData.answer">
-                        <template #prefix>
-                            <span class="iconfont icon-password"></span>
-                        </template>
-                        </el-input>
-                        <img :src="checkCodeUrl" class="check-code" @click="changeCheckCode"/>
+                        <div class="check-code-panel">
+                            <el-input 
+                            size="large"    
+                            clearable 
+                            placeholder="请输入图形验证码" 
+                            v-model.trim="formData.answer">
+                            <template #prefix>
+                                <span class="iconfont icon-password"></span>
+                            </template>
+                            </el-input>
+                            <img :src="checkCodeUrl" class="check-code" @click="changeCheckCode"/>
+                        </div>          
                     </el-form-item>
 
                     <el-form-item>
@@ -70,7 +72,7 @@
                     ref="formDataRef2"
                     @submit.prevent
                     >
-                    <div class="login-title">服创</div>
+                    <div class="login-title">Web智寻</div>
                     <el-form-item  prop="username">
                     <el-input 
                     size="large"
@@ -136,7 +138,7 @@
                     ref="formDataRef3"
                     @submit.prevent
                     >
-                    <div class="login-title">服创</div>
+                    <div class="login-title">Web智寻</div>
                     <el-form-item  prop="email">
                     <div class="send-email-panel">
                         <el-input 
@@ -544,7 +546,8 @@ const doChange = ()=>
             width: 100%;
             display: flex;
             .check-code
-            {
+            {   
+                width:150px;
                 margin-left: 5px;
                 cursor: pointer;
             }
