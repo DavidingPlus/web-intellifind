@@ -154,9 +154,10 @@ const onShow = (row) => {
     },
     yAxis: {
       type: 'value',
+      min: 70,
     },
     // 通过循环的方式，将历次数据进行展示
-    series: chartData.value.map(item => ({
+    series: chartData.value.reverse().map(item => ({
       name: item.name,
       data: item.data,
       type: 'line',
@@ -222,7 +223,7 @@ chart.setOption(option)}  }
       :current-page="params.page"
       :page-size="params.size"
       :background="true"
-      layout="jumper, total, prev, sizes, pager, next, ->"
+      layout="jumper, total, prev, pager, next, ->"
       :total="total"
       @size-change="onSizeChange"
       @current-change="onCurrentChange"
