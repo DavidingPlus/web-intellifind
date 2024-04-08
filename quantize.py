@@ -37,8 +37,10 @@ def load_data(data_path, tokenizer, n_samples):
 
             tokenized_data = tokenizer(text)
 
-            input_ids.append(tokenized_data["input_ids"][: tokenizer.model_max_length])
-            attention_mask.append(tokenized_data["attention_mask"][: tokenizer.model_max_length])
+            input_ids.append(
+                tokenized_data["input_ids"][: tokenizer.model_max_length])
+            attention_mask.append(
+                tokenized_data["attention_mask"][: tokenizer.model_max_length])
             prompts.append(prompt)
             texts.append(text)
 
@@ -82,7 +84,8 @@ def main():
     )
 
     # 加载未量化的模型，默认情况下，模型总是会被加载到 CPU 内存中
-    model = AutoGPTQForCausalLM.from_pretrained(pretrained_model_dir, quantize_config)
+    model = AutoGPTQForCausalLM.from_pretrained(
+        pretrained_model_dir, quantize_config)
     tokenizer = AutoTokenizer.from_pretrained(pretrained_model_dir)
     examples = load_data(dataset_dir, tokenizer, n_samples)
     examples_for_quant = [

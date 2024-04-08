@@ -6,16 +6,20 @@ import time
 
 from fastapi import FastAPI, Request
 from transformers import AutoTokenizer, AutoModel
-import uvicorn, json, datetime
+import uvicorn
+import json
+import datetime
 import torch
 import torch.distributed as dist
 
 from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model_path',type=str,default='../Llama2-Chinese-13b-Chat-4bit')
+parser.add_argument('--model_path', type=str,
+                    default='../Llama2-Chinese-13b-Chat-4bit')
 parser.add_argument('--gpus', default="0", type=str)
-parser.add_argument('--infer_dtype', default="int4", choices=["int4", "int8", "float16"], required=False,type=str)
+parser.add_argument('--infer_dtype', default="int4",
+                    choices=["int4", "int8", "float16"], required=False, type=str)
 
 args = parser.parse_args()
 os.environ["CUDA_VISIBLE_DEVICES"] = args.gpus
@@ -27,6 +31,7 @@ rank = local_rank
 
 app = FastAPI()
 
+
 def get_prompt_llama2chinese(
     chat_history, system_prompt: str
 ) -> str:
@@ -34,13 +39,14 @@ def get_prompt_llama2chinese(
     print(chat_history)
     print(type(chat_history))
     for input_text_one in chat_history:
-            prompt += "<s>"+input_text_one['role']+": "+input_text_one['content'].strip()+"\n</s>"
-    if chat_history[-1]['role']=='Human':
+        prompt += "<s>"+input_text_one['role']+": " + \
+            input_text_one['content'].strip()+"\n</s>"
+    if chat_history[-1]['role'] == 'Human':
         prompt += "<s>Assistant: "
     else:
         prompt += "<s>Human: "
     prompt = prompt[-2048:]
-    if len(system_prompt)>0:
+    if len(system_prompt) > 0:
         prompt = '<s>System: '+system_prompt.strip()+'\n</s>'+prompt
 
     return prompt
@@ -74,9 +80,10 @@ async def create_item(request: Request):
     )
     generate_ids = model.generate(**generate_kwargs)
 
-    generate_ids = [item[len(inputs[0]):-1] for  item in generate_ids]
+    generate_ids = [item[len(inputs[0]):-1] for item in generate_ids]
 
-    bot_message = tokenizer.batch_decode(generate_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
+    bot_message = tokenizer.batch_decode(
+        generate_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
     if 'Human:' in bot_message:
         bot_message = bot_message.split('Human:')[0]
 
@@ -89,11 +96,13 @@ async def create_item(request: Request):
     }
     return answer
 
+
 def get_world_size() -> int:
     if dist.is_initialized():
         return dist.get_world_size()
     else:
         return 1
+
 
 def print_rank0(*msg):
     if rank != 0:
@@ -121,9 +130,11 @@ if __name__ == '__main__':
     else:
         kwargs["torch_dtype"] = dtype
 
-    tokenizer = AutoTokenizer.from_pretrained(args.model_path, trust_remote_code=True)
+    tokenizer = AutoTokenizer.from_pretrained(
+        args.model_path, trust_remote_code=True)
     if infer_dtype in ["int8", "float16"]:
-        model = AutoModelForCausalLM.from_pretrained(args.model_path, **kwargs,trust_remote_code=True,use_flash_attention_2=True)
+        model = AutoModelForCausalLM.from_pretrained(
+            args.model_path, **kwargs, trust_remote_code=True, use_flash_attention_2=True)
     elif infer_dtype == "int4":
         from auto_gptq import AutoGPTQForCausalLM, get_gptq_peft_model
         model = AutoGPTQForCausalLM.from_quantized(
@@ -134,7 +145,7 @@ if __name__ == '__main__':
             # inject_fused_attention=False,
             # inject_fused_mlp=False,
             use_flash_attention_2=True
-            )
+        )
 
     model.eval()
     uvicorn.run(app, host='0.0.0.0', port=8001, workers=1)

@@ -1,0 +1,5 @@
+auto_gptq==0.7.1
+datasets==2.18.0
+fastapi==0.110.1
+torch==2.2.2
+uvicorn==0.29.0
