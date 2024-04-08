@@ -154,7 +154,15 @@ const onShow = (row) => {
     },
     yAxis: {
       type: 'value',
-      min: 70,
+      min: Math.floor(Math.min(...chartData.value.map(item => Math.min(...item.data))) / 5) * 5,  
+      // 设置interval为5的倍数，这里假设我们想要每5个单位一个标签  
+      interval: 5,  
+      axisLabel: {  
+        // 格式化标签，确保显示为整数  
+        formatter: function (value) {  
+          return value.toFixed(0); // 根据需要调整小数点位数  
+        }  
+      }
     },
     // 通过循环的方式，将历次数据进行展示
     series: chartData.value.reverse().map(item => ({
