@@ -1,4 +1,5 @@
 .idea
+.gitignore
 generation.py
 post.py
 test.py
