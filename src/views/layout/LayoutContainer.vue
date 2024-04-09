@@ -133,7 +133,7 @@ const handleCommand = async (key) => {
         <router-view></router-view>
       </el-main>
       <el-footer
-        >大学生服务外包——创新创业大赛 · © · Web_Intell_Find System &nbsp;&nbsp;智寻系统</el-footer
+        >大学生服务外包——创新创业大赛 · © · Web_IntelliFind System —— Web智寻系统</el-footer
       >
     </el-container>
   </el-container>

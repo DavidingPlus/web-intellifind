@@ -173,7 +173,15 @@ const onShow = (row) => {
   }
 chart.setOption(option)}  }
 
-
+// 表格数据优劣评判
+const tableRowClassName = ({ row }) => {
+  if (row.total_score >= 89) {
+    return 'success-row';
+  } else if (row.total_score <= 86) {
+    return 'warning-row';
+  }
+  return '';
+}
 
 
 
@@ -187,25 +195,42 @@ chart.setOption(option)}  }
 
     <el-empty v-if="emptyFlag" description="暂无解析记录" />
     <!-- 表格区域 -->
-    <el-table v-else :data="solveLogList" v-loading="loading">
-      <el-table-column label="解析文件名" prop="title">
+    <el-table v-else 
+      :data="solveLogList" v-loading="loading" 
+      :row-class-name="tableRowClassName">
+      <el-table-column label="解析文件名" align="center" prop="file_name">
         <template #default="{ row }">
-          <el-link type="primary" :underline="false">{{ row.file_name }}</el-link>
+          <el-link type="primary">{{ (row.file_name).substr(14) }}</el-link>
+        </template>
+
+      </el-table-column>
+      <el-table-column label="页面报错得分" align="center" prop="page_error">
+        <template #default="{ row }">
+          <el-link type="primary">{{ (row.page_error).toFixed(2) }}</el-link>
         </template>
       </el-table-column>
-      <el-table-column label="综合得分" prop="title">
+      <el-table-column label="页面加载得分" align="center" prop="page_load">
         <template #default="{ row }">
-          <el-link type="primary" :underline="false">{{ (row.total_score).toFixed(2) }}</el-link>
+          <el-link type="primary">{{ (row.page_load).toFixed(2) }}</el-link>
         </template>
+      </el-table-column>
+      <el-table-column label="页面体验得分" align="center" prop="page_expercience">
+        <template #default="{ row }">
+          <el-link type="primary">{{ (row.page_experience).toFixed(2) }}</el-link>
+        </template>
+      </el-table-column>
+      <el-table-column label="综合得分" align="center" prop="total_score">
+        <template #default="{ row }">
+          <el-link type="primary">{{ (row.total_score).toFixed(2) }}</el-link>
+        </template> 
       </el-table-column>
 
-      <el-table-column label="解析时间" prop="date">
+      <el-table-column label="解析时间" align="center" width="280">
         <template #default="{ row }">
-          {{ formatTime(row.create_time) }}
+          <el-link type="primary">{{ formatTime(row.create_time) }}</el-link>
         </template>
       </el-table-column>
-      <!-- 利用作用域插槽 row 可以获取当前行的数据 => v-for 遍历 item -->
-      <el-table-column label="操作">
+      <el-table-column label="操作"  align="center" width="150">
         <template #default="{ row }">
           <el-button
             circle
@@ -235,7 +260,7 @@ chart.setOption(option)}  }
       :total="total"
       @size-change="onSizeChange"
       @current-change="onCurrentChange"
-      style="margin-top: 20px; justify-content: flex-end"
+      style="margin-top: 20px; justify-content: flex-end; margin-right: 80px;"
     />
 
     <br>
@@ -247,4 +272,11 @@ chart.setOption(option)}  }
   </page-container>
 </template>
 
-<style lang="scss" scoped></style>
+<style>
+.el-table .warning-row {
+  --el-table-tr-bg-color: var(--el-color-warning-light-9);
+}
+.el-table .success-row {
+  --el-table-tr-bg-color: var(--el-color-success-light-9);
+}
+</style>
