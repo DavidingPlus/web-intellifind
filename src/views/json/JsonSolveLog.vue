@@ -128,7 +128,7 @@ const onShow = (row) => {
   const chart = echarts.init(chartRef.value)
   const option = {
     title: {
-      text: '最近七次解析反馈数据'
+      text: '    七次解析反馈数据'
     },
     tooltip: {
       trigger: 'axis'
@@ -195,7 +195,7 @@ chart.setOption(option)}  }
       </el-table-column>
       <el-table-column label="综合得分" prop="title">
         <template #default="{ row }">
-          <el-link type="primary" :underline="false">{{ (row.total_score * 2).toFixed(2) }}</el-link>
+          <el-link type="primary" :underline="false">{{ (row.total_score).toFixed(2) }}</el-link>
         </template>
       </el-table-column>
 

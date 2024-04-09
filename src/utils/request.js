@@ -11,7 +11,6 @@ const contentTypeJson = 'application/json'
 let loading = null;
 const instance = axios.create({
     baseURL: '/auth',
-    timeout: 10*1000,
     headers: {'Content-Type': 'application/json'},
 });
 

@@ -169,20 +169,16 @@ const formModel = ref({
     name: '',
     word: '',
     value: '50'
-  }, {
-    name: '',
-    word: '',
-    value: '50'
   }]  
 });  
 
-const count = ref(2);
+const count = ref(1);
 const addItem = () => {  
   if (count.value >= 9) {  
     ElMessage.error('最多只能添加9个权重配置项');  
     return;  
   }
-  formModel.value.items.push({ word: '', name: '', value: '' });  
+  formModel.value.items.push({ word: '', name: '', value: '50' });  
   selectedItems.value.push({ word: '' });
   count.value ++;
 };  
@@ -355,39 +351,44 @@ const iconStyle = {
       </el-descriptions>
       <br>
       <br>
-    
-    <el-form-item
-    v-for="(item, index) in formModel.items"
-    :key="index"
-    :prop="'items.' + index + '.word'" 
-    
-  >
-    <div style="display: flex; align-items: center;">
-      <el-select v-model="selectedItems[index].word" 
-      @change="handleSelectChange(index)" 
-      placeholder="请选择权重属性">
-        <el-option 
-          v-for="(option, optionIndex) in getAvailableOptions(index)" 
-          :key="optionIndex" 
-          :label="option.word" 
-          :value="option.word">
-        </el-option>
-      </el-select>
-      <el-input 
-        v-model="item.value" 
-        type="number" 
-        @input="checkNumber(item)" 
-        placeholder="请输入0~100之间的数值"></el-input>
-      <el-button type="danger" @click="removeItem(index)" class="cancel">删除</el-button>
-    </div>
-  </el-form-item>
-  
-    <el-form-item>  
-      <el-button type="primary" @click="submitForm">保存配置</el-button>  
-      <el-button @click="addItem">新增权重配置</el-button>  
-    </el-form-item>  
-  </el-form> 
+      
+    <el-row :gutter="20">
+        <el-col :span="12" 
+          v-for="(item, index) in formModel.items"
+          :key="index">
+          <el-form-item
+            :prop="'items.' + index + '.word'" 
+            :style="{ marginBottom: '15px' }"
+            >
+            <div style="display: flex; align-items: center;">
+              <el-select v-model="selectedItems[index].word" 
+                @change="handleSelectChange(index)" 
+                placeholder="请选择权重属性">
+              <el-option 
+                v-for="(option, optionIndex) in getAvailableOptions(index)" 
+                :key="optionIndex" 
+                :label="option.word" 
+                :value="option.word">
+              </el-option>
+            </el-select>
+            <el-input 
+              v-model="item.value" 
+              type="number" 
+              @input="checkNumber(item)" 
+              placeholder="请输入0~100之间的数值"></el-input>
+            <el-button type="danger" @click="removeItem(index)" class="cancel">删除</el-button>
+          </div>
+          </el-form-item>
+        </el-col>
 
+        <el-col :span="24" style="text-align: center;">
+          <div style="text-align: center;">  
+            <el-button type="primary" @click="submitForm" class="large-button" style="margin-right: 60px;">保存配置</el-button>  
+            <el-button type="success" @click="addItem" class="large-button" style="margin-left: 60px;">新增权重配置</el-button>  
+          </div> 
+      </el-col>
+    </el-row>
+    </el-form> 
 
   </page-container>
 </template>
@@ -398,7 +399,7 @@ const iconStyle = {
   max-width: 600px;
 }
 
-/* 使用深度选择器来覆盖 Element UI 组件的内部样式 */  
+/* 使用深度选择器来覆盖 Element UI 组件的内部样式  */
 ::v-deep(.el-select .el-input__inner)  {  
   width: 200px !important; 
 }  
@@ -408,6 +409,12 @@ const iconStyle = {
 
 .cancel {
   margin-left: 10px; /* 添加一些间距，使得按钮与 select/input 分开 */  
+}
+
+.large-button {
+  margin-top: 20px; /* 添加一些间距，使得按钮与表单分开 */  
+  width: 180px; /* 设置按钮的宽度 */
+  height: 41px; /* 设置按钮的高度 */
 }
 
 </style>

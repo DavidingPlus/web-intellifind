@@ -427,7 +427,7 @@ const sendEmail2 = ()=>
             }, 1000);
         }
         let params = {};
-        Object.assign(params,{emial:formData3.value.email});
+        Object.assign(params,{email:formData3.value.email});
         let result1 = await proxy.Request(
             {
                 url:api.isexist,
@@ -438,7 +438,7 @@ const sendEmail2 = ()=>
         {
             return;
         }
-        if(result1.data == 1)
+        if(result1.code == 1)
         {
             let result = await proxy.Request(
             {
