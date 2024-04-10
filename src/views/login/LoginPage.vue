@@ -180,7 +180,7 @@ const userStore = useUserStore();
 
 const preRef = ref('')
 const imgList = ref([ registerImg, loginImg ])
-  let flag = ref(false)
+  let flag = ref(true)
   /* 登录框与注册框滑动切换效果 */
   const mySwitch = () => {
     if (flag.value) {

@@ -1,96 +1,194 @@
 <script setup>
-import { ref } from 'vue'
-// import { userUpdatePasswordService } from '@/api/user'
-import { useUserStore } from '@/stores'
-import { useRouter } from 'vue-router'
+import {ref,getCurrentInstance} from "vue";
+const {proxy} = getCurrentInstance();
 
-const formRef = ref()
-const pwdForm = ref({
-  old_pwd: '',
-  new_pwd: '',
-  re_pwd: ''
-})
-
-const checkDifferent = (rule, value, callback) => {
-  // 校验新密码和原密码不能一样
-  if (value === pwdForm.value.old_pwd) {
-    callback(new Error('新密码不能与原密码一样'))
-  } else {
-    callback()
-  }
-}
-const checkSameAsNewPwd = (rule, value, callback) => {
-  // 校验确认密码必须和新密码一样
-  if (value !== pwdForm.value.new_pwd) {
-    callback(new Error('确认密码必须和新密码一样'))
-  } else {
-    callback()
-  }
-}
-const rules = ref({
-  old_pwd: [
-    { required: true, message: '请输入原密码', trigger: 'blur' },
-    { min: 6, max: 15, message: '原密码长度在6-15位之间', trigger: 'blur' }
-  ],
-  new_pwd: [
-    { required: true, message: '请输入新密码', trigger: 'blur' },
-    { min: 6, max: 15, message: '新密码长度在6-15位之间', trigger: 'blur' },
-    { validator: checkDifferent, trigger: 'blur' }
-  ],
-  re_pwd: [
-    { required: true, message: '请再次输入新密码', trigger: 'blur' },
-    { min: 6, max: 15, message: '确认密码长度在6-15位之间', trigger: 'blur' },
-    { validator: checkSameAsNewPwd, trigger: 'blur' }
-  ]
-})
-
-const userStore = useUserStore()
-const router = useRouter()
-
-const submitForm = async () => {
-  await formRef.value.validate()
-  // await userUpdatePasswordService(pwdForm.value)
-  ElMessage.success('密码修改成功')
-
-  // 密码修改成功后，退出重新登录
-  // 清空本地存储的 token 和 个人信息
-  userStore.setToken('')
-  // userStore.setUser({})
-
-  // 拦截登录
-  router.push('/login')
+const api = 
+{
+    reset:"/reset",
+    isexist:"/is-exist"
 }
 
-// const resetForm = () => {
-//   formRef.value.resetFields()
-// }
+const formData3 = ref({});
+const formDataRef3 = ref();
+//change
+const countdown2 = ref(0);
+const sendEmail2 = ()=>  
+{
+    formDataRef3.value.validateField("email",async(valid) =>
+    {
+        if(!valid)
+        {
+            return;
+        }
+        if (countdown2.value === 0) 
+        {
+            countdown2.value = 60;
+            const intervalId = setInterval(() => 
+            {
+            if (countdown2.value > 0) 
+            {
+                countdown2.value--;
+            } else 
+            {
+                clearInterval(intervalId);
+            }
+            }, 1000);
+        }
+        let params = {};
+        Object.assign(params,{email:formData3.value.email});
+        let result1 = await proxy.Request(
+            {
+                url:api.isexist,
+                params:JSON.stringify(params),
+                dataType:'json',
+            });
+        if(!result1)
+        {
+            return;
+        }
+        if(result1.code == 1)
+        {
+            let result = await proxy.Request(
+            {
+                url:api.sendcode,
+                params:JSON.stringify(params),
+                dataType:'json',
+            })
+            if(!result)
+            {
+                return;
+            }
+        }else
+        {
+            proxy.Message.warning("邮箱未注册，请输入正确邮箱");
+        }
+    });
+};
+const doChange = ()=>
+{
+    formDataRef3.value.validate(async(valid)=>
+    {
+        if(!valid)
+        {
+            return;
+        }
+        let params = {};
+        Object.assign(params,formData3.value);
+        let result = await proxy.Request(
+            {
+                url:api.reset,
+                params:JSON.stringify(params),
+                dataType:'json',
+            });
+        if(!result)
+        {
+            return;
+        }
+        proxy.Message.success("修改成功");
+    })
+};
 </script>
 
 <template>
   <page-container title="修改密码">
+    
     <el-row>
       <el-col :span="12">
-        <el-form
-          ref="formRef"
-          :model="pwdForm"
-          :rules="rules"
-          label-width="100px"
-        >
-          <el-form-item label="原密码" prop="old_pwd">
-            <el-input v-model="pwdForm.old_pwd" show-password></el-input>
-          </el-form-item>
-          <el-form-item label="新密码" prop="new_pwd">
-            <el-input v-model="pwdForm.new_pwd" show-password></el-input>
-          </el-form-item>
-          <el-form-item label="确认密码" prop="re_pwd">
-            <el-input v-model="pwdForm.re_pwd" show-password></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="submitForm">修改密码</el-button>
-            <!-- <el-button @click="resetForm">重置</el-button> -->
-          </el-form-item>
-        </el-form></el-col
+        <el-card>
+    <el-form
+      class="login-form"
+      :model="formData3"
+      :rules="rules"
+      ref="formDataRef3"
+      @submit.prevent
       >
+      <div class="login-title">Web智寻</div>
+      <el-form-item  prop="email">
+      <div class="send-email-panel">
+          <el-input 
+          size="large"
+          clearable 
+          placeholder="请输入邮箱" 
+          v-model.trim="formData3.email">
+          <template #prefix>
+              <span class="iconfont icon-email"></span>
+          </template>
+          </el-input>
+          <el-form-item>
+              <el-button @click="sendEmail2" class="send-mail-btn" size = "large" :disabled="countdown2 > 0">{{ countdown2 > 0 ? `${countdown2}秒后重试` : '发送' }}</el-button>
+          </el-form-item>
+      </div>
+      </el-form-item>
+      <el-form-item  prop="verify_code">
+      <el-input 
+      size="large"    
+      clearable 
+      placeholder="请输入邮箱验证码" 
+      v-model.trim="formData3.verify_code">
+      <template #prefix>
+          <span class="iconfont icon-youxiangyanzhengma"></span>
+      </template>
+      </el-input>
+      </el-form-item>
+      <el-form-item  prop="password">
+      <el-input 
+      size="large"    
+      clearable
+      show-password
+      placeholder="请输入重置后密码" 
+      v-model.trim="formData3.password">
+      <template #prefix>
+          <span class="iconfont icon-password"></span>
+      </template>
+      </el-input>
+      </el-form-item>
+      <el-form-item>
+          <el-button type="primary" class="op-btn" @click="doChange" size="large">修改密码</el-button>
+      </el-form-item>
+      </el-form>
+    </el-card>
+    </el-col>
     </el-row>
+
   </page-container>
 </template>
+
+<style lang="scss" scoped>
+.login-form
+        {
+            padding: 25px;
+            background: #fff;
+            border-radius: 5px;
+            .login-title
+            {
+                text-align:center;
+                font-size:18px;
+                font-weight:bold;
+                margin-bottom: 20px;
+            }
+            .send-email-panel
+            {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                .send-mail-btn
+                {
+                    margin-left: 5px;
+                }
+            }
+            .rememberme-panel
+            {
+                width: 100%;
+            }
+            .no-account
+            {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+            }
+            .op-btn
+            {
+                width: 100%;
+            }
+        }
+</style>
