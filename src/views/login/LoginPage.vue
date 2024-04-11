@@ -136,7 +136,7 @@
                             <el-input 
                             size="large"    
                             clearable 
-                            placeholder="请输入图形验证码" 
+                            placeholder="输入图形验证码" 
                             v-model.trim="formData.answer">
                             <template #prefix>
                                 <span class="iconfont icon-password"></span>
@@ -396,85 +396,6 @@ const doRegis = ()=>
     });
 };
 
-// const formData3 = ref({});
-// const formDataRef3 = ref();
-// //change
-// const countdown2 = ref(0);
-// const sendEmail2 = ()=>  
-// {
-//     formDataRef3.value.validateField("email",async(valid) =>
-//     {
-//         if(!valid)
-//         {
-//             return;
-//         }
-//         if (countdown2.value === 0) 
-//         {
-//             countdown2.value = 60;
-//             const intervalId = setInterval(() => 
-//             {
-//             if (countdown2.value > 0) 
-//             {
-//                 countdown2.value--;
-//             } else 
-//             {
-//                 clearInterval(intervalId);
-//             }
-//             }, 1000);
-//         }
-//         let params = {};
-//         Object.assign(params,{email:formData3.value.email});
-//         let result1 = await proxy.Request(
-//             {
-//                 url:api.isexist,
-//                 params:JSON.stringify(params),
-//                 dataType:'json',
-//             });
-//         if(!result1)
-//         {
-//             return;
-//         }
-//         if(result1.code == 1)
-//         {
-//             let result = await proxy.Request(
-//             {
-//                 url:api.sendcode,
-//                 params:JSON.stringify(params),
-//                 dataType:'json',
-//             })
-//             if(!result)
-//             {
-//                 return;
-//             }
-//         }else
-//         {
-//             proxy.Message.warning("邮箱未注册，请输入正确邮箱");
-//         }
-//     });
-// };
-// const doChange = ()=>
-// {
-//     formDataRef3.value.validate(async(valid)=>
-//     {
-//         if(!valid)
-//         {
-//             return;
-//         }
-//         let params = {};
-//         Object.assign(params,formData3.value);
-//         let result = await proxy.Request(
-//             {
-//                 url:api.reset,
-//                 params:JSON.stringify(params),
-//                 dataType:'json',
-//             });
-//         if(!result)
-//         {
-//             return;
-//         }
-//         proxy.Message.success("修改成功");
-//     })
-// };
 </script>
 
 <style lang="less" scoped>
@@ -535,7 +456,7 @@ input {
   text-align: center;
   /* 文字间距 */
   letter-spacing: 5px;
-  color: white;
+  color: rgb(0, 0, 0);
   /* 禁止选中 */
   user-select: none;
   /* 文字阴影 */
@@ -551,7 +472,7 @@ input {
   /* 禁止选中 */
   user-select: none;
   font-weight: bold;
-  color: white;
+  color: rgb(0, 0, 0);
   text-shadow: 4px 4px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -590,8 +511,8 @@ input {
             display: flex;
             .check-code
             {   
-                width:150px;
-                margin-left: 5px;
+                width:115px;
+                // margin-left: 3px;
                 cursor: pointer;
             }
         }
@@ -625,7 +546,7 @@ input {
 /* 标题 */
 .title-box h1 {
   text-align: center;
-  color: white;
+  color: rgb(0, 0, 0);
   /* 禁止选中 */
   user-select: none;
   letter-spacing: 5px;
@@ -702,7 +623,7 @@ button:hover {
   /* 禁止选中 */
   user-select: none;
   font-size: 14px;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .btn-box p:hover {
